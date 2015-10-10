@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="row">
+        <div class="col-xs-2 col-md-1">
+            <div ng-click="toogleMark()" ng-class="isAllMarked ? 'btn btn-default' : 'btn btn-success'">
+                <span ng-show="!isAllMarked" class="glyphicon  glyphicon-ok"></span>    
+                <span ng-show="isAllMarked" class="glyphicon  glyphicon-remove"></span>  
+            </div>
+        </div>
+        <div class="text-center col-xs-4 col-md-9">
+            <h3><strong>Muestras del cliente:<br/> </strong></h3>
+            <h4>{{client.name}}</h4>
+        </div>
+        <div class="col-xs-3 col-md-1">
+            <div ng-click="cancelModifications()" class="btn btn-danger">
+                Cancelar
+            </div>
+        </div>
+        <div ng-click="saveModification()" class="col-xs-3 col-md-1">
+            <div class="btn btn-success">
+                Guardar
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="col-xs-6">
+                <div ng-init="distributedOption = distributedOptions[0]">
+                    <select 
+                            class="nya-selectpicker btn btn-primary"
+                            ng-model="distributedOption"
+                            ng-options="o for o in distributedOptions">
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div ng-init="selectedType = serverData.invitations.types[0]">
+                    <select class="nya-selectpicker btn btn-primary"
+                            ng-model="selectedType"
+                            ng-options="t for t in serverData.invitations.types">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    
+<!--
+    <div class="row">
+        <div dir-paginate-start="product in products | itemsPerPage: 9" class="animate-if col-md-4 col-sm-6 col-xs-12">
+            <div class="card img-rounded">
+                <div align="left" class="btn btn-sm card-header">
+                    <span ng-click="showDetails(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
+                </div>
+                <div align="center">
+                    <img  alt="{{product.name}}" class="img-rounded img-responsive"  ng-click="showSampleBook(product)"
+                         ng-src="{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/> 
+                </div>
+
+                <div class="card-body">
+                    <hr/>
+                    <div>
+                        <h3 class="card-title">{{product.name}}</h3>
+                    </div>
+                    <div>
+                        <p class="card-data">
+                            Deposito: {{product.quantity}} Unidades
+                            <br/>
+                            Precio: {{product.prices[0].value}} Bs.</p>
+                    </div>
+                </div>
+                <div class="card-button">
+                    <div ng-click="showSellingItem({'product':product,'productPrice':product.prices[0]})" class="btn btn-success">                        
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-md visible-lg clearfix" ng-if="($index+1)%3==0"></div>
+        <div class="visible-sm clearfix" ng-if="($index+1)%2==0" ></div>
+        <div dir-paginate-end=""></div>
+  </div>
+-->
+    
+    <div class="row">
+        <div  dir-paginate-start="product in products | checkedProduct:client:distributedOption | itemsPerPage: 200">
+<!--            <div ng-if="filterDistributedOptions(product.name)" class="sample-product">-->
+            <div class="sample-product">
+                <div class="col-xs-4 col-sm-3 col-md-2" >
+                    <div class="row">
+                        <div ng-class="isDistributed(product.name) ? 'checked-sample' : 'unchecked-sample'">
+                            <div class="sample-header">
+                                <p>{{product.name}}</p>
+                            </div>
+                            <div ng-click="addSample(product.name)">
+                                <img alt="{{product.name}}" class="img-rounded img-responsive" 
+                                                     ng-src=
+                                        "{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/>
+                            </div>
+                            <div ng-show="isDistributed(product.name)" class="sample-check">
+                                <span class="glyphicon glyphicon-check color-green"></span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-md visible-lg clearfix" ng-if="($index+1)%6==0"></div>
+        <div class="visible-sm clearfix" ng-if="($index+1)%4==0" ></div>
+        <div class="visible-sm clearfix" ng-if="($index+1)%3==0" ></div>
+        <div dir-paginate-end=""></div>
+    </div>
+    
+<!--
+    <div masonry preserve-order>
+        <div  class="masonry-brick masonry-client-sample" dir-paginate="product in products | itemsPerPage: 200">
+            <div ng-show="filterDistributedOptions(product.name)" class="sample-product">
+                <div ng-class="isDistributed(product.name) ? 'checked-sample' : 'unchecked-sample'">
+                    <div class="sample-header">
+                        <p>{{product.name}}</p>
+                    </div>
+                    <div ng-click="addSample(product.name)">
+                        <img alt="{{product.name}}" class="img-rounded img-responsive" 
+                                             ng-src=
+                                "{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/>
+                    </div>
+                    <div ng-show="isDistributed(product.name)" class="sample-check">
+                        <span class="glyphicon glyphicon-check color-green"></span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+<!--
+    <div ng-repeat="product in products">
+        <div ng-show="filterDistributedOptions(product.name)" class="sample-product col-xs-4 col-sm-3 col-md-2 col-xl-1">
+            <div class="row">
+                <div ng-class="isDistributed(product.name) ? 'checked-sample' : 'unchecked-sample'">
+                    <div class="sample-header">
+                        <p>{{product.name}}</p>
+                    </div>
+                    <div ng-click="addSample(product.name)">
+                        <img alt="{{product.name}}" class="img-rounded img-responsive" 
+                                             ng-src=
+                                "{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/>
+                    </div>
+                    <div ng-show="isDistributed(product.name)" class="sample-check">
+                        <span class="glyphicon glyphicon-check color-green"></span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+</div>

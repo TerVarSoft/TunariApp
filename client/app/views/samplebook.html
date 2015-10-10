@@ -1,0 +1,81 @@
+<!--
+<div>
+    <div>
+        <ul rn-carousel rn-carousel-indicator="true" 
+                        rn-carousel-controls  
+                        rn-carousel-transition="hexagon" 
+                        rn-carousel-index="sampleBookSelected">             
+            <li ng-repeat="product in products">  
+                    <div ng-mouseover="product.samplebookheader = true" ng-mouseleave="product.samplebookheader = false">
+                        <div ng-if="product.samplebookheader" class="samplebook-header">
+                            <h4>{{product.name}}</h4>
+                        </div>
+                        <div class="thumbnail image-responsive" 
+                         style="background-image:  
+                                url({{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png); 
+                                width:400px; height:350px;">{{product.name}}
+                        </div>       
+                    </div>
+            </li>
+        </ul>
+        <div class="samplebook-indicators">
+            <div rn-carousel-indicators ng-if="products.length > 1" slides="products" rn-carousel-index="sampleBookSelected"></div>
+        </div>
+    </div>
+</div>
+-->
+
+
+<div>
+    <div>
+<!--
+        <ul rn-carousel rn-carousel-indicator="true" 
+                        rn-carousel-controls  
+                        rn-carousel-transition="hexagon" 
+                        rn-carousel-index="sampleBookSelected">             
+            <li ng-repeat="product in products">  
+                <div class="img-responsive" 
+                 style="background-image:  
+                        url({{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png); 
+                        width:100px; height:100px;">
+                    <img
+                </div>       
+            </li>
+        </ul>
+-->
+<!--
+        <ul text-align rn-carousel rn-carousel-indicator="true" 
+                        rn-carousel-controls  
+                        rn-carousel-transition="hexagon" 
+                        rn-carousel-index="sampleBookSelected"
+                        class="samplebook">
+          <li ng-repeat="product in products">
+            <div class="thumbnail image-responsive" 
+                         style="background-image:  
+                                url({{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png); 
+                                width:100%; height:100%;postion:relative;
+                                -webkit-background-size: cover;
+                              -moz-background-size: cover;
+                              -o-background-size: cover;
+                              background-size: cover;">
+                        </div>     
+          </li>
+        </ul>
+                <div class="samplebook-indicators">
+            <div rn-carousel-indicators ng-if="products.length > 1" slides="products" rn-carousel-index="sampleBookSelected"></div>
+        </div>
+-->
+        
+        
+        <div class="samplebook-body">
+            <div class = "fixed-background">
+            
+                <img  class ="img-sample" 
+                     ng-src="{{serverData.urlImages}}/Invitaciones/Mementos/{{selectedProductSampleBook.name}}.png" 
+                     class="img-responsive"
+>
+                                </img>  
+            </div>
+        </div>
+    </div>
+</div>

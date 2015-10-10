@@ -1,0 +1,129 @@
+<div class="row">
+  
+    <div class="col-xs-12 col-sm-6" >
+        <form ng-submit="search()" novalidate>
+            <div class="col-xs-9">
+                <typeahead client="selectedClient"></typeahead>
+            </div>
+            <div class="col-xs-3">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </div>                        
+        </form>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-xs-12" >
+        <div class="panel panel-default">
+            <table class="table table-info table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Celular</th>
+                        <th>Direccion</th>
+                        <th>Mostrario</th>
+                        <th>Muestras</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="client in clients">
+                        <td  class="pointer" ng-click="editClient(client._id)">{{client.name}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.cellphone}}</td>
+                        <td>{{client.address}}</td>
+                        <td>
+                            <span ng-class="client.sampleBook ? 'label label-success' : 'label label-danger' " >
+                                Mostrario
+                            </span>
+                        </td>
+                        <td class="table-sample-button">
+                            <div ng-click="showProductSamples(client._id)" class="btn-sm btn-primary">
+                                Muestras
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+<!--
+    <div masonry>
+        <div  class="masonry-brick masonry-card" dir-paginate="client in clients | itemsPerPage: 12">
+            <div class="client-card">
+                <div ng-click="editClient(client._id)" >
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2>{{client.name}}</h2>
+                        </div>
+                    </div>
+                    
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <p>
+                                Telf.: {{client.phone}}<br/>
+                                Cel.: {{client.cellphone}}
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+                            <p>
+                                Dir.: {{client.address}}<br/>
+
+                                <span ng-class="client.sampleBook ? 'label label-success' : 'label label-danger' ">
+                                    Mostrario
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>                
+                </div>
+                <hr/>
+                <div ng-click="showProductSamples(client._id)" class="btn-sm btn-primary">
+                    Muestras
+                </div>         
+            </div>
+        </div>
+
+    </div>
+-->
+    
+<!--
+    <div ng-repeat="client in clients">
+        <div ng-click="editClient(client._id)" class="col-xs-12 col-sm-6 col-md-4">
+            <div class="client-card">
+                <h2>{{client.name}}</h2>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <p>
+                            Telf.: {{client.phone}}<br/>
+                            Cel.: {{client.cellphone}}
+                        </p>
+                    </div>
+                    <div class="col-xs-7">
+                        <p>
+                            Dir.: {{client.address}}<br/>
+
+                            <span ng-class="client.sampleBook ? 'label label-success' : 'label label-danger' ">
+                                Mostrario
+                            </span>
+
+                        </p>
+                    </div>
+                </div>                
+                <hr/>
+                <div ng-click="showProductSamples(client._id)" class="btn-sm btn-primary">
+                    Muestras
+                </div>         
+            </div>
+        </div>
+    </div>
+-->
+</div>
+<!--
+<div class="col-xs-12" style="text-align:center">
+    <dir-pagination-controls ng-click="windowTop()"></dir-pagination-controls>        
+</div>-->

@@ -1,0 +1,74 @@
+<div class="shopping-cart">
+    <div class="clearfix shopping-cart-header">
+        <div class="col-xs-2 col-sm-4 col-md-7 btn pull-left shopping-cart-button" 
+             data-toggle="collapse" href="#shoppingcartbody">
+            {{sellingItems.length}} Items
+        </div>
+<!--
+        <div class="btn pull-right shopping-cart-button" data-toggle="collapse" href="#shoppingcartbody">
+            <span class="glyphicon glyphicon-shopping-cart"></span> 
+        </div>
+-->
+        <div class="col-xs-2 col-sm-2 col-md-1 btn pull-right btn-success" ng-click="saveSelling()">
+            Vender
+        </div>
+        <div class="col-xs-2 col-md-1 btn pull-right btn-danger" ng-click="cleanSelling()">
+            Limpiar
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3 pull-right input-group">
+            <typeahead client="client"></typeahead>
+        </div>
+    </div>    
+
+     <div id="shoppingcartbody" class="container panel-collapse collapse shopping-cart-body" >
+<!--
+        <div class="row">
+             <div class="col-sm-offset-6 col-xs-9 col-sm-4">
+                    <div class="input-group">
+                        <typeahead client="client"></typeahead>
+                    </div>
+            </div>            
+             <div class="col-xs-3 col-sm-2">
+                 <div ng-click="saveSelling()" class="btn btn-success">
+                     Vender
+                 </div>
+             </div>
+         </div> 
+-->
+        <table class="table">
+            <thead>
+              <tr>
+                <th class="hidden-xs">Imagen</th>
+                <th>Producto</th>  
+                <th>P/Paq.</th>
+                <th>Cant.</th>
+                <th>Gan.</th>
+                <th>Total</th>   
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sellingItem in sellingItems track by $index">
+                    <td class="hidden-xs">
+                        <div class="thumbnail shoppingCartImage">
+                            <img alt="{{sellingItem.product.name}}" class="img-rounded img-responsive" 
+                                 ng-src=
+                    "{{serverData.urlImages}}/{{sellingItem.product.category}}/{{sellingItem.product.properties.type}}/{{sellingItem.product.name}}.png"/>      
+                        </div>
+                    </td>
+                    <td class="product-name" ng-click="showSellingItem()(sellingItem)">{{sellingItem.product.name}}</td>
+                    <td>{{sellingItem.productPrice.value}} Bs.</td>
+                    <td>{{sellingItem.quantity}}</td>
+                    <td>{{sellingItem.revenue}} Bs.</td>
+                    <td>{{sellingItem.total}} Bs.</td>
+                </tr>
+                <tr>
+                    <td class="hidden-xs"></td>
+                    <td colspan="3"></td>      
+                    <td class="btn-warning">{{getTotalRevenue()}} Bs.</td>
+                    <td class="btn-info">{{getTotal()}} Bs.</td>
+                </tr>
+            </tbody>
+         </table>
+         
+    </div>
+</div>

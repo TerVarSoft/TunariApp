@@ -1,0 +1,95 @@
+<form name="editClientForm"  
+      ng-submit="editClientForm.$valid && createClient()" 
+      class="form-horizontal" 
+                  role="form" novalidate>
+    <div class="row">
+        <div class="col-xs-8">
+            <h3 class="title">{{client.name}}</h3>
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-warning btn" data-toggle="modal" data-target="#deleteModal">
+                Eliminar <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </div>
+    </div>
+    <hr/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Nombre: 
+        </span>
+        <input name="name" ng-model="client.name" type="text" class="form-control" required />
+    </div>
+    <div class="text-danger">                   
+        <span 
+             ng-show="(!editClientForm.name.$pristine || 
+                      editClientForm.$submitted) && editClientForm.name.$error.required">
+           Introduzca el nombre del cliente por favor. 
+        </span>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Telefono: 
+        </span>
+        <input name="phone" ng-model="client.phone" type="number" step="any" class="form-control" required/>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Celular: 
+        </span>
+        <input name="cellphone" ng-model="client.cellphone" type="number" step="any" class="form-control" required/>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Direccion: 
+        </span>
+        <input name="address" ng-model="client.address" type="text" class="form-control" required/>        
+    </div>
+    <br/>
+    
+    <div class="input-group">
+        <div class="checkbox">
+          <label>
+              <input ng-model="client.sampleBook" type="checkbox"> <p>Mostrario</p>              
+          </label>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-offset-6 col-xs-3">
+            <button type="button" ng-click="cancelEditClient()" class="btn btn-danger">
+                Cancelar
+            </button>
+        </div>
+        <div class="col-xs-3">
+            <button type="submit" ng-click="saveClient()" class="btn btn-success">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Modal -->
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliminar Cliente</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta seguro de eliminar el cliente {{client.name}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteClient()" >Aceptar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

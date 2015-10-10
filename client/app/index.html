@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
+    <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/sandstone.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/productsearch.css">
+    <link rel="stylesheet" href="styles/samplebook.css">
+    <link rel="stylesheet" href="styles/sellingItem.css">
+    <link rel="stylesheet" href="styles/shoppingcart.css">
+    <link rel="stylesheet" href="styles/typeahead.css">
+    <link rel="stylesheet" href="styles/clientsearch.css">
+    <link rel="stylesheet" href="styles/clientsamples.css">
+    <link rel="stylesheet" href="styles/newclient.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="tunariApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#/">TunariApp</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+<!--
+              <li class="active"><a href="#/">Home</a></li>
+              <li><a ng-href="#/about">About</a></li>
+              <li><a ng-href="#/productSearch">Buscar</a></li>
+              <li><a ng-href="#/">Contact</a></li>
+-->
+              <li ng-audio="sounds/click.mp3"  class="hidden-xs"><a ng-href="#/productSearch">Productos</a></li> 
+              <li ng-audio="sounds/click.mp3"  class="hidden-xs"><a ng-href="#/clientSearch">Clientes</a></li>    
+              <li ng-audio="sounds/click.mp3"  class="hidden-xs dropdown"><a class="dropdown-toggle" data-toggle="dropdown" >Agregar<span class="caret"></span></a>
+                  <ul class="sub-nav-menu dropdown-menu">
+                    <li><a ng-audio="sounds/click.mp3" accesskey="p" ng-href="#/newProduct">Producto</a></li>
+                    <li><a ng-audio="sounds/click.mp3" accesskey="l" ng-href="#/newClient">Cliente</a></li>                    
+                  </ul>
+              </li>
+                
+              <li class="visible-xs"><a ng-href="#/productSearch" data-toggle="collapse" data-target="#js-navbar-collapse">Productos</a></li> 
+              <li class="visible-xs"><a ng-href="#/clientSearch" data-toggle="collapse" data-target="#js-navbar-collapse">Clientes</a></li>    
+              <li class="visible-xs dropdown"><a class="dropdown-toggle" data-toggle="dropdown" >Agregar<span class="caret"></span></a>
+                  <ul class="sub-nav-menu dropdown-menu">
+                    <li><a ng-href="#/newProduct" data-toggle="collapse" data-target="#js-navbar-collapse">Product</a></li>
+                    <li><a ng-href="#/newClient" data-toggle="collapse" data-target="#js-navbar-collapse">Cliente</a></li>                    
+                  </ul>
+              </li>   
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="reveal-animation" ng-view=""></div>
+<!--        <div ng-view=""></div>-->
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <p><span class="glyphicon glyphicon-registration-mark"></span> El equipo de TervarSoft</p>
+      </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
+    <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+    <script src="bower_components/angular-typeahead/angular-typeahead.js"></script>
+    <script src="bower_components/angular-audio/app/angular.audio.js"></script>
+    <script src="bower_components/get-style-property/get-style-property.js"></script>
+    <script src="bower_components/get-size/get-size.js"></script>
+    <script src="bower_components/eventie/eventie.js"></script>
+    <script src="bower_components/doc-ready/doc-ready.js"></script>
+    <script src="bower_components/eventEmitter/EventEmitter.js"></script>
+    <script src="bower_components/matches-selector/matches-selector.js"></script>
+    <script src="bower_components/outlayer/item.js"></script>
+    <script src="bower_components/outlayer/outlayer.js"></script>
+    <script src="bower_components/masonry/masonry.js"></script>
+    <script src="bower_components/imagesloaded/imagesloaded.js"></script>
+    <script src="bower_components/jquery-bridget/jquery.bridget.js"></script>
+    <script src="bower_components/angular-masonry/angular-masonry.js"></script>
+    <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+    <script src="bower_components/isotope/js/item.js"></script>
+    <script src="bower_components/isotope/js/layout-mode.js"></script>
+    <script src="bower_components/isotope/js/isotope.js"></script>
+    <script src="bower_components/isotope/js/layout-modes/vertical.js"></script>
+    <script src="bower_components/isotope/js/layout-modes/fit-rows.js"></script>
+    <script src="bower_components/isotope/js/layout-modes/masonry.js"></script>
+    <script src="bower_components/angular-isotope/dist/angular-isotope.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/services/products.js"></script>
+        <script src="scripts/controllers/productsearcher.js"></script>
+        <script src="scripts/services/serverdata.js"></script>
+        <script src="scripts/directives/productdetails.js"></script>
+        <script src="scripts/directives/samplebook.js"></script>
+        <script src="scripts/directives/sellingItem.js"></script>
+        <script src="scripts/controllers/editproduct.js"></script>
+        <script src="scripts/services/alertmessages.js"></script>
+        <script src="scripts/controllers/newproduct.js"></script>
+        <script src="scripts/services/sellings.js"></script>
+        <script src="scripts/services/clients.js"></script>
+        <script src="scripts/directives/sellingquantity.js"></script>
+        <script src="scripts/directives/tagsproduct.js"></script>
+        <script src="scripts/directives/shoppingcart.js"></script>
+        <script src="scripts/directives/typeahead.js"></script>
+        <script src="scripts/controllers/clientSearch.js"></script>
+        <script src="scripts/controllers/clientSamples.js"></script>
+        <script src="scripts/controllers/newclient.js"></script>
+        <script src="scripts/controllers/editclient.js"></script>
+        <script src="scripts/directives/productlocation.js"></script>
+        <script src="scripts/directives/uppercase.js"></script>
+        <script src="scripts/filters/checkedproduct.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

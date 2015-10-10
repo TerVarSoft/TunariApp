@@ -1,0 +1,76 @@
+.sample-header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #fff;
+    border-radius: 0px 0px 10px 0px;
+    border: 1px solid #999;
+}
+
+.sample-product {
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+/*    width: 190px;*/
+
+
+}
+
+
+.checked-sample {
+    border: 4px solid green;      
+    border-radius: 10px 10px 10px 10px;
+}
+.unchecked-sample{
+    border: 4px solid #999;      
+    border-radius: 10px 10px 10px 10px;
+    filter:alpha(opacity=25);
+    opacity:.25;
+}
+
+.sample-check {
+    position: absolute;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    bottom: 0px;
+    right: 0px;
+    background: #91BA96;
+    border-radius: 4px;
+}
+
+.color-green {
+    color:green;
+    font-size: 2.8em;
+    
+}
+
+/*
+.masonry-client-sample{
+    width:16%;
+}
+*/
+/*
+
+@media screen and (max-width: 1500px) {
+
+    .masonry-client-sample { width:16%; }
+*/
+/*    .client-card:hover {width:16%;}    */
+/*}*/
+
+/*
+@media screen and (max-width: 1000px) {
+
+    .masonry-client-sample { width:25%; }
+*/
+/*    .client-card:hover {width:45%;}    */
+/*}*/
+
+
+/*
+@media screen and (max-width: 740px) {
+
+    .masonry-client-sample { width:33%; }
+*/
+/*    .client-card:hover {width:25%;} */
+/*}*/

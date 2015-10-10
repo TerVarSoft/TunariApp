@@ -1,0 +1,26 @@
+newStuff=[
+{
+"name": "Imprenta Novedades",
+"phone": 70725233,
+"address": "Avenida 1",
+"productSamples":[
+	"ME-01"
+]
+},
+{
+"name": "Imprenta Veloz",
+"phone": 4425361,
+"address": "Avenida 2",
+"productSamples":[
+	"ME-02"
+]
+},
+{
+"name": "Imprenta Tudy",
+"phone": 78954213,
+"address": "Avenida 3",
+"productSamples":[
+	"ME-03"
+]
+}
+]

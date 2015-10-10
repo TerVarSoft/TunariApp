@@ -1,0 +1,10 @@
+mongod --dbpath c:\node\nodetest1\data\
+mongo
+use tunariApp
+http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/
+
+npm install -g express-generator
+
+express projectName
+
+npm install

@@ -1,0 +1,61 @@
+.shopping-cart-header {
+    background: aliceblue;  
+/*    color: floralwhite*/
+    bottom: 0px;
+/*	border-radius:none !important;*/
+/*
+    right: 0;
+    left: 0;
+*/
+/*
+	margin-right: auto;
+    margin-left: auto;
+*/
+    z-index: 10;    
+    cursor: pointer;
+}
+
+.shopping-cart-body{
+/*    background: rgba(20,20,20,0.7); */
+/*    background: -webkit-linear-gradient(top, #ABC8D1 0%,#81959C 100%) */
+/*    background: #809196;*/
+/*    background: #a5c9e5;*/
+
+    overflow: scroll;
+/*    height: 200px;*/
+/*    max-height: 200px;*/
+    width: 100%;
+    background-image: url(../images/sandpaper.png);   
+}
+
+.shopping-cart {
+	position: fixed;
+
+    
+    bottom: 0px;
+    right:0px;
+    left:0px;
+	border-radius:none !important;
+	padding-left:0px;
+	padding-right:0px;
+	z-index:10;
+}
+
+.shopping-cart-button:hover{
+    color: darkcyan;
+/*    top: 0px;*/
+/*    right: 20px;*/
+/*
+    margin-right: auto;
+    margin-left: auto;
+*/
+}
+
+.shoppingCartImage{
+    height: 50px;
+    width: 80px;
+}
+
+.product-name{
+    cursor: pointer;
+}

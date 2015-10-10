@@ -1,0 +1,305 @@
+<div class="col-xs-12">
+    {{editingProduct}}
+    <div class="col-xs-12 col-sm-4">
+        <div class="thumbnail">
+            <img alt="{{editingProduct.name}}" class="img-rounded img-responsive" 
+                 ng-src=
+                 "{{serverData.urlImages}}/{{editingProduct.category}}/{{editingProduct.properties.type}}/{{editingProduct.name}}.png"/>    
+        </div>                        
+    </div>
+    <div class="col-xs-12 col-sm-8">
+        <div class="row">
+            <form name="productDetailsForm" ng-submit="productDetailsForm.$valid && saveProduct()" 
+                  class="form-horizontal"  role="form" novalidate>
+                <div class="row form-group">  
+                    <div class="col-xs-6">
+                        <h4><strong>Edicion {{editingProduct.name}}</strong></h4>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-3" align="center">                                       
+                       <button ng-href="#/productSearch" type="button" class="btn btn-warning" 
+                               data-toggle="modal" data-target="#deleteModal">
+                           Eliminar <span class="glyphicon glyphicon-trash"></span>
+                       </button>                   
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="quantity">Categoria :</label>
+                        </div>                    
+                        <div class="col-xs-6" ng-init="editingProduct.category = categories[0]">
+                            <p class="form-control-static">{{editingProduct.category}}</p>
+                        </div>
+                    </div>                   
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="name">Nombre :</label>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <input type="text" ng-maxlength="10"
+                                   ng-model="editingProduct.name"
+                                   class="form-control" name="name" 
+                                   placeholder="Nombre..." required>
+                            <div class="text-danger">                   
+                                <span ng-show="productDetailsForm.name.$dirty && productDetailsForm.name.$error.maxlength">
+                                   El nombre es muy largo, 10 caracteres maximo 
+                                </span>
+                                <span 
+                                     ng-show="(!productDetailsForm.name.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.name.$error.required">
+                                   Introduzca el nombre del producto por favor. 
+                                </span>
+                            </div>
+                        </div>     
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="quantity">Cantidad deposito :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input type="number"  
+                                   ng-model="editingProduct.quantity"
+                                   class="form-control" name="quantity" 
+                                   placeholder="Cantidad deposito..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.quantity.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.quantity.$error.required">
+                                   Introduzca la cantidad en deposito del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="storeLocation">Ubicacion Tienda :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input type="text" 
+                                   productlocation
+                                   ng-model="editingProduct.locations[0].value"
+                                   class="form-control" name="storeLocation" 
+                                   placeholder="Ubicacion en Tienda..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.storeLocation.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.storeLocation.$error.required">
+                                   Introduzca la ubicacion en tienda del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="warehouseLocation">Ubicacion Deposito :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input type="text" 
+                                   productlocation
+                                   ng-model="editingProduct.locations[1].value"
+                                   class="form-control" name="warehouseLocation" 
+                                   placeholder="Ubicacion en Deposito..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.warehouseLocation.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.warehouseLocation.$error.required">
+                                   Introduzca la ubicacion en deposito del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="provider">Proveedor :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input type="text" 
+                                   ng-model="editingProduct.provider"
+                                   class="form-control" name="provider" 
+                                   placeholder="Proveedor..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.provider.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.provider.$error.required">
+                                   Introduzca el proveedor del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="tags">Buscar por :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input tagsproduct type="text" 
+                                   ng-model="editingProduct.tags"
+                                   class="form-control" name="tags" 
+                                   placeholder="Etiquetas..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.tags.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.tags.$error.required">
+                                   Introduzca las etiquetas del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="quantityPerPackage">Cantidad por Paquete :</label>
+                        </div>                    
+                        <div class="col-xs-6">
+                            <input type="number" 
+                                   ng-model="editingProduct.properties.quantityPerPackage"
+                                   class="form-control" name="quantityPerPackage" 
+                                   placeholder="Cantidad por Paquete..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.quantityPerPackage.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.quantityPerPackage.$error.required">
+                                   Introduzca la cantidad por paquete del producto por favor. 
+                                </span>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="price">Precio de Compra :</label>
+                        </div>                    
+                        <div class="col-xs-4">
+                            <input type="number" 
+                                   ng-model="editingProduct.buyingPrice"
+                                   class="form-control" name="buyingPrice" 
+                                   placeholder="Precio de compra..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.buyingPrice.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.buyingPrice.$error.required">
+                                   Introduzca el precio de compra del producto por favor. 
+                                </span>
+                            </div>
+                        </div>    
+                        <div class="col-xs-2">
+                            <p>Bs.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="price">Precio :</label>
+                        </div>                    
+                        <div class="col-xs-4">
+                            <input type="number" 
+                                   ng-model="editingProduct.prices[0].value"
+                                   class="form-control" name="price" 
+                                   placeholder="Precio..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.price.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.price.$error.required">
+                                   Introduzca el precio del producto por favor. 
+                                </span>
+                            </div>
+                        </div>    
+                        <div class="col-xs-2">
+                            <p>Bs.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="specialPrice">Precio Particular :</label>
+                        </div>                    
+                        <div class="col-xs-4">
+                            <input type="number" 
+                                   ng-model="editingProduct.prices[1].value"
+                                   class="form-control" name="specialPrice" 
+                                   placeholder="Precio especial..." required>
+                            <div class="text-danger">                   
+                                <span 
+                                     ng-show="(!productDetailsForm.specialPrice.$pristine || 
+                                              productDetailsForm.$submitted) && productDetailsForm.specialPrice.$error.required">
+                                   Introduzca el precio especial del producto por favor. 
+                                </span>
+                            </div>
+                        </div>  
+                        <div class="col-xs-2">
+                            <p>Bs.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="type">Tipo :</label>
+                        </div>                    
+                        <div class="col-xs-6" ng-init="editingProduct.category = categories[0]">
+                            <select class="nya-selectpicker btn btn-primary" name="type"
+                                    ng-model="editingProduct.properties.type" 
+                                    ng-options="t for t in serverData.invitations.types">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="size">Tamano :</label>
+                        </div>                    
+                        <div class="col-xs-6" ng-init="editingProduct.category = categories[0]">
+                            <select class="nya-selectpicker btn btn-warning" name="size"
+                                    ng-model="editingProduct.properties.size" 
+                                    ng-options="s for s in serverData.invitations.sizes">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <label class="control-label" for="genre">Genero :</label>
+                        </div>                    
+                        <div class="col-xs-6" ng-init="editingProduct.category = categories[0]">
+                            <select class="nya-selectpicker btn btn-info" name="genre"
+                                    ng-model="editingProduct.properties.genre" 
+                                    ng-options="g for g in serverData.invitations.genres">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-offset-6 col-xs-3" align="center">
+                        <button accesskey="c" type="button" class="btn btn-danger" 
+                                    ng-click="cancelEditing()">
+                            Cancelar
+                        </button>
+                    </div>
+                    <div class="col-xs-3" align="center">                                       
+                       <button ng-href="#/productSearch" type="submit" class="btn btn-success"  >
+                           Guardar
+                       </button>                   
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+     Modal content
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Eliminar Producto</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta seguro de eliminar el producto {{editingProduct.name}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct()" >Aceptar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

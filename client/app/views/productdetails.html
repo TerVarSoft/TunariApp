@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="col-xs-12">
+
+        <div class="hidden-xs col-sm-4">
+            <div class="thumbnail">
+                <img alt="{{editingProduct.name}}" class="img-rounded img-responsive" 
+                     ng-src=
+                     "{{serverData.urlImages}}/{{editingProduct.category}}/{{editingProduct.properties.type}}/{{editingProduct.name}}.jpg"/>    
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <form class="form-horizontal"name="productDetailsForm" role="form" novalidate>
+                <div class="row form-group">  
+                    <div class="col-xs-6">
+                        <h4><strong>Edicion {{editingProduct.name}}</strong></h4>
+                    </div>
+                    <div class="col-xs-3" align="center">
+                        <button type="submit" class="btn btn-success" 
+                                ng-click="submitEditing(editinggData)" >Guardar</button>
+                    </div>
+                    <div class="col-xs-3" align="center">
+                        <button  class="btn btn-danger" 
+                                ng-click="hideModals()">Cancelar</button>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div ng-init="productDetailsPage = 'views/productdetails1.html'" ng-include="productDetailsPage"></div>
+                </div>
+                
+                <div align="center" class="col-xs-12">
+                    <ul class="pagination">
+                        <li><a href="" ng-click="productDetailsPage = 'views/productdetails1.html'">«</a></li>
+                        <li ng-class="{active : productDetailsPage == 'views/productdetails1.html'}">
+                          <a href="" ng-click="productDetailsPage = 'views/productdetails1.html'">1</a>
+                        </li>
+                        <li ng-class="{active : productDetailsPage == 'views/productdetails2.html'}">
+                          <a href="" ng-click="productDetailsPage = 'views/productdetails2.html'">2</a>
+                        </li>
+                        <li><a href="" ng-click="productDetailsPage = 'views/productdetails2.html'">»</a></li>
+                    </ul>
+                </div>
+            </form>
+                        
+        </div>
+    </div>
+</div>

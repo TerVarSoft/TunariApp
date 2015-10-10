@@ -1,0 +1,69 @@
+<form name="newClientForm"  
+      ng-submit="newClientForm.$valid && createClient()" 
+      class="form-horizontal" 
+                  role="form" novalidate>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="title">Nuevo Cliente</h3>
+        </div>
+    </div>
+    <hr/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Nombre: 
+        </span>
+        <input id="name" name="name" ng-model="newClient.name" type="text" class="form-control" required />
+    </div>
+    <div class="text-danger">                   
+        <span 
+             ng-show="(!newClientForm.name.$pristine || 
+                      newClientForm.$submitted) && newClientForm.name.$error.required">
+           Introduzca el nombre del cliente por favor. 
+        </span>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Telefono: 
+        </span>
+        <input name="phone" ng-model="newClient.phone" type="number" step="any" class="form-control"/>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Celular: 
+        </span>
+        <input name="cellphone" ng-model="newClient.cellphone" type="number" step="any" class="form-control"/>
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon">
+            Direccion: 
+        </span>
+        <input name="address" maxlength="21" ng-model="newClient.address" type="text" class="form-control"/>        
+    </div>
+    <br/>
+    
+    <div class="input-group">
+        <div class="checkbox">
+          <label>
+              <input ng-model="newClient.sampleBook" ng-init="newClient.sampleBook = false"type="checkbox"> <p>Mostrario</p>              
+          </label>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-offset-6 col-xs-3">
+            <button type="button" ng-click="cancelNewClient()" class="btn btn-danger">
+                Cancelar
+            </button>
+        </div>
+        <div class="col-xs-3">
+            <button type="submit" class="btn btn-success">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+
