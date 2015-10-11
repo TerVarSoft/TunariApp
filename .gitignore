@@ -1,0 +1,10 @@
+# Server Exclusions
+
+server/node_modules/*
+server/log/*
+server/public/images/*
+
+# Client Exclusions
+
+client/node_modules/*
+client/bower_components/*
