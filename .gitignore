@@ -8,3 +8,4 @@ server/public/images/*
 
 client/node_modules/*
 client/bower_components/*
+client/.tmp/*
