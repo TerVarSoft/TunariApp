@@ -17,7 +17,6 @@ angular
     'ngAudio',
     'nya.bootstrap.select',
     'siyfion.sfTypeahead',
-    'wu.masonry',
     'angularUtils.directives.dirPagination'
   ])
   .config(function ($routeProvider, RestangularProvider) {
@@ -94,13 +93,3 @@ angular
       });
   });
 
-angular
-  .module('tunariApp')
-    .config(function($provide) {
-    $provide.decorator('masonryDirective', function($delegate) {
-        var directive = $delegate[0];
-        directive.link.post = directive.link.pre;
-        delete(directive.link.pre);
-        return $delegate;
-    });
-});
