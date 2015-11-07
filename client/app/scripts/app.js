@@ -19,7 +19,7 @@ angular
     'siyfion.sfTypeahead',
     'angularUtils.directives.dirPagination'
   ])
-  .config(function ($routeProvider, RestangularProvider) {
+  .config(['$routeProvider', 'RestangularProvider', function ($routeProvider, RestangularProvider) {
     
 //    RestangularProvider.setBaseUrl('http://localhost:8000/api');
 //    RestangularProvider.setBaseUrl('http://192.168.43.210:8000/api');
@@ -91,5 +91,5 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);
 

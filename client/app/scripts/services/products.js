@@ -8,7 +8,7 @@
  * Factory in the clientApp.
  */
 angular.module('tunariApp')
-  .factory('Products', function (Restangular) {
+  .factory('Products', ['Restangular', function (Restangular) {
     return Restangular.service('products');
     
 //    return Restangular.withConfig(function(RestangularConfigurer) {
@@ -26,4 +26,4 @@ angular.module('tunariApp')
 //        });
 //      }).service('products');
     
-  });
+  }]);

@@ -8,7 +8,8 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('EditproductCtrl', function ($scope, $location, $routeParams, Products, ServerData, AlertMessages){       
+  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', 'Products', 'ServerData', 'AlertMessages',
+    function ($scope, $location, $routeParams, Products, ServerData, AlertMessages){       
     $scope.editingProduct = Products.one($routeParams.productId).get().then(function(product){
         $scope.editingProduct = product;
     });
@@ -39,4 +40,4 @@ angular.module('tunariApp')
         });
     }
     
-});
+}]);

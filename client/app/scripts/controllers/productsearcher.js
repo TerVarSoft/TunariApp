@@ -8,7 +8,9 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('ProductSearcherCtrl', function ($scope, $location, Products, ServerData, AlertMessages) {
+  .controller('ProductSearcherCtrl', 
+              ['$scope', '$location', 'Products', 'ServerData', 'AlertMessages', 
+              function ($scope, $location, Products, ServerData, AlertMessages) {
     
     Products.getList().then(function(products) {      
       $scope.products = products;   
@@ -130,4 +132,4 @@ angular.module('tunariApp')
     $('#addingProductQuantity').on('shown.bs.modal', function () {
         $('#addingQuantity').focus()
     })
-  });
+  }]);
