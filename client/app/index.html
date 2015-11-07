@@ -6,25 +6,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+	<!-- build:css styles/app.min.css -->
+    <link rel="stylesheet" href="styles/sandstone.css">
+      
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
     <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
     <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/sandstone.css">
+
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/productsearch.css">
     <link rel="stylesheet" href="styles/samplebook.css">
     <link rel="stylesheet" href="styles/sellingItem.css">
     <link rel="stylesheet" href="styles/shoppingcart.css">
-    <link rel="stylesheet" href="styles/typeahead.css">
+    <link rel="stylesheet" href="styles/typeahead.css">      
     <link rel="stylesheet" href="styles/clientsearch.css">
     <link rel="stylesheet" href="styles/clientsamples.css">
     <link rel="stylesheet" href="styles/newclient.css">
-    <!-- endbuild -->
+    <!-- /build -->
   </head>
   <body ng-app="tunariApp">
     <!--[if lte IE 8]>
@@ -103,7 +103,7 @@
        ga('send', 'pageview');
     </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:js lib/dependencies.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -119,15 +119,11 @@
     <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
     <script src="bower_components/angular-typeahead/angular-typeahead.js"></script>
     <script src="bower_components/angular-audio/app/angular.audio.js"></script>
-    <script src="bower_components/jquery-bridget/jquery.bridget.js"></script>
-    <script src="bower_components/eventEmitter/EventEmitter.js"></script>
-    <script src="bower_components/eventie/eventie.js"></script>
-    <script src="bower_components/imagesloaded/imagesloaded.js"></script>
     <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
     <!-- endbower -->
-    <!-- endbuild -->
+    <!-- /build -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <!-- build:js scripts/app.min.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
@@ -153,6 +149,6 @@
         <script src="scripts/directives/productlocation.js"></script>
         <script src="scripts/directives/uppercase.js"></script>
         <script src="scripts/filters/checkedproduct.js"></script>
-        <!-- endbuild -->
+        <!-- /build -->
 </body>
 </html>

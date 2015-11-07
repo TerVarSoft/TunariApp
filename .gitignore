@@ -3,9 +3,11 @@
 server/node_modules/*
 server/log/*
 server/public/images/*
+server/public/frontend/*
 
 # Client Exclusions
 
 client/node_modules/*
 client/bower_components/*
 client/.tmp/*
+client/build/*

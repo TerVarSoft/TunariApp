@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 
 // Mongo 
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/tunariDB');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/tunariDB');
 
@@ -44,6 +42,7 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public/frontend')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
@@ -68,18 +67,17 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
 
-app.use('/', routes);
+app.use('/test', routes);
 app.use('/users', users);
 app.use('/api/products', productRouter);
 app.use('/api/sellingItems', sellingItemRouter);
 app.use('/api/sellings', sellingRouter);
 app.use('/api/clients', clientRouter);
+
+app.get('/', function(req, res) {
+    res.sendFile('./public/frontend/index.html',{root: __dirname }); 
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -111,6 +109,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
