@@ -152,6 +152,22 @@ module.exports = function (grunt) {
           ]
         }]
       },
+	  build: {
+        files: [{
+          dot: true,
+          src: [
+            'build',
+          ]
+        }]
+      },
+	  buildTmp: {
+        files: [{
+          dot: true,
+          src: [
+            'build/.tmp',
+          ]
+        }]
+      },
       server: '.tmp'
     },
 
@@ -358,13 +374,17 @@ module.exports = function (grunt) {
           expand: true,
           dot: true,
           cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          dest: 'build',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
+			'views/{,*/}*.html',
             '*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+			'fonts/*',
+			'images/*',
+			'sounds/*' 
           ]
         }, {
           expand: true,
@@ -378,6 +398,18 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }]
       },
+      toServer: {
+        expand: true,
+        cwd: 'build',
+        dest: '../server/public/frontend/',
+        src: '**'
+      }, 
+      dependencies: {
+        expand: true,
+        cwd: 'build/.tmp/',
+        dest: 'build/lib/',
+        src: 'dependencies.js'
+      },     
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -407,9 +439,81 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
-  });
+    },
+	
+  //////////////////////////////////////////
+  ///////////Added By TerVarSoft////////////
+  //////////////////////////////////////////
+  
+  concat: {
+  
+		css: {
+            src: [        
+                    'app/styles/sandstone.css',
+					'bower_components/bootstrap/dist/css/bootstrap.css',
+					'bower_components/angular-carousel/dist/angular-carousel.css',
+					'bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css',
+					'app/styles/*'
+                ],
+            dest: 'build/.tmp/app.css'
+        },
+		
+        js: {
+            src: [
+                'app/scripts/**/*'
+            ],
+            dest: 'build/.tmp/app.js'
+        },
+		
+		lib:{
+            src: [                                
+                'bower_components/jquery/dist/jquery.min.js',
+                'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                'bower_components/angular/angular.min.js',
+                'bower_components/angular-animate/angular-animate.min.js',
+                'bower_components/angular-route/angular-route.min.js',
+                'bower_components/lodash/lodash.min.js',
+                'bower_components/restangular/dist/restangular.min.js',
+                'bower_components/angular-touch/angular-touch.min.js',
+                'bower_components/angular-carousel/dist/angular-carousel.min.js',
+                'bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js',
+                'bower_components/underscore/underscore-min.js',
+                'bower_components/typeahead.js/dist/typeahead.bundle.min.js',
+                'bower_components/angular-typeahead/angular-typeahead.min.js',
+                'bower_components/angular-audio/app/angular.audio.js',
+                'bower_components/angular-utils-pagination/dirPagination.js'
+            ],
+            dest: 'build/.tmp/dependencies.js'
+        }
+  },
+  
+  cssmin:{
+        css:{
+            src: 'build/.tmp/app.css',
+            dest: 'build/styles/app.min.css'
+        }
+    },
 
+    uglify:{
+        js:{
+            files:{
+                'build/scripts/app.min.js': ['build/.tmp/app.js'],
+//                'build/lib/dependencies.min.js': ['build/.tmp/dependencies.js'],
+            }
+        }
+    },
+	
+	processhtml:{
+        dist:{
+            files:{
+                'build/index.html': 'app/index.html'
+            } 
+        }
+    }  
+	
+  });
+  
+  grunt.loadNpmTasks('grunt-processhtml');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -463,4 +567,20 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+  
+  
+  
+  grunt.registerTask('tvsBuild', 
+                     [
+					 'clean:build',
+					 'copy:dist',
+                     'concat',
+					 'cssmin',                     
+					 'uglify',
+                     'copy:dependencies',
+					 'clean:buildTmp',
+					 'processhtml',
+                     'copy:toServer'
+  ]); 
+  
 };

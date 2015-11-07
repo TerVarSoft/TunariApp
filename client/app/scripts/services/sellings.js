@@ -8,6 +8,6 @@
  * Service in the clientApp.
  */
 angular.module('tunariApp')
-  .service('Sellings', function (Restangular) {
+  .service('Sellings', ['Restangular', function (Restangular) {
     return Restangular.service('sellings');
-  });
+  }]);

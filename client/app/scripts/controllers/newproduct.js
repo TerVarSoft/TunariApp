@@ -8,7 +8,9 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('NewproductCtrl', function ($scope, $location, ServerData, Products, AlertMessages) {
+  .controller('NewproductCtrl', 
+              ['$scope', '$location', 'ServerData', 'Products', 'AlertMessages',
+             function ($scope, $location, ServerData, Products, AlertMessages) {
      window.scrollTo(0, 0);
     $scope.serverData = ServerData;
     
@@ -35,4 +37,4 @@ angular.module('tunariApp')
     };
     
     $('#name').focus();
-  });
+  }]);
