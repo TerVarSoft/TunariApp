@@ -2,8 +2,7 @@
 
 server/node_modules/*
 server/log/*
-server/public/images/*
-server/public/frontend/*
+server/public/*
 
 # Client Exclusions
 
@@ -11,3 +10,16 @@ client/node_modules/*
 client/bower_components/*
 client/.tmp/*
 client/build/*
+
+# ELK
+
+ELK/*
+!ELK/logstash
+!ELK/kibana
+
+ELK/logstash/*
+!ELK/logstash/config
+ELK/logstash/config/dev*
+
+ELK/kibana/*
+!ELK/kibana/dashboards
