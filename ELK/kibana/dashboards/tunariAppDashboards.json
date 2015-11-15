@@ -1,0 +1,150 @@
+[
+  {
+    "_id": "CANTIDAD-DE-MEMENTOS",
+    "_type": "dashboard",
+    "_source": {
+      "title": "CANTIDAD DE MEMENTOS",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"CANTIDAD-EN-DEPOSITO-MEMENTOS\",\"row\":1,\"size_x\":12,\"size_y\":5,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "VENTAS",
+    "_type": "dashboard",
+    "_source": {
+      "title": "VENTAS",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"VENTAS-VS-TIEMPO\",\"row\":7,\"size_x\":7,\"size_y\":3,\"type\":\"visualization\"},{\"col\":8,\"id\":\"Clientes\",\"row\":7,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"columns\":[\"producto\",\"cliente\",\"cantidadProducto\",\"precioPaquete\",\"total\",\"ganancia\"],\"id\":\"VENTAS\",\"row\":3,\"size_x\":12,\"size_y\":4,\"sort\":[\"@timestamp\",\"desc\"],\"type\":\"search\"},{\"col\":1,\"id\":\"GANANCIAS-Y-TOTALES\",\"row\":1,\"size_x\":12,\"size_y\":2,\"type\":\"visualization\"},{\"id\":\"GANACIAS-VS-TIEMPO\",\"type\":\"visualization\",\"size_x\":12,\"size_y\":3,\"col\":1,\"row\":10}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "CANTIDAD-DE-PRODUCTOS",
+    "_type": "search",
+    "_source": {
+      "title": "CANTIDAD DE PRODUCTOS",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "cantidad",
+        "producto"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[],\"query\":{\"query_string\":{\"query\":\"logType:products\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "VENTAS",
+    "_type": "search",
+    "_source": {
+      "title": "VENTAS",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "producto",
+        "cliente",
+        "cantidadProducto",
+        "precioPaquete",
+        "total",
+        "ganancia"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"logType:sellings AND ganancia:>0\",\"analyze_wildcard\":true}},\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "CANTIDAD-EN-DEPOSITO-MEMENTOS",
+    "_type": "visualization",
+    "_source": {
+      "title": "CANTIDAD EN DEPOSITO MEMENTOS",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{},\"spyPerPage\":10},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"cantidad\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"producto.raw\",\"size\":200,\"order\":\"asc\",\"orderBy\":\"_term\"}},{\"id\":\"3\",\"type\":\"filters\",\"schema\":\"split\",\"params\":{\"filters\":[{\"input\":{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}},\"label\":\"Cantidad en deposito\"}],\"row\":true}}],\"listeners\":{}}",
+      "description": "",
+      "savedSearchId": "CANTIDAD-DE-PRODUCTOS",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "VENTAS-VS-TIEMPO",
+    "_type": "visualization",
+    "_source": {
+      "title": "VENTAS VS TIEMPO",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"cantidadProducto\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"producto.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "savedSearchId": "VENTAS",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Clientes",
+    "_type": "visualization",
+    "_source": {
+      "title": "CLIENTES",
+      "visState": "{\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"params\": {\n        \"field\": \"cantidadProducto\"\n      },\n      \"schema\": \"metric\",\n      \"type\": \"sum\"\n    },\n    {\n      \"id\": \"2\",\n      \"params\": {\n        \"field\": \"cliente.raw\",\n        \"order\": \"desc\",\n        \"orderBy\": \"1\",\n        \"size\": 5\n      },\n      \"schema\": \"segment\",\n      \"type\": \"terms\"\n    },\n    {\n      \"id\": \"3\",\n      \"params\": {\n        \"field\": \"producto.raw\",\n        \"order\": \"desc\",\n        \"orderBy\": \"1\",\n        \"size\": 5\n      },\n      \"schema\": \"segment\",\n      \"type\": \"terms\"\n    }\n  ],\n  \"listeners\": {},\n  \"params\": {\n    \"addLegend\": true,\n    \"addTooltip\": true,\n    \"isDonut\": false,\n    \"shareYAxis\": true\n  },\n  \"type\": \"pie\"\n}",
+      "description": "",
+      "savedSearchId": "VENTAS",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "GANANCIAS-Y-TOTALES",
+    "_type": "visualization",
+    "_source": {
+      "title": "GANANCIAS Y TOTALES",
+      "visState": "{\"type\":\"metric\",\"params\":{\"fontSize\":60},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"ganancia\"}},{\"id\":\"2\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"total\"}}],\"listeners\":{}}",
+      "description": "",
+      "savedSearchId": "VENTAS",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "GANACIAS-VS-TIEMPO",
+    "_type": "visualization",
+    "_source": {
+      "title": "GANACIAS VS TIEMPO",
+      "visState": "{\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":true,\"smoothLines\":false,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"ganancia\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "description": "",
+      "savedSearchId": "VENTAS",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]
