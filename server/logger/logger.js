@@ -1,8 +1,11 @@
+// Config
+var config = require('../config/environment')
+
 // Winston
 var winston = require('winston');
 var fs = require( 'fs' );
 
-var logDir = 'log';
+var logDir = config.loggingOptions.logDir;
 if ( !fs.existsSync( logDir ) ) {
 	// Create the directory if it does not exist
 	fs.mkdirSync( logDir );

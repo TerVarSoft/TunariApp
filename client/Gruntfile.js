@@ -114,16 +114,16 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: config.clientOptions.port,
         // Change this to '0.0.0.0' to access the server from outside.
-//        hostname: 'localhost',
-//        hostname: '192.168.43.210',
-        hostname: '10.0.0.6',
+        hostname: '*',
         livereload: 35729
       },
       livereload: {
-        options: {
-          open: true,
+        options: {         
+          open: {
+                target: config.clientOptions.host + ':' + config.clientOptions.port
+          },
           middleware: function (connect) {
             return [
               connect.static('.tmp'),

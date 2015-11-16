@@ -8,14 +8,9 @@
  * Service in the clientApp.
  */
 angular.module('tunariApp')
-  .service('ServerData', function () {
+  .service('ServerData', ['Config', function (Config) {
     
-//    this.url = "http://localhost:8000/";
-//    this.urlImages = "http://localhost:8000/images/";
-//    this.url = "http://10.0.0.4:8000/";
-    this.urlImages = "http://10.0.0.6:8000/images/";
-//    this.url = "http://192.168.43.210:8000/";
-//    this.urlImages = "http://192.168.43.210:8000/images/";
+    this.urlImages = Config.serverOptions.host + ":" + Config.serverOptions.port + "/images/";
     
     this.invitations = {}
     this.invitations.genres = ["Hombre", "Mujer", "Unisex"];
@@ -25,6 +20,6 @@ angular.module('tunariApp')
     this.products ={
         categories: ["Invitaciones"]
     }
-  });
+  }]);
 
 

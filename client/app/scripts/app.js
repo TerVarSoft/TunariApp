@@ -17,13 +17,12 @@ angular
     'ngAudio',
     'nya.bootstrap.select',
     'siyfion.sfTypeahead',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination'    
   ])
-  .config(['$routeProvider', 'RestangularProvider', function ($routeProvider, RestangularProvider) {
+  .config(['$routeProvider', 'RestangularProvider', 'Config', function ($routeProvider, RestangularProvider, Config) {
     
-//    RestangularProvider.setBaseUrl('http://localhost:8000/api');
-//    RestangularProvider.setBaseUrl('http://192.168.43.210:8000/api');
-    RestangularProvider.setBaseUrl('http://10.0.0.6:8000/api');
+    RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
+
     RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
             if (operation === "getList") {
                 _.each(response,function(element){
