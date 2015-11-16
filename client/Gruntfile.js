@@ -19,6 +19,13 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn'
   });
 
+  var config;
+  try {
+    config = require('./../server/config/environment');
+  } catch(e) {
+    config = {};
+  }
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -30,6 +37,43 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+
+    // Configuration File
+    ngconstant: {
+      // Options for all targets
+      options: {
+        name: 'tunariApp',
+        deps: false
+      },
+      // Environment targets
+      development: {        
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          Config: {            
+            serverOptions: {              
+              host: config.serverOptions.host,
+              port: config.serverOptions.port
+            }
+          }
+        }
+      },
+      production: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          Config: {            
+            serverOptions: {
+              host: 'http://localhost',
+              port: 8000,
+            }
+          }
+        }
+      }
+    },
+
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -514,6 +558,7 @@ module.exports = function (grunt) {
   });
   
   grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-ng-constant');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -522,6 +567,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -571,16 +617,17 @@ module.exports = function (grunt) {
   
   
   grunt.registerTask('tvsBuild', 
-                     [
-					 'clean:build',
-					 'copy:dist',
-                     'concat',
-					 'cssmin',                     
-					 'uglify',
-                     'copy:dependencies',
-					 'clean:buildTmp',
-					 'processhtml',
-                     'copy:toServer'
+    [
+      'ngconstant:production',
+      'clean:build',
+      'copy:dist',
+      'concat',
+      'cssmin',                     
+      'uglify',
+      'copy:dependencies',
+      'clean:buildTmp',
+      'processhtml',
+      'copy:toServer'
   ]); 
   
 };
