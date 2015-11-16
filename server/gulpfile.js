@@ -1,5 +1,10 @@
+process.env.NODE_ENV = 'development';
+
 var gulp =require('gulp');
     nodemon = require('gulp-nodemon');
+
+// Config
+var config = require('./config/environment');
 
 gulp.task('default', function(){
     nodemon({
@@ -7,12 +12,15 @@ gulp.task('default', function(){
         script: 'bin/www',
         ext: 'js',
         env: {
-            PORT:8000
+            PORT: config.serverOptions.port
         },
         ignore:['./node_modules/**']
         
     })
+    .on('start', function(){
+        console.log('TunariApp server is listening at %s:%d in %s mode', config.serverOptions.host, config.serverOptions.port, config.env);
+    })
     .on('restart', function(){
-        console.log('Gulp is running on port 8000');
+        console.log('Files have been updated succesfully');
     });
 });

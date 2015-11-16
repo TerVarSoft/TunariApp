@@ -39,6 +39,10 @@ var productRouter = function(Product){
 				}
                 else {                    
 				    res.status(201).send(newProduct);
+                    logger.log('info',
+                        'productId:' + newProduct._id + ' ' +
+                        'product:' + newProduct.name + ' ' +
+                        'wareHouseQuantity:' + newProduct.quantity);
                 }
 			});
 		});        

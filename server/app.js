@@ -1,14 +1,16 @@
+// Config
+var config = require('./config/environment');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-//var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // Mongo 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/tunariDB');
+mongoose.connect(config.mongo.uri);
 
 // Logger
 var logger = require('./logger/logger');
@@ -48,10 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-//    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.43.210:9000');
-    res.setHeader('Access-Control-Allow-Origin', 'http://10.0.0.6:9000');
-//    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
-    //res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

@@ -4,12 +4,16 @@ server/node_modules/*
 server/log/*
 server/public/*
 
+server/config/local.env.js
+
 # Client Exclusions
 
 client/node_modules/*
 client/bower_components/*
 client/.tmp/*
 client/build/*
+
+client/app/scripts/config.js
 
 # ELK
 
