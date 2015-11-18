@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<!-- build:css styles/app.min.css -->
-    <link rel="stylesheet" href="styles/sandstone.css">
       
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
     <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
+    <link rel="stylesheet" href="bower_components/angular-notify/dist/angular-notify.css" />
     <!-- endbower -->
+    
+    <link rel="stylesheet" href="styles/sandstone.css">
 
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/productsearch.css">
@@ -120,6 +121,7 @@
     <script src="bower_components/angular-typeahead/angular-typeahead.js"></script>
     <script src="bower_components/angular-audio/app/angular.audio.js"></script>
     <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+    <script src="bower_components/angular-notify/dist/angular-notify.js"></script>
     <!-- endbower -->
     <!-- /build -->
 
@@ -135,10 +137,11 @@
         <script src="scripts/directives/samplebook.js"></script>
         <script src="scripts/directives/sellingItem.js"></script>
         <script src="scripts/controllers/editproduct.js"></script>
-        <script src="scripts/services/alertmessages.js"></script>
         <script src="scripts/controllers/newproduct.js"></script>
         <script src="scripts/services/sellings.js"></script>
-        <script src="scripts/services/clients.js"></script>
+        <script src="scripts/services/clients.js"></script>        
+        <script src="scripts/services/messages.js"></script>
+        <script src="scripts/services/notifier.js"></script>
         <script src="scripts/directives/sellingquantity.js"></script>
         <script src="scripts/directives/tagsproduct.js"></script>
         <script src="scripts/directives/shoppingcart.js"></script>
