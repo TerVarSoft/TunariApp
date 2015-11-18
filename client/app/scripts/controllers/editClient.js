@@ -8,8 +8,8 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('EditClientCtrl', ['$scope', '$location', 'Clients', '$routeParams', 
-     function ($scope, $location, Clients, $routeParams) {
+  .controller('EditClientCtrl', ['$scope', '$location', '$routeParams', 'Clients', 'Notifier', 'Messages',
+     function ($scope, $location, $routeParams, Clients, Notifier, Messages) {
     
         Clients.one($routeParams.clientId).get().then(function(client){
             $scope.client = client;
@@ -18,7 +18,11 @@ angular.module('tunariApp')
         });
         $scope.saveClient = function(){
             $scope.client.save().then(function(){
-                $location.path("/clientSearch");    
+                $location.path("/clientSearch");   
+                Notifier({ 
+                    message: Messages.message003 + $scope.client.name,
+                    classes: 'alert-info'
+                });  
             });
         }
 
@@ -30,9 +34,15 @@ angular.module('tunariApp')
         $scope.deleteClient = function(){            
             
             Clients.one($routeParams.clientId).remove().then(function(){
-                $('#deleteModal').modal('toggle');
-                $('.modal-backdrop').remove();
-                $location.path("/clientSearch");  
-            });            
+                //$('#deleteModal').modal('toggle');
+                //$('.modal-backdrop').remove();
+                $("#deleteModal").on('hidden.bs.modal', function () { 
+                    $location.path("/clientSearch");  
+                    Notifier({ 
+                        message: Messages.message005 + $scope.client.name,
+                        classes: 'alert-danger'
+                    });
+                });                    
+            })
         }
 }]);
