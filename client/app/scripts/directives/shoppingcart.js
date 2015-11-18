@@ -9,7 +9,8 @@
 angular.module('tunariApp')
   .directive('shoppingcart', function () {
     
-    var controller = ['$scope', 'Sellings', function($scope, Sellings){                
+    var controller = ['$scope', 'Sellings', 'Notifier', 'Messages', 
+      function($scope, Sellings, Notifier, Messages){                
         
                 
         $scope.getTotalRevenue = function(){
@@ -55,8 +56,10 @@ angular.module('tunariApp')
                  $scope.sellingItems = [];
              });
 
-            var resultMessage =   "Venta Exitosa!";
-            $scope.endSelling()(resultMessage);                          
+            Notifier({ 
+                message: Messages.message007,
+                classes: 'alert-info'
+            });                          
         };
         
         $scope.cleanSelling = function() {

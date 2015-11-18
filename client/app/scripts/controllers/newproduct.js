@@ -9,19 +9,20 @@
  */
 angular.module('tunariApp')
   .controller('NewproductCtrl', 
-              ['$scope', '$location', 'ServerData', 'Products', 'AlertMessages',
-             function ($scope, $location, ServerData, Products, AlertMessages) {
+              ['$scope', '$location', 'ServerData', 'Products', 'Notifier', 'Messages',
+             function ($scope, $location, ServerData, Products, Notifier, Messages) {
      window.scrollTo(0, 0);
     $scope.serverData = ServerData;
     
     $scope.saveProduct = function(){
-        var message = "Acaba de crear " + $scope.newProduct.name; 
-        AlertMessages.setMessage(message)
+        Notifier({ 
+            message: Messages.message002 + $scope.newProduct.name,
+            classes: 'alert-success'
+        });
         $location.path ("/productSearch");
     }
     
     $scope.createProduct = function(){
-//        console.log("holaaaa");
         $scope.newProduct.tags.push($scope.newProduct.name);
         $scope.newProduct.tags.push($scope.newProduct.category);
         $scope.newProduct.tags.push($scope.newProduct.properties.size);
@@ -29,6 +30,10 @@ angular.module('tunariApp')
         $scope.newProduct.tags.push($scope.newProduct.properties.genre);
         Products.post($scope.newProduct).then(function(){
             $location.path("/productSearch");    
+            Notifier({ 
+                message: Messages.message002 + $scope.newProduct.name,
+                classes: 'alert-success'
+            });
         });
     }
         

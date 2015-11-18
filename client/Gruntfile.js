@@ -493,11 +493,19 @@ module.exports = function (grunt) {
   
 		css: {
             src: [        
+                    'bower_components/angular-carousel/dist/angular-carousel.css',
+                    'bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css',
+                    'bower_components/angular-notify/dist/angular-notify.css',
                     'app/styles/sandstone.css',
-					'bower_components/bootstrap/dist/css/bootstrap.css',
-					'bower_components/angular-carousel/dist/angular-carousel.css',
-					'bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css',
-					'app/styles/*'
+                    'app/styles/main.css',                    
+                    'app/styles/productsearch.css',
+                    'app/styles/samplebook.css',                    
+                    'app/styles/sellingItem.css',
+                    'app/styles/shoppingcart.css',
+                    'app/styles/typeahead.css', 
+                    'app/styles/clientsearch.css',
+                    'app/styles/clientsamples.css',
+                    'app/styles/newclient.css'
                 ],
             dest: 'build/.tmp/app.css'
         },
@@ -514,6 +522,7 @@ module.exports = function (grunt) {
                 'bower_components/jquery/dist/jquery.min.js',
                 'bower_components/bootstrap/dist/js/bootstrap.min.js',
                 'bower_components/angular/angular.min.js',
+                'bower_components/angular-notify/dist/angular-notify.min.js',
                 'bower_components/angular-animate/angular-animate.min.js',
                 'bower_components/angular-route/angular-route.min.js',
                 'bower_components/lodash/lodash.min.js',

@@ -17,7 +17,8 @@ angular
     'ngAudio',
     'nya.bootstrap.select',
     'siyfion.sfTypeahead',
-    'angularUtils.directives.dirPagination'    
+    'angularUtils.directives.dirPagination',
+    'cgNotify'    
   ])
   .config(['$routeProvider', 'RestangularProvider', 'Config', function ($routeProvider, RestangularProvider, Config) {
     

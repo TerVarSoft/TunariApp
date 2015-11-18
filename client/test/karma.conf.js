@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/angular-typeahead/angular-typeahead.js',
       'bower_components/angular-audio/app/angular.audio.js',
       'bower_components/angular-utils-pagination/dirPagination.js',
+      'bower_components/angular-notify/dist/angular-notify.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

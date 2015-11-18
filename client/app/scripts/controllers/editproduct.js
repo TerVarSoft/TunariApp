@@ -8,8 +8,8 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', 'Products', 'ServerData', 'AlertMessages',
-    function ($scope, $location, $routeParams, Products, ServerData, AlertMessages){       
+  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', 'Products', 'ServerData', 'Notifier', 'Messages',
+    function ($scope, $location, $routeParams, Products, ServerData, Notifier, Messages){       
     $scope.editingProduct = Products.one($routeParams.productId).get().then(function(product){
         $scope.editingProduct = product;
     });
@@ -20,8 +20,11 @@ angular.module('tunariApp')
                 
         $scope.editingProduct.put().then(function(){
             var message = "Acaba de modificar " + $scope.editingProduct.name; 
-            AlertMessages.setMessage(message)
             $location.path("/productSearch");
+            Notifier({ 
+                message: Messages.message004 + $scope.editingProduct.name,
+                classes: 'alert-info'
+            }); 
         });
         
     }
@@ -34,8 +37,11 @@ angular.module('tunariApp')
        
         Products.one($routeParams.productId).remove().then(function(){
             $("#deleteModal").on('hidden.bs.modal', function () { 
-                  $location.path("/productSearch"); 
-            //          $scope.$apply();    
+                $location.path("/productSearch"); 
+                Notifier({ 
+                    message: Messages.message006 + $scope.editingProduct.name,
+                    classes: 'alert-danger'
+                });       
             }); 
         });
     }

@@ -9,8 +9,8 @@
  */
 angular.module('tunariApp')
   .controller('ProductSearcherCtrl', 
-              ['$scope', '$location', 'Products', 'ServerData', 'AlertMessages', 
-              function ($scope, $location, Products, ServerData, AlertMessages) {
+              ['$scope', '$location', 'Products', 'ServerData',  
+              function ($scope, $location, Products, ServerData) {
     
     Products.getList().then(function(products) {      
       $scope.products = products;   
@@ -21,7 +21,6 @@ angular.module('tunariApp')
     $scope.sampleBookSelected = 0; 
     $scope.shoppingCartSellings = [];
     
-    $scope.alertMessages = AlertMessages.getAlertMessages();
     $scope.modals = {
         sampleBook : false,
         sellingItem : false,
@@ -31,7 +30,6 @@ angular.module('tunariApp')
     
     $scope.serverData = ServerData;
     
-//    $scope.sellingProduct = {}
     $scope.search = function(){
         Products.getList({tags:$scope.tags}).then(function(products) {
             $scope.products = products;
@@ -39,7 +37,6 @@ angular.module('tunariApp')
     }
     
     $scope.addToCart = function(sellingItem){
-        console.log("jejejee");
         if(!_.contains($scope.shoppingCartSellings, sellingItem)){           
             $scope.shoppingCartSellings.push(sellingItem);
            }
@@ -51,7 +48,6 @@ angular.module('tunariApp')
         $scope.selectedProductSampleBook = product;
         $scope.modals.sampleBook = true;
         $scope.modals.background = true;
-        $scope.hideAlertMessages();
     };
     
     $scope.selectProductToAdd = function(product) {
@@ -78,27 +74,14 @@ angular.module('tunariApp')
     $scope.showSellingItem = function(sellingItemData){  
         $scope.sellingItemData = sellingItemData;                
         $scope.savedsellingItemData = $.extend(true, {}, $scope.sellingItemData);
-
-//        $scope.sellingItemData = {};
-//        $scope.sellingItemData.product = [$scope.product];
-//        $scope.sellingItemData.productPrice = $scope.product.prices[0];
-//        $scope.sellingItemData.revenue = 50;
-        
-//        $scope.sellingProduct = product;
         $scope.modals.sellingItem = true;
         $scope.modals.background = true;    
-        $scope.hideAlertMessages();
         window.scrollTo(0, 0);
     };
     
-    $scope.endSelling = function(message){
-        if(message){
-            $scope.alertMessages.message =  message;
-            $scope.alertMessages.show = true;       
-        }
-        
-        $scope.hideModals();
-    }
+    //$scope.endSelling = function(message){
+    //    $scope.hideModals();
+    //}
     
     $scope.cancelSelling = function(){
         var iSelling = $scope.shoppingCartSellings.indexOf($scope.sellingItemData);
@@ -114,16 +97,9 @@ angular.module('tunariApp')
     };
     
     $scope.showDetails = function(productId){
-        $scope.alertMessages.show = false;
-        AlertMessages.hideAlerts();
-        console.log(productId);
         $location.path ("products/" + productId);
     }
     
-    $scope.hideAlertMessages = function(){
-        $scope.alertMessages.show = false;
-        AlertMessages.hideAlerts();
-    }
     
     $scope.windowTop = function(){
         window.scrollTo(0, 0);
