@@ -10,9 +10,8 @@ angular.module('tunariApp')
   .directive('shoppingcart', function () {
     
     var controller = ['$scope', 'Sellings', 'Notifier', 'Messages', 
-      function($scope, Sellings, Notifier, Messages){                
-        
-                
+      function($scope, Sellings, Notifier, Messages){                              
+
         $scope.getTotalRevenue = function(){
             return _.reduce($scope.sellingItems, function(memo, sellingItem){ return memo + sellingItem.revenue; }, 0);
         };

@@ -150,3 +150,5 @@ input::-webkit-inner-spin-button {
   border-style: solid;
     
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
