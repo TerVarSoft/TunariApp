@@ -7,7 +7,7 @@
             <h3 class="title">{{client.name}}</h3>
         </div>
         <div class="col-xs-4">
-            <button type="button" class="btn btn-warning btn" data-toggle="modal" data-target="#deleteModal">
+            <button type="button" class="btn btn-warning btn" ng-click="deleteClient()">
                 Eliminar <span class="glyphicon glyphicon-trash"></span>
             </button>
         </div>
@@ -70,26 +70,4 @@
         </div>
     </div>
 </form>
-
-<!-- Modal -->
-<div id="deleteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Eliminar Cliente</h4>
-      </div>
-      <div class="modal-body">
-        <p>Esta seguro de eliminar el cliente {{client.name}}?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteClient()" >Aceptar</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 

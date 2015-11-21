@@ -15,5 +15,9 @@ angular.module('tunariApp')
   	message004: 'Ha modificado satisfactoriamente el producto ',
   	message005: 'Ha eliminado el cliente ',
   	message006: 'Ha eliminado el producto ',
-  	message007: '"Venta Exitosa!"'
-  });
+  	message007: 'Venta Exitosa!',
+  	message008: 'Eliminar Cliente',
+  	message009: 'Esta seguro de elminar el cliente ',
+  	message010: 'Eliminar Producto',
+  	message011: 'Esta seguro de elminar el producto '
+  })

@@ -8,8 +8,8 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', 'Products', 'ServerData', 'Notifier', 'Messages',
-    function ($scope, $location, $routeParams, Products, ServerData, Notifier, Messages){       
+  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', '$uibModal', 'Products', 'ServerData', 'Notifier', 'Messages',
+    function ($scope, $location, $routeParams, $uibModal, Products, ServerData, Notifier, Messages){       
     $scope.editingProduct = Products.one($routeParams.productId).get().then(function(product){
         $scope.editingProduct = product;
     });
@@ -33,17 +33,30 @@ angular.module('tunariApp')
         $location.path("/productSearch");
     }
     
-    $scope.deleteProduct = function(){            
-       
-        Products.one($routeParams.productId).remove().then(function(){
-            $("#deleteModal").on('hidden.bs.modal', function () { 
-                $location.path("/productSearch"); 
+    $scope.deleteProduct = function () {
+
+        var deleteModal = $uibModal.open({
+          templateUrl: '../../views/questionModal.html',
+          controller: 'QuestionModalCtrl',
+          resolve: {
+            options: function () {
+              return {
+                title: Messages.message010,
+                message: Messages.message011+ $scope.editingProduct.name + '?',
+              }
+            }
+          }
+        });
+
+        deleteModal.result.then(function () {
+            Products.one($routeParams.productId).remove().then(function(){
+                $location.path("/productSearch");  
                 Notifier({ 
                     message: Messages.message006 + $scope.editingProduct.name,
                     classes: 'alert-danger'
-                });       
-            }); 
+                });
+            });                    
         });
-    }
+    };
     
 }]);

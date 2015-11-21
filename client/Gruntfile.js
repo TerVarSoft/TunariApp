@@ -534,7 +534,8 @@ module.exports = function (grunt) {
                 'bower_components/typeahead.js/dist/typeahead.bundle.min.js',
                 'bower_components/angular-typeahead/angular-typeahead.min.js',
                 'bower_components/angular-audio/app/angular.audio.js',
-                'bower_components/angular-utils-pagination/dirPagination.js'
+                'bower_components/angular-utils-pagination/dirPagination.js',
+                'app/custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js'
             ],
             dest: 'build/.tmp/dependencies.js'
         }

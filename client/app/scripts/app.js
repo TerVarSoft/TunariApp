@@ -18,7 +18,8 @@ angular
     'nya.bootstrap.select',
     'siyfion.sfTypeahead',
     'angularUtils.directives.dirPagination',
-    'cgNotify'    
+    'cgNotify',
+    'ui.bootstrap'
   ])
   .config(['$routeProvider', 'RestangularProvider', 'Config', function ($routeProvider, RestangularProvider, Config) {
     
