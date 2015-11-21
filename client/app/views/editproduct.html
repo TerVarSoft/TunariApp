@@ -16,8 +16,8 @@
                         <h4><strong>Edicion {{editingProduct.name}}</strong></h4>
                     </div>
                     <div class="col-xs-offset-3 col-xs-3" align="center">                                       
-                       <button ng-href="#/productSearch" type="button" class="btn btn-warning" 
-                               data-toggle="modal" data-target="#deleteModal">
+                       <button type="button" class="btn btn-warning" 
+                               ng-click="deleteProduct()">
                            Eliminar <span class="glyphicon glyphicon-trash"></span>
                        </button>                   
                     </div>
@@ -277,29 +277,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-        
-
+        </div>        
     </div>
-</div>
-
-<!-- Modal -->
-<div id="deleteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-     Modal content
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Eliminar Producto</h4>
-      </div>
-      <div class="modal-body">
-        <p>Esta seguro de eliminar el producto {{editingProduct.name}}?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteProduct()" >Aceptar</button>
-      </div>
-    </div>
-
-  </div>
 </div>
