@@ -43,11 +43,26 @@ angular.module('tunariApp')
     }
     
     $scope.showSampleBook = function(product){
-        $scope.sampleBookSelected = $scope.products.indexOf(product);
-        $scope.selectedProductSampleBook = product;
-        $scope.modals.sampleBook = true;
-        $scope.modals.background = true;
-    };
+        var samplebookModal = $uibModal.open({
+            templateUrl: '../../views/samplebook.html',
+            controller: 'SamplebookCtrl',
+            resolve: {
+                samplebookInfo: function () {
+                    return {
+                        product: product,
+                        serverData: $scope.serverData
+                    }
+                }
+            }
+        });
+    }
+
+    $scope.getProductImageUrl = function(product) {
+        return  $scope.serverData.urlImages + "/" + 
+                product.category + "/" + 
+                product.properties.type + "/" +
+                product.name + "-M.jpg"
+    }
     
 
     $scope.addProduct = function(product) {
@@ -94,7 +109,7 @@ angular.module('tunariApp')
         $scope.modals.background = false;
     };
     
-    $scope.showDetails = function(productId){
+    $scope.editProduct = function(productId){
         $location.path ("products/" + productId);
     }
     
