@@ -62,13 +62,10 @@
         <dir-pagination-controls ng-click="windowTop()"></dir-pagination-controls>        
     </div>
 
-    <samplebook ng-click="hideModals()" class="animate-if samplebook" ng-if="modals.sampleBook"></samplebook>
-
     <sellingitem selling-item-data='sellingItemData' add-to-cart='addToCart'
              server-data="serverData" end-selling="endSelling" cancel-selling="cancelSelling"
              class="animate-if  modalcard-sm" ng-if="modals.sellingItem">
     </sellingitem>  
-    <productdetails class="animate-if modalcard-lg" ng-if="modals.productdetails"></productdetails>
     
     <shoppingcart selling-items='shoppingCartSellings' 
                   show-selling-item='showSellingItem'
