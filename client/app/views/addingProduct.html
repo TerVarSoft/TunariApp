@@ -18,20 +18,19 @@
 	                   autofocus/>
 	        </div>
 	        <div class="text-danger">                   
-	            <span ng-show="addingQuantityForm.addingQuantity.$error.pattern">
-	                La cantidad no es correcta.
+	            <span ng-if="addingQuantityForm.addingQuantity.$error.pattern">
+	                {{messages.message013}}
 	            </span>
-	            <span 
-	                 ng-show="(!addingQuantityForm.addingQuantity.$pristine || 
+	            <span ng-if="(!addingQuantityForm.addingQuantity.$pristine || 
 	                          addingQuantityForm.$submitted) &&
 	                          addingQuantityForm.addingQuantity.$error.required">
-	               Introduzca la cantidad por favor. 
+	               {{messages.message014}}
 	            </span>
 	        </div>
 	        <div class="text-info">                   
-	            <span ng-show="addingQuantityForm.addingQuantity.$dirty &&
+	            <span ng-if="addingQuantityForm.addingQuantity.$dirty &&
 	                           addingQuantityForm.addingQuantity.$valid">
-	               {{quantityToAdd}} Unidades
+	               {{quantityToAdd}} {{messages.message015}}
 	            </span>
 	        </div>
 	    </div>
