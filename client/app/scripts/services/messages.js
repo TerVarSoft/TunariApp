@@ -21,4 +21,7 @@ angular.module('tunariApp')
       message010: 'Eliminar Producto',
       message011: 'Esta seguro de elminar el producto ',
       message012: 'Nueva cantidad del producto ',
+      message013: 'La cantidad no es correcta.',
+      message014: 'Introduzca la cantidad por favor.',
+      message015: 'Unidades.'
   })
