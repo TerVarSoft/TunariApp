@@ -19,13 +19,16 @@
         <div dir-paginate-start="product in products | itemsPerPage: 9" class="animate-if col-md-4 col-sm-6 col-xs-12">
             <div class="card img-rounded">
                 <div align="left" class="btn btn-sm card-header">
-                    <span ng-click="showDetails(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
+                    <span ng-click="editProduct(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
                 </div>
                 <div align="center">
-                    <img  alt="{{product.name}}" class="img-rounded img-responsive"  ng-click="showSampleBook(product)"
-                         ng-src="{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}-M.jpg"/> 
+                    <!--Double img tag to not show samplebook in small screens-->
+                    <img    alt="{{product.name}}" class="img-rounded img-responsive hidden-xs"  
+                            ng-click="showSampleBook(product)"
+                            ng-src="{{getProductImageUrl(product)}}"/> 
+                    <img    alt="{{product.name}}" class="img-rounded img-responsive visible-xs"
+                            ng-src="{{getProductImageUrl(product)}}"/>  
                 </div>
-
                 <div class="card-body col-xs-8">
                     <hr/>
                     <div>
@@ -70,7 +73,8 @@
     <shoppingcart selling-items='shoppingCartSellings' 
                   show-selling-item='showSellingItem'
                   end-selling="endSelling"
-                  server-data="serverData"></shoppingcart>
+                  server-data="serverData">
+    </shoppingcart>
     
     <div ng-if="modals.background" class="modalBackground animate-if" ng-click="hideModals()">
     </div>
