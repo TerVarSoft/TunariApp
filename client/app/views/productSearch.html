@@ -14,46 +14,7 @@
     </form>
 </div>
 
-<div class="row">
-<!--
-    <div masonry>
-        <div  class="masonry-brick masonry-card" dir-paginate="product in products | itemsPerPage: 9">
-             <div class="card img-rounded"
-                 ng-mouseover="product.showHeader = true" 
-                 ng-mouseleave="product.showHeader = false">
-                <div align="left" class="btn btn-sm card-header">
-                    <span ng-click="showDetails(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
-                </div>
-                <div align="center">
-                    <img  alt="{{product.name}}" class="img-rounded img-responsive"  ng-click="showSampleBook(product)"
-                         ng-src="{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/> 
-                </div>
-
-                <div class="card-body">
-                    <hr/>
-                    <div>
-                        <h3 class="card-title">{{product.name}}</h3>
-                    </div>
-                    <div>
-                        <p class="card-data">
-                            Deposito: {{product.quantity}} Unidades
-                            <br/>
-                            Precio: {{product.prices[0].value}} Bs.</p>
-                    </div>
-                </div>
-                <div class="card-button">
-                    <div ng-click="showSellingItem({'product':product,'productPrice':product.prices[0]})" class="btn btn-success">                        
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12" style="text-align:center">
-        <dir-pagination-controls ng-click="windowTop()"></dir-pagination-controls>        
-    </div>
--->
-    
+<div class="row">    
     <div class="row">
         <div dir-paginate-start="product in products | itemsPerPage: 9" class="animate-if col-md-4 col-sm-6 col-xs-12">
             <div class="card img-rounded">
@@ -82,16 +43,8 @@
                         <span class="glyphicon glyphicon-shopping-cart"></span>
                     </div>
                 </div>
-<!--
-                <div class="col-xs-offset-3 col-xs-3" align="center">                                       
-                       <button ng-href="#/productSearch" type="button" class="btn btn-warning" 
-                               data-toggle="modal" data-target="#deleteModal">
-                           Eliminar <span class="glyphicon glyphicon-trash"></span>
-                       </button>                   
-                    </div>
--->
                 <div class="card-button col-xs-2">
-                    <div  class="btn btn-primary"  ng-click="selectProductToAdd(product)">
+                    <div  class="btn btn-primary"  ng-click="addProduct(product)">
                         <span class="glyphicon glyphicon-plus"></span>
                     </div>
                 </div>
@@ -108,12 +61,6 @@
 
     <samplebook ng-click="hideModals()" class="animate-if samplebook" ng-if="modals.sampleBook"></samplebook>
 
-<!--
-    <sellingitem selling-item-data='sellingItemData' add-to-cart='addToCart'
-             server-data="serverData" end-selling="endSelling" cancel-selling="cancelSelling"
-             class="animate-if hidden-xs hidden-sm modalcard-lg" ng-if="modals.sellingItem">
-    </sellingitem> 
--->
     <sellingitem selling-item-data='sellingItemData' add-to-cart='addToCart'
              server-data="serverData" end-selling="endSelling" cancel-selling="cancelSelling"
              class="animate-if  modalcard-sm" ng-if="modals.sellingItem">
@@ -126,66 +73,5 @@
                   server-data="serverData"></shoppingcart>
     
     <div ng-if="modals.background" class="modalBackground animate-if" ng-click="hideModals()">
-    </div>
-</div>
-
-
-
-<div ng-if = "alertMessages.show" 
-     ng-click = "hideAlertMessages()"
-     class="animate-if alert alertpos alert-dismissible alert-info">
-  <strong>Felicidades!</strong> {{alertMessages.message}}
-</div>
-
-
-<!-- Modal -->
-<div id="addingProductQuantity" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="form-horizontal" ng-submit="addingProduct()" name="addingQuantityForm" role="form" novalidate>
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Agregar {{selectedProductToAdd.name}}</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">Cantidad :</span>
-                            <input type="tel" 
-                                   sellingquantity
-                                   ng-pattern="/^\d+[ #\*]\d+$|^\d+$/"
-                                   class="form-control" 
-                                   ng-model="quantityToAdd" 
-                                   id="addingQuantity"
-                                   name="addingQuantity"
-                                   required
-                                   autofocus/>
-                        </div>
-                        <div class="text-danger">                   
-                            <span ng-show="addingQuantityForm.addingQuantity.$error.pattern">
-                                La cantidad no es correcta.
-                            </span>
-                            <span 
-                                 ng-show="(!addingQuantityForm.addingQuantity.$pristine || 
-                                          addingQuantityForm.$submitted) &&
-                                          addingQuantityForm.addingQuantity.$error.required">
-                               Introduzca la cantidad por favor. 
-                            </span>
-                        </div>
-                        <div class="text-info">                   
-                            <span ng-show="addingQuantityForm.addingQuantity.$dirty &&
-                                           addingQuantityForm.addingQuantity.$valid">
-                               {{quantityToAdd}} Unidades
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" ng-click="cancelAdding()">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Aceptar</button>
-                </div>
-            </form>
-        </div>
-
     </div>
 </div>

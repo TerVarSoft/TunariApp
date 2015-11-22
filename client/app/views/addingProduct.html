@@ -1,0 +1,43 @@
+<form class="form-horizontal" ng-submit="addingQuantityForm.$valid && accept()" 
+	name="addingQuantityForm" role="form" novalidate>
+	<div class="modal-header">
+	    <h3 class="modal-title">Agregar {{productName}}</h3>
+	</div>
+	<div class="modal-body">
+	    <div class="form-group">
+	        <div class="input-group">
+	            <span class="input-group-addon">Cantidad :</span>
+	            <input type="tel" 
+	                   sellingquantity
+	                   ng-pattern="/^\d+[ #\*]\d+$|^\d+$/"
+	                   class="form-control" 
+	                   ng-model="quantityToAdd" 
+	                   id="addingQuantity"
+                       name="addingQuantity"
+	                   required
+	                   autofocus/>
+	        </div>
+	        <div class="text-danger">                   
+	            <span ng-show="addingQuantityForm.addingQuantity.$error.pattern">
+	                La cantidad no es correcta.
+	            </span>
+	            <span 
+	                 ng-show="(!addingQuantityForm.addingQuantity.$pristine || 
+	                          addingQuantityForm.$submitted) &&
+	                          addingQuantityForm.addingQuantity.$error.required">
+	               Introduzca la cantidad por favor. 
+	            </span>
+	        </div>
+	        <div class="text-info">                   
+	            <span ng-show="addingQuantityForm.addingQuantity.$dirty &&
+	                           addingQuantityForm.addingQuantity.$valid">
+	               {{quantityToAdd}} Unidades
+	            </span>
+	        </div>
+	    </div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+	    <button class="btn btn-primary" type="submit">Aceptar</button>
+	</div>
+</form>

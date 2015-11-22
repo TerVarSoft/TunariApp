@@ -9,12 +9,11 @@
  */
 angular.module('tunariApp')
   .controller('ProductSearcherCtrl', 
-              ['$scope', '$location', 'Products', 'ServerData',  
-              function ($scope, $location, Products, ServerData) {
+              ['$scope', '$location', '$uibModal', 'Products', 'ServerData', 'Messages', 'Notifier',  
+              function ($scope, $location, $uibModal, Products, ServerData, Messages, Notifier) {
     
     Products.getList().then(function(products) {      
       $scope.products = products;   
-        console.log(products[0]);
     }); 
    
         
@@ -50,26 +49,29 @@ angular.module('tunariApp')
         $scope.modals.background = true;
     };
     
-    $scope.selectProductToAdd = function(product) {
-        //$scope.quantityToAdd = "";
-        $('#addingProductQuantity').modal('toggle');
-        $scope.selectedProductToAdd = product;
+
+    $scope.addProduct = function(product) {
+        var addProductModal = $uibModal.open({
+          templateUrl: '../../views/addingProduct.html',
+          controller: 'AddingProductCtrl',
+          resolve: {
+            productName: function () {
+              return product.name;
+            }
+          }
+        });
+
+        addProductModal.result.then(function (quantityToAdd) {
+            product.quantity += quantityToAdd;
+            product.save();
+
+            Notifier({ 
+                message: Messages.message012 + product.name + ' : ' + product.quantity,
+                classes: 'alert-info'
+            });                    
+        });
     };
     
-    $scope.addingProduct = function() {
-        $scope.selectedProductToAdd.quantity += $scope.quantityToAdd;
-        $scope.selectedProductToAdd.save();
-        $('#addingProductQuantity').modal('toggle');
-        $scope.quantityToAdd = "";
-        $scope.addingQuantityForm.$setPristine();
-    };
-    
-    $scope.cancelAdding = function() {
-        $scope.quantityToAdd = "";
-        $scope.addingQuantityForm.$setPristine();
-        
-        $('#addingProductQuantity').modal('toggle');
-    }
     
     $scope.showSellingItem = function(sellingItemData){  
         $scope.sellingItemData = sellingItemData;                
@@ -77,11 +79,7 @@ angular.module('tunariApp')
         $scope.modals.sellingItem = true;
         $scope.modals.background = true;    
         window.scrollTo(0, 0);
-    };
-    
-    //$scope.endSelling = function(message){
-    //    $scope.hideModals();
-    //}
+    };    
     
     $scope.cancelSelling = function(){
         var iSelling = $scope.shoppingCartSellings.indexOf($scope.sellingItemData);
@@ -105,7 +103,4 @@ angular.module('tunariApp')
         window.scrollTo(0, 0);
     }
     
-    $('#addingProductQuantity').on('shown.bs.modal', function () {
-        $('#addingQuantity').focus()
-    })
   }]);
