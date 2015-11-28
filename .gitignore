@@ -3,6 +3,7 @@
 server/node_modules/*
 server/log/*
 server/public/*
+server/data
 
 server/config/local.env.js
 
