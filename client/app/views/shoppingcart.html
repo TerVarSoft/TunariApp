@@ -4,11 +4,6 @@
              data-toggle="collapse" href="#shoppingcartbody">
             {{sellingItems.length}} Items
         </div>
-<!--
-        <div class="btn pull-right shopping-cart-button" data-toggle="collapse" href="#shoppingcartbody">
-            <span class="glyphicon glyphicon-shopping-cart"></span> 
-        </div>
--->
         <div class="col-xs-2 col-sm-2 col-md-1 btn pull-right btn-success" ng-click="saveSelling()">
             Vender
         </div>
@@ -21,20 +16,6 @@
     </div>    
 
      <div id="shoppingcartbody" class="container panel-collapse collapse shopping-cart-body" >
-<!--
-        <div class="row">
-             <div class="col-sm-offset-6 col-xs-9 col-sm-4">
-                    <div class="input-group">
-                        <typeahead client="client"></typeahead>
-                    </div>
-            </div>            
-             <div class="col-xs-3 col-sm-2">
-                 <div ng-click="saveSelling()" class="btn btn-success">
-                     Vender
-                 </div>
-             </div>
-         </div> 
--->
         <table class="table">
             <thead>
               <tr>
@@ -55,7 +36,7 @@
                     "{{serverData.urlImages}}/{{sellingItem.product.category}}/{{sellingItem.product.properties.type}}/{{sellingItem.product.name}}-S.jpg"/>      
                         </div>
                     </td>
-                    <td class="product-name" ng-click="showSellingItem()(sellingItem)">{{sellingItem.product.name}}</td>
+                    <td class="product-name" ng-click="showSelling(sellingItem)">{{sellingItem.product.name}}</td>
                     <td>{{sellingItem.productPrice.value}} Bs.</td>
                     <td>{{sellingItem.quantity}}</td>
                     <td>{{sellingItem.revenue}} Bs.</td>

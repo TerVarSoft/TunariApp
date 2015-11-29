@@ -33,25 +33,15 @@ angular.module('tunariApp')
         Products.getList({tags:$scope.tags}).then(function(products) {
             $scope.products = products;
         });
-    }
-    
-    $scope.addToCart = function(sellingItem){
-        if(!_.contains($scope.shoppingCartSellings, sellingItem)){           
-            $scope.shoppingCartSellings.push(sellingItem);
-           }
-        $scope.hideModals();
-    }
+    }    
     
     $scope.showSampleBook = function(product){
         var samplebookModal = $uibModal.open({
             templateUrl: '../../views/samplebook.html',
             controller: 'SamplebookCtrl',
             resolve: {
-                samplebookInfo: function () {
-                    return {
-                        product: product,
-                        serverData: $scope.serverData
-                    }
+                product: function () {
+                    return product;                                        
                 }
             }
         });
@@ -86,33 +76,31 @@ angular.module('tunariApp')
             });                    
         });
     };
-    
-    
-    $scope.showSellingItem = function(sellingItemData){  
-        $scope.sellingItemData = sellingItemData;                
-        $scope.savedsellingItemData = $.extend(true, {}, $scope.sellingItemData);
-        $scope.modals.sellingItem = true;
-        $scope.modals.background = true;    
-        window.scrollTo(0, 0);
-    };    
-    
-    $scope.cancelSelling = function(){
-        var iSelling = $scope.shoppingCartSellings.indexOf($scope.sellingItemData);
-        $scope.shoppingCartSellings[iSelling] = $scope.savedsellingItemData
-        $scope.hideModals();
-    }
-    
-    $scope.hideModals = function(){
-        $scope.modals.sampleBook = false;
-        $scope.modals.sellingItem = false;
-        $scope.modals.productdetails = false;
-        $scope.modals.background = false;
-    };
+
+    $scope.showSellingItem = function(product) {
+        var addingProductToCartModal = $uibModal.open({
+          templateUrl: '../../views/sellingItem.html',
+          controller: 'sellingItemCtrl',
+          size:'lg',
+          resolve: {
+            sellingItem: function () {
+                return {
+                    product: product
+                };
+            }
+          }
+        });
+
+        addingProductToCartModal.result.then(function(sellingItem) {
+            if(!_.contains($scope.shoppingCartSellings, sellingItem)){           
+                $scope.shoppingCartSellings.push(sellingItem);
+            }
+        }); 
+    };            
     
     $scope.editProduct = function(productId){
         $location.path ("products/" + productId);
-    }
-    
+    }    
     
     $scope.windowTop = function(){
         window.scrollTo(0, 0);
