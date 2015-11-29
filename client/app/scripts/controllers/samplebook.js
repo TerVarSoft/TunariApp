@@ -8,13 +8,13 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('SamplebookCtrl', ['$scope', '$uibModalInstance', 'samplebookInfo', 
-  	function ($scope, $uibModalInstance, samplebookInfo) {    
+  .controller('SamplebookCtrl', ['$scope', '$uibModalInstance', 'ServerData', 'product', 
+  	function ($scope, $uibModalInstance, ServerData, product) {    
 
-		$scope.imageUrl = 	samplebookInfo.serverData.urlImages + "/" + 
-							samplebookInfo.product.category + "/" + 
-							samplebookInfo.product.properties.type + "/" +
-							samplebookInfo.product.name + "-L.jpg"
+		$scope.imageUrl = 	 ServerData.urlImages + "/" + 
+							           product.category + "/" + 
+							           product.properties.type + "/" +
+							           product.name + "-L.jpg"
 
   		$scope.dissmissModal = function () {
       	  $uibModalInstance.dismiss();
