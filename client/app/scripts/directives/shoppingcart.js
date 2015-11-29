@@ -9,8 +9,14 @@
 angular.module('tunariApp')
   .directive('shoppingcart', function () {
     
-    var controller = ['$scope', 'Sellings', 'Notifier', 'Messages', 
-      function($scope, Sellings, Notifier, Messages){                              
+    var controller = ['$scope', 'Sellings', 'Notifier', 'Messages', '$uibModal', 'ServerData',
+      function($scope, Sellings, Notifier, Messages, $uibModal, ServerData){                              
+
+        $scope.serverData = ServerData;
+
+        $scope.selling = {
+            sellingItems: $scope.sellingItems,
+        };
 
         $scope.getTotalRevenue = function(){
             return _.reduce($scope.sellingItems, function(memo, sellingItem){ return memo + sellingItem.revenue; }, 0);
@@ -23,11 +29,25 @@ angular.module('tunariApp')
                 return result; 
             }, 0);
         };
-        
-        $scope.selling = {
-            sellingItems: $scope.sellingItems,
+                
+        $scope.showSelling = function(sellingItem) {
+            var sellingItemModal = $uibModal.open({
+              templateUrl: '../../views/sellingItem.html',
+              controller: 'sellingItemCtrl',
+              size:'lg',
+              resolve: {
+                sellingItem: function () {
+                  return sellingItem;
+                }
+              }
+            });
+
+            sellingItemModal.result.then(function(updatedSellingItem) {
+                var iSelling = $scope.sellingItems.indexOf(sellingItem);
+                $scope.sellingItems[iSelling] = updatedSellingItem;
+            }); 
         };
-        
+
         $scope.saveSelling = function () {   
 
             $('#shoppingcartbody').collapse('hide');
@@ -74,10 +94,7 @@ angular.module('tunariApp')
       templateUrl: '../../views/shoppingcart.html',
       restrict: 'EA',
       scope: {
-          sellingItems: '=',
-          serverData: '=',
-          showSellingItem: '&',
-          endSelling: '&'
+          sellingItems: '='
       },    
       controller: controller
     };
