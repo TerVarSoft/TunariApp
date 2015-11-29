@@ -1,117 +1,92 @@
-<div class="container">
-{{sellingItemData.product.properties.quantityPerPackage}}
-    <div >
-        <div class="hidden-xs col-sm-6">
+<form  class="form-horizontal" name="sellingForm" 
+                  ng-submit="sellingForm.$valid && addToCart()" role="form" novalidate>
+	<div class="modal-header">
+	    <h3 class="modal-title">Venta {{sellingItem.product.name}}</h3>
+	</div>
+	<div class="modal-body">	    
+    	<div class="hidden-xs col-sm-4">
             <div class="thumbnail">
-                <img alt="{{sellingItemData.product.name}}" class="img-rounded img-responsive" 
+                <img alt="{{sellingItem.product.name}}" class="img-rounded img-responsive" 
                      ng-src=
-                     "{{serverData.urlImages}}/{{sellingItemData.product.category}}/{{sellingItemData.product.properties.type}}/{{sellingItemData.product.name}}-M.jpg"/>        
+                     "{{serverData.urlImages}}/{{sellingItem.product.category}}/{{sellingItem.product.properties.type}}/{{sellingItem.product.name}}-M.jpg"/>        
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <form  class="form-horizontal" name="sellingForm" 
-                  ng-submit="sellingForm.$valid && addToCart()(sellingItemData)" role="form" novalidate>
-                <div class="row form-group">
-                    <div class="col-xs-12 col-md-4">
-                        <h4><strong>Venta {{sellingItemData.product.name}}</strong></h4>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <button type="button" accesskey="c" class="btn btn-danger" 
-                                ng-click="cancelSelling()()">
-                            Cancelar
-                        </button>
-                    </div>
-                    <div class="col-xs-6 col-md-2">
-                        <button type="submit" class="btn btn-success">
-                            Guardar 
-                        </button>
-                    </div>
-
-                </div>
-                <hr/>
-                <div class="form-group">
+        <div class="col-sm-8">
+        	<div class="form-group">
+            	<div class="col-xs-12">
                     <div class="input-group">
-                        <span class="input-group-addon">Cantidad :</span>
-                        <input type="tel" ng-pattern="/^\d+[ #\*]\d+$|^\d+$/"  
-                               sellingquantity max-quantity="{{sellingItemData.product.quantity}}" ng-change="updateTotal()" 
+                        <span class="input-group-addon">Cant :</span>
+                        <input autofocus type="tel" ng-pattern="/^\d+[ #\*]\d+$|^\d+$/"  
+                               sellingquantity max-quantity="{{sellingItem.product.quantity}}" 
+                               ng-change="updateTotal()" 
+                               autocomplete="off"
                                class="form-control" 
-                               ng-model="sellingItemData.quantity" 
+                               ng-model="sellingItem.quantity" 
                                name="quantity" id="quantity"
                                required/>
-                        <span class="input-group-btn">
-                                <div ng-init="sellingItemData.productPrice = sellingItemData.product.prices[0]">
+                       	<span class="input-group-btn">
+                                <div ng-init="sellingItem.productPrice = sellingItem.product.prices[0]">
                                     <select class="nya-selectpicker btn btn-primary"
-                                            ng-model="sellingItemData.productPrice" 
-                                            ng-options="p.value+' Bs. - '+p.type for p in sellingItemData.product.prices" 
+                                            ng-model="sellingItem.productPrice" 
+                                            ng-options="p.value+' Bs. - '+p.type for p in sellingItem.product.prices" 
                                             ng-change="updateTotal()">
                                     </select>
                                 </div>
                         </span>
-                        
                     </div>
                     <div class="text-danger">                   
-                        <span ng-show="sellingForm.quantity.$error.pattern">La cantidad no es correcta.</span>
+                        <span ng-if="sellingForm.quantity.$error.pattern">La cantidad no es correcta.</span>
 
-                        <span ng-show="sellingForm.quantity.$dirty && sellingForm.$error.max_quantity">
+                        <span ng-if="sellingForm.quantity.$dirty && sellingForm.$error.max_quantity">
                             No hay suficientes unidades en el deposito.
                         </span>
                         <span 
-                             ng-show="(!sellingForm.quantity.$pristine || 
+                             ng-if="(!sellingForm.quantity.$pristine || 
                                       sellingForm.$submitted) && sellingForm.quantity.$error.required">
                            Introduzca la cantidad por favor. 
                         </span>
                     </div>
                     <div class="text-info">                   
-                        <span ng-show="sellingForm.quantity.$dirty && sellingForm.quantity.$valid">
-                           {{sellingItemData.quantity}} Unidades
+                        <span ng-if="sellingForm.quantity.$dirty && sellingForm.quantity.$valid">
+                           {{sellingItem.quantity}} Unidades
                         </span>
                     </div>
+            	</div>
+        	</div>
+        	<div class="form-group">
+        		<div class="col-xs-12">
+	                <div class="input-group">
+	                    <span class="input-group-addon">
+	                        Total: 
+	                    </span>
+	                    <input placeholder="Total de la venta..." ng-change = "updateRevenue()"
+	                           type="number" step="any" class="form-control" ng-model="sellingItem.total"/>
+	                    <span class="input-group-addon">Bs.
+	                    </span>
+	                    
+	                </div>
+	            </div>
+            </div>
+            <div >
+                <div class="col-xs-7">
+                    <label class="control-label">Cantidad deposito :</label>
+                </div>                        
+                <div class="col-xs-5">
+                    <p class="form-control-static">{{sellingItem.product.quantity}} Unidades.</p>
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            Total: 
-                        </span>
-                        <input placeholder="Total de la venta..." ng-change = "updateRevenue()"
-                               type="number" step="any" class="form-control" ng-model="sellingItemData.total"/>
-<!--
-                        <span class="input-group-addon">
-                            {{sellingItemData.quantity}} * ({{sellingItemData.price.value /
-                                product.properties.quantityPerPackage}} Bs)
-                        </span>
--->
-                        <span class="input-group-addon">Bs.
-                        </span>
-                        
-                    </div>
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <div class="col-xs-7">
-                        <label class="control-label">Cantidad deposito :</label>
-                    </div>                        
-                    <div class="col-xs-5">
-                        <p class="form-control-static">{{sellingItemData.product.quantity}} Unidades.</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-7">
-                        <label class="control-label">Ubicacion :</label>
-                    </div>                        
-                    <div class="col-xs-5">
-                        <p class="form-control-static">{{sellingItemData.product.location}}</p>
-                    </div>              
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-7">
-                        <label class="control-label">Cantidad / Paquete :</label>
-                    </div>                        
-                    <div class="col-xs-5">
-                        <p class="form-control-static">{{sellingItemData.product.properties.quantityPerPackage}} Unidades por Paquete</p>
-                    </div>              
-                </div>                                
-            </form>
+            </div>
+            <div >
+                <div class="col-xs-7">
+                    <label class="control-label">Cantidad / Paquete :</label>
+                </div>                        
+                <div class="col-xs-5">
+                    <p class="form-control-static">{{sellingItem.product.properties.quantityPerPackage}} Unidades por Paquete</p>
+                </div>              
+            </div>    
         </div>
-        
-    </div>
-</div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+	    <button class="btn btn-primary" type="submit">Agregar</button>
+	</div>
+</form>
