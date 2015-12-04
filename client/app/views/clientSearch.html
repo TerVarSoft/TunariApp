@@ -20,8 +20,8 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Telefono</th>
-                        <th>Celular</th>
-                        <th>Direccion</th>
+                        <th class="hidden-xs hidden-sm">Celular</th>
+                        <th class="hidden-xs">Direccion</th>
                         <th>Mostrario</th>
                         <th>Muestras</th>
                     </tr>
@@ -30,8 +30,8 @@
                     <tr ng-repeat="client in clients">
                         <td  class="pointer" ng-click="editClient(client._id)">{{client.name}}</td>
                         <td>{{client.phone}}</td>
-                        <td>{{client.cellphone}}</td>
-                        <td>{{client.address}}</td>
+                        <td class="hidden-xs hidden-sm">{{client.cellphone}}</td>
+                        <td class="hidden-xs">{{client.address}}</td>
                         <td>
                             <span ng-class="client.sampleBook ? 'label label-success' : 'label label-danger' " >
                                 Mostrario
