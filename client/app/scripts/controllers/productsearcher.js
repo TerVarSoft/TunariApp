@@ -18,14 +18,7 @@ angular.module('tunariApp')
    
         
     $scope.sampleBookSelected = 0; 
-    $scope.shoppingCartSellings = [];
-    
-    $scope.modals = {
-        sampleBook : false,
-        sellingItem : false,
-        productdetails : false, 
-        background: false
-    };
+    $scope.shoppingCartSellings = [];    
     
     $scope.serverData = ServerData;
     
@@ -77,7 +70,7 @@ angular.module('tunariApp')
         });
     };
 
-    $scope.showSellingItem = function(product) {
+    $scope.createSellingItem = function(product) {
         var addingProductToCartModal = $uibModal.open({
           templateUrl: '../../views/sellingItem.html',
           controller: 'sellingItemCtrl',
