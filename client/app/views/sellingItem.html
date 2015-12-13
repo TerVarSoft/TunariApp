@@ -25,7 +25,7 @@
                                name="quantity" id="quantity"
                                required/>
                        	<span class="input-group-btn">
-                                <div ng-init="sellingItem.productPrice = sellingItem.product.prices[0]">
+                                <div>
                                     <select class="nya-selectpicker btn btn-primary"
                                             ng-model="sellingItem.productPrice" 
                                             ng-options="p.value+' Bs. - '+p.type for p in sellingItem.product.prices" 

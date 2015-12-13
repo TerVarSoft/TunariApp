@@ -1,14 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var price = new Schema({
+	type: String,
+	value: Number
+});
+
 // create a schema
 var productSchema = new Schema({
 	name: {
 		type: String
 	},
-//    price : {
-//        type: Number
-//    },
 	category: {
 		type: String
 	},
@@ -28,7 +30,7 @@ var productSchema = new Schema({
         type: Number
     },
     locations: {},
-	prices: {},
+	prices: [price],
 	properties: {}
 });
 

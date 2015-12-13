@@ -85,7 +85,8 @@ angular.module('tunariApp')
           resolve: {
             sellingItem: function () {
                 return {
-                    product: product
+                    product: product,
+                    productPrice: product.prices[0]
                 };
             }
           }
