@@ -43,48 +43,9 @@
             </div>
         </div>
     </div>
-    <hr/>
-    
-<!--
-    <div class="row">
-        <div dir-paginate-start="product in products | itemsPerPage: 9" class="animate-if col-md-4 col-sm-6 col-xs-12">
-            <div class="card img-rounded">
-                <div align="left" class="btn btn-sm card-header">
-                    <span ng-click="showDetails(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
-                </div>
-                <div align="center">
-                    <img  alt="{{product.name}}" class="img-rounded img-responsive"  ng-click="showSampleBook(product)"
-                         ng-src="{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/> 
-                </div>
-
-                <div class="card-body">
-                    <hr/>
-                    <div>
-                        <h3 class="card-title">{{product.name}}</h3>
-                    </div>
-                    <div>
-                        <p class="card-data">
-                            Deposito: {{product.quantity}} Unidades
-                            <br/>
-                            Precio: {{product.prices[0].value}} Bs.</p>
-                    </div>
-                </div>
-                <div class="card-button">
-                    <div ng-click="showSellingItem({'product':product,'productPrice':product.prices[0]})" class="btn btn-success">                        
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="visible-md visible-lg clearfix" ng-if="($index+1)%3==0"></div>
-        <div class="visible-sm clearfix" ng-if="($index+1)%2==0" ></div>
-        <div dir-paginate-end=""></div>
-  </div>
--->
-    
+    <hr/>    
     <div class="row">
         <div  dir-paginate-start="product in products | checkedProduct:client:distributedOption | itemsPerPage: 200">
-<!--            <div ng-if="filterDistributedOptions(product.name)" class="sample-product">-->
             <div class="sample-product">
                 <div class="col-xs-4 col-sm-3 col-md-2" >
                     <div class="row">
@@ -107,50 +68,7 @@
         </div>
         <div class="visible-md visible-lg clearfix" ng-if="($index+1)%6==0"></div>
         <div class="visible-sm clearfix" ng-if="($index+1)%4==0" ></div>
-        <div class="visible-sm clearfix" ng-if="($index+1)%3==0" ></div>
+        <div class="visible-xs clearfix" ng-if="($index+1)%3==0" ></div>
         <div dir-paginate-end=""></div>
     </div>
-    
-<!--
-    <div masonry preserve-order>
-        <div  class="masonry-brick masonry-client-sample" dir-paginate="product in products | itemsPerPage: 200">
-            <div ng-show="filterDistributedOptions(product.name)" class="sample-product">
-                <div ng-class="isDistributed(product.name) ? 'checked-sample' : 'unchecked-sample'">
-                    <div class="sample-header">
-                        <p>{{product.name}}</p>
-                    </div>
-                    <div ng-click="addSample(product.name)">
-                        <img alt="{{product.name}}" class="img-rounded img-responsive" 
-                                             ng-src=
-                                "{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/>
-                    </div>
-                    <div ng-show="isDistributed(product.name)" class="sample-check">
-                        <span class="glyphicon glyphicon-check color-green"></span> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
-<!--
-    <div ng-repeat="product in products">
-        <div ng-show="filterDistributedOptions(product.name)" class="sample-product col-xs-4 col-sm-3 col-md-2 col-xl-1">
-            <div class="row">
-                <div ng-class="isDistributed(product.name) ? 'checked-sample' : 'unchecked-sample'">
-                    <div class="sample-header">
-                        <p>{{product.name}}</p>
-                    </div>
-                    <div ng-click="addSample(product.name)">
-                        <img alt="{{product.name}}" class="img-rounded img-responsive" 
-                                             ng-src=
-                                "{{serverData.urlImages}}/{{product.category}}/{{product.properties.type}}/{{product.name}}.png"/>
-                    </div>
-                    <div ng-show="isDistributed(product.name)" class="sample-check">
-                        <span class="glyphicon glyphicon-check color-green"></span> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
 </div>
