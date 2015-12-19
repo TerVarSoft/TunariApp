@@ -24,7 +24,8 @@ angular.module('tunariApp')
     }
 
     $scope.cancelNewClient = function(){
-        $location.path("/clientSearch");  
+        $location.path("/clientSearch"); 
+        $(".nav").find(".active").removeClass("active"); 
     };
         
     $('#name').focus();

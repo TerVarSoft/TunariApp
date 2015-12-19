@@ -1,0 +1,14 @@
+<ul class="nav nav-pills">
+	<li>
+		<a accesskey="c" ng-href="#/newClient">Nuevo Cliente   <span class="glyphicon glyphicon-plus-sign"></span>
+		</a>
+	</li>
+</ul>
+<script>
+	// Desactivate menu items and activate selected
+	// menu item
+	$(".nav a").on("click", function(){
+	   $(".nav").find(".active").removeClass("active");
+	   $(this).parent().addClass("active");	   
+	});
+</script>
