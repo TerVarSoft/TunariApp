@@ -23,6 +23,74 @@ var all = {
 	clientOptions:{
 		host: 'http://localhost',
 		port: 9000
+	},
+	productCategories: [
+		{
+			name: "Invitaciones",
+			view: "views/invitationDetails.html"
+		},
+		{
+			name: "Escritorio",
+			view: "views/desktopMaterialDetails.html"
+		}
+	],
+	defaultProductProperties: {
+		Default: {
+			provider: "Tunari",
+			quantity: 200,
+			locations: [
+				{
+					type: "Tienda",
+					value: "Deposito Z, Estante 100, Peldaño 100"
+				},
+				{
+					type: "Deposito",
+					value: "Deposito Z, Estante 100, Peldaño 100"
+				}
+			],
+			properties:{
+				quantityPerPackage: 100
+			}
+		},
+		Escritorio: {
+			provider: "Faber Castell",
+			quantity: 20,
+			properties:{
+				quantityPerPackage: 12
+			}
+		}
+	},
+	invitationTypes: [
+		"Mementos",
+		"Bautizos",
+		"1º Comunion",
+		"Matrimonios",
+		"Estampas"
+	],
+	invitationsDetails:{
+		Default: {			
+			sizes: [
+				"Postal",
+				"Esquela",
+				"Doble Postal",
+				"Doble Esquela"
+			],
+			genres: [
+				"Hombre",
+				"Mujer",
+				"Unisex"
+			]
+		},
+		Mementos: {			
+			sizes: [
+				"Pequeño",
+				"Mediano",
+				"Grande"				
+			]
+		},
+		Matrimonios: {
+			genres: ["Unisex"]
+		}
 	}
 };
 
