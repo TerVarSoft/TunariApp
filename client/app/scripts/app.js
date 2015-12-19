@@ -86,6 +86,11 @@ angular
         controller: 'EditClientCtrl',
         controllerAs: 'editClient'
       })
+      .when('/statistics', {
+        templateUrl: 'views/statistics.html',
+        controller: 'StatisticsCtrl',
+        controllerAs: 'statistics'
+      })
       .otherwise({
         redirectTo: '/'
       });

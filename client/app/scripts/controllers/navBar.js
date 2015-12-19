@@ -10,6 +10,9 @@
 angular.module('tunariApp')
   .controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
 
+  	$scope.subMenu = "views/productsSubmenu.html"
+  	$location.path('/');
+  	 
   	$scope.menus = {
   		products: {
   			redirectTo: '/productSearch',
@@ -18,11 +21,12 @@ angular.module('tunariApp')
   		clients: {
   			redirectTo: '/clientSearch',  	
   			subMenuView: 'views/clientsSubMenu.html'		
+  		},
+  		statistics: {
+  			redirectTo: '/statistics'  			
   		}
-
   	}
 
-  	$scope.subMenu = "views/productsSubmenu.html"
   	$scope.changeView = function(menuItem){
 		$scope.subMenu = $scope.menus[menuItem].subMenuView || "";
 		$location.path($scope.menus[menuItem].redirectTo);  
