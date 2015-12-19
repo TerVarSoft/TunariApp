@@ -22,8 +22,8 @@ angular.module('tunariApp')
     });
 
     $scope.updateCategory = function () {
-        $scope.product.properties = {};
         var category = $scope.product.category;
+        $scope.product = {category: category,prices:[],properties:{},tags:[],locations:[]};
         $scope.productView = _.where($scope.config.productCategories, {name:category})[0].view;
 
         // Merge default product properties with specif default product properties based 
