@@ -136,7 +136,7 @@ a {
 }
 
 a:hover, a:focus {
-    color: #fff;
+    /*color: #fff;*/
     text-decoration: none;
 }
 
