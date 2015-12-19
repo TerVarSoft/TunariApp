@@ -32,7 +32,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
+    <div ng-controller="NavBarCtrl"  class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -56,28 +56,19 @@
               <li><a ng-href="#/productSearch">Buscar</a></li>
               <li><a ng-href="#/">Contact</a></li>
 -->
-              <li ng-audio="sounds/click.mp3"  class="hidden-xs"><a ng-href="#/productSearch">Productos</a></li> 
-              <li ng-audio="sounds/click.mp3"  class="hidden-xs"><a ng-href="#/clientSearch">Clientes</a></li>    
-              <li ng-audio="sounds/click.mp3"  class="hidden-xs dropdown"><a class="dropdown-toggle" data-toggle="dropdown" >Agregar<span class="caret"></span></a>
-                  <ul class="sub-nav-menu dropdown-menu">
-                    <li><a ng-audio="sounds/click.mp3" accesskey="p" ng-href="#/newProduct">Producto</a></li>
-                    <li><a ng-audio="sounds/click.mp3" accesskey="l" ng-href="#/newClient">Cliente</a></li>                    
-                  </ul>
-              </li>
-                
-              <li class="visible-xs"><a ng-href="#/productSearch" data-toggle="collapse" data-target="#js-navbar-collapse">Productos</a></li> 
-              <li class="visible-xs"><a ng-href="#/clientSearch" data-toggle="collapse" data-target="#js-navbar-collapse">Clientes</a></li>    
-              <li class="visible-xs dropdown"><a class="dropdown-toggle" data-toggle="dropdown" >Agregar<span class="caret"></span></a>
-                  <ul class="sub-nav-menu dropdown-menu">
-                    <li><a ng-href="#/newProduct" data-toggle="collapse" data-target="#js-navbar-collapse">Product</a></li>
-                    <li><a ng-href="#/newClient" data-toggle="collapse" data-target="#js-navbar-collapse">Cliente</a></li>                    
-                  </ul>
-              </li>   
-
+              <li class="active" ng-audio="sounds/click.mp3"  class="">
+                <a ng-click="changeView('products')">Productos</a>
+              </li> 
+              <li ng-audio="sounds/click.mp3"  class="">
+                <a ng-click="changeView('clients')">Clientes</a>
+              </li>                  
             </ul>
           </div>
         </div>
-      </div>
+        <div class="submenu">
+          <div ng-include="subMenu"></div>
+        </div>
+      </div>            
     </div>
 
     <div class="container">
@@ -131,6 +122,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/navBar.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/products.js"></script>
         <script src="scripts/controllers/productSearcher.js"></script>
@@ -158,5 +150,6 @@
         <script src="scripts/directives/uppercase.js"></script>
         <script src="scripts/filters/checkedproduct.js"></script>
         <!-- /build -->
+
 </body>
 </html>

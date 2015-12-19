@@ -57,6 +57,7 @@ angular.module('tunariApp')
         
     $scope.cancelProduct = function(){
         $location.path("/productSearch");  
+        $(".nav").find(".active").removeClass("active");
     };
     
     $('#name').focus();
