@@ -22,16 +22,32 @@ angular.module('tunariApp')
 
       $scope.serverData = ServerData;
 
+      $scope.imageUrl =    ServerData.urlImages + "/" + 
+                         $scope.sellingItem.product.category + "/" + 
+                         ($scope.sellingItem.product.properties.type || '') + "/" +
+                         $scope.sellingItem.product.name + "-M.jpg"
+
       $scope.updateTotal = function() {
-        $scope.sellingItem.total = $scope.sellingItem.quantity *
-            $scope.sellingItem.productPrice.value / $scope.sellingItem.product.properties.quantityPerPackage;
-        $scope.updateRevenue();
+          var pricePerUnity = $scope.sellingItem.productPrice.type != 'Unidad' ?
+                              $scope.sellingItem.productPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
+                              $scope.sellingItem.productPrice.value;
+
+          $scope.sellingItem.total = $scope.sellingItem.quantity * pricePerUnity;
+          $scope.sellingItem.total = parseFloat($scope.sellingItem.total.toFixed(2));
+          $scope.updateRevenue();
       }
         
       $scope.updateRevenue = function() {
+          var pricePerUnity = $scope.sellingItem.productPrice.type != 'Unidad' ?
+                            $scope.sellingItem.productPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
+                            $scope.sellingItem.productPrice.value;
+
+          var buyingPricePerUnity = $scope.sellingItem.product.buyingPrice.type != 'Unidad' ?
+                            $scope.sellingItem.product.buyingPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
+                            $scope.sellingItem.product.buyingPrice.value;
+
           $scope.sellingItem.revenue = $scope.sellingItem.total -
-              ($scope.sellingItem.product.buyingPrice * $scope.sellingItem.quantity)/
-              $scope.sellingItem.product.properties.quantityPerPackage;
+              $scope.sellingItem.quantity * buyingPricePerUnity;
           $scope.sellingItem.revenue = parseFloat($scope.sellingItem.revenue.toFixed(2));
       }
 
