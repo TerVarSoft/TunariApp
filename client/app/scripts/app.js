@@ -42,9 +42,6 @@ angular
     
     $routeProvider
       .when('/', {
-//        templateUrl: 'views/main.html',
-//        controller: 'MainCtrl',
-//        controllerAs: 'main'
         templateUrl: 'views/productSearch.html',
         controller: 'ProductSearcherCtrl',
         controllerAs: 'ProductSearcher'
@@ -60,13 +57,13 @@ angular
         controllerAs: 'ProductSearcher'
       })
       .when('/products/:productId', {
-        templateUrl: 'views/editproduct.html',
-        controller: 'EditproductCtrl',
+        templateUrl: 'views/editProduct.html',
+        controller: 'EditProductCtrl',
         controllerAs: 'editProduct'
       })
       .when('/newProduct', {
         templateUrl: 'views/newProduct.html',
-        controller: 'NewproductCtrl',
+        controller: 'NewProductCtrl',
         controllerAs: 'newProduct'
       })
       .when('/clientSearch', {

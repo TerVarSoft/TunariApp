@@ -13,6 +13,11 @@ angular.module('tunariApp')
             function (Clients, Products, ServerData, $scope, $location, $routeParams) {
     
     $scope.serverData = ServerData;
+    ServerData.config.get().then(function(config){
+        $scope.invitationTypes = config.invitationTypes;
+        $scope.selectedType = $scope.invitationTypes[0]
+    });
+
     $scope.distributedOptions = [ "Todos", "Repartidos", "No Repartidos" ];
     $scope.distributedOption = $scope.distributedOptions[0]
     

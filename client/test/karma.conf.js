@@ -32,7 +32,6 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-carousel/dist/angular-carousel.js',
       'bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js',
-      'bower_components/underscore/underscore.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
       'bower_components/angular-typeahead/angular-typeahead.js',
       'bower_components/angular-audio/app/angular.audio.js',

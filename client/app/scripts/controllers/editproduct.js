@@ -8,25 +8,27 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('EditproductCtrl', ['$scope', '$location', '$routeParams', '$uibModal', 'Products', 'ServerData', 'Notifier', 'Messages',
+  .controller('EditProductCtrl', ['$scope', '$location', '$routeParams', '$uibModal', 'Products', 'ServerData', 'Notifier', 'Messages',
     function ($scope, $location, $routeParams, $uibModal, Products, ServerData, Notifier, Messages){       
-    $scope.editingProduct = Products.one($routeParams.productId).get().then(function(product){
-        $scope.editingProduct = product;
+    
+    $scope.serverData = ServerData; 
+    
+    $scope.product = Products.one($routeParams.productId).get().then(function(product){
+        $scope.product = product; 
+        ServerData.config.get().then(function(config) {
+            $scope.config = config;
+            $scope.productView = _.where(config.productCategories, {name: $scope.product.category})[0].view;
+        });    
     });
     
-    $scope.serverData = ServerData;    
-    
-    $scope.saveProduct = function(){  
-                
-        $scope.editingProduct.put().then(function(){
-            var message = "Acaba de modificar " + $scope.editingProduct.name; 
+    $scope.saveProduct = function(){                  
+        $scope.product.put().then(function(){
             $location.path("/productSearch");
             Notifier({ 
-                message: Messages.message004 + $scope.editingProduct.name,
+                message: Messages.message004 + $scope.product.name,
                 classes: 'alert-info'
             }); 
-        });
-        
+        });        
     }
     
     $scope.cancelEditing = function() {
@@ -34,25 +36,24 @@ angular.module('tunariApp')
     }
     
     $scope.deleteProduct = function () {
-
         var deleteModal = $uibModal.open({
-          templateUrl: '../../views/questionModal.html',
-          controller: 'QuestionModalCtrl',
-          resolve: {
-            options: function () {
-              return {
-                title: Messages.message010,
-                message: Messages.message011+ $scope.editingProduct.name + '?',
-              }
+            templateUrl: '../../views/questionModal.html',
+            controller: 'QuestionModalCtrl',
+            resolve: {
+                options: function () {
+                    return {
+                        title: Messages.message010,
+                        message: Messages.message011+ $scope.product.name + '?',
+                    }
+                }
             }
-          }
         });
 
         deleteModal.result.then(function () {
             Products.one($routeParams.productId).remove().then(function(){
                 $location.path("/productSearch");  
                 Notifier({ 
-                    message: Messages.message006 + $scope.editingProduct.name,
+                    message: Messages.message006 + $scope.product.name,
                     classes: 'alert-danger'
                 });
             });                    

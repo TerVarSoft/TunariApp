@@ -6,6 +6,11 @@ var price = new Schema({
 	value: Number
 });
 
+var location = new Schema({
+	type: String,
+	value: String
+});
+
 // create a schema
 var productSchema = new Schema({
 	name: {
@@ -27,9 +32,9 @@ var productSchema = new Schema({
         type: String
     },
     buyingPrice: {
-        type: Number
+        type: price
     },
-    locations: {},
+    locations: [location],
 	prices: [price],
 	properties: {}
 });

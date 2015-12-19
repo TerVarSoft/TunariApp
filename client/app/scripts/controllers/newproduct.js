@@ -2,42 +2,60 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:NewproductCtrl
+ * @name clientApp.controller:NewProductCtrl
  * @description
- * # NewproductCtrl
+ * # NewProductCtrl
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('NewproductCtrl', 
+  .controller('NewProductCtrl', 
               ['$scope', '$location', 'ServerData', 'Products', 'Notifier', 'Messages',
              function ($scope, $location, ServerData, Products, Notifier, Messages) {
      window.scrollTo(0, 0);
     $scope.serverData = ServerData;
-    
-    $scope.saveProduct = function(){
-        Notifier({ 
-            message: Messages.message002 + $scope.newProduct.name,
-            classes: 'alert-success'
-        });
-        $location.path ("/productSearch");
+
+    ServerData.config.get().then(function(config){
+        $scope.config = config;
+        $scope.categories = _.pluck(config.productCategories, 'name');
+        $scope.product.category = $scope.categories[0];
+        $scope.updateCategory();        
+    });
+
+    $scope.updateCategory = function () {
+        var category = $scope.product.category;
+        $scope.product = {category: category,prices:[],properties:{},tags:[],locations:[]};
+        $scope.productView = _.where($scope.config.productCategories, {name:category})[0].view;
+
+        // Merge default product properties with specif default product properties based 
+        // on the product category.
+        $scope.defaultValues = $.extend(true, {}, $scope.config.defaultProductProperties['Default']);  
+        _.merge($scope.defaultValues, $scope.config.defaultProductProperties[category] || {}, 
+            // Replace first array with second array when merging
+            // Default behavior would mix the arrays, that is not what we want
+            function(a, b) {
+                if (_.isArray(a)) {
+                    return b;
+                };
+            }
+        );   
     }
     
-    $scope.createProduct = function(){
-        $scope.newProduct.tags.push($scope.newProduct.name);
-        $scope.newProduct.tags.push($scope.newProduct.category);
-        $scope.newProduct.tags.push($scope.newProduct.properties.size);
-        $scope.newProduct.tags.push($scope.newProduct.properties.type);
-        $scope.newProduct.tags.push($scope.newProduct.properties.genre);
-        Products.post($scope.newProduct).then(function(){
+    $scope.createProduct = function() {
+        $scope.product.tags.push($scope.product.name);       
+        $scope.product.tags.push($scope.product.category);       
+        $scope.product.tags.push($scope.product.provider); 
+        $scope.$broadcast ('prepareProductToSave');
+        Products.post($scope.product).then(function(){
             $location.path("/productSearch");    
             Notifier({ 
-                message: Messages.message002 + $scope.newProduct.name,
+                message: Messages.message002 + $scope.product.name,
                 classes: 'alert-success'
             });
         });
-    }
+    };
+
         
-    $scope.cancelNewProduct = function(){
+    $scope.cancelProduct = function(){
         $location.path("/productSearch");  
     };
     

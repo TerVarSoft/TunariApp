@@ -103,6 +103,7 @@ var productRouter = function(Product){
             req.product.imageUrl = req.body.imageUrl;
             req.product.provider = req.body.provider;
             req.product.quantity = req.body.quantity;
+            req.product.locations = req.body.locations;
             req.product.save(function(err){
                 if(err)
                     res.status(500).send(err);

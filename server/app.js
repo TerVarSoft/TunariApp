@@ -29,6 +29,7 @@ var Selling = require('./models/sellingModel');
 var Client = require('./models/clientModel');
 
 // Routers
+var configRouter = require('./routes/configRoutes')();
 var productRouter = require('./routes/productRoutes')(Product);
 var sellingItemRouter = require('./routes/sellingItemRoutes')(SellingItem);
 var sellingRouter = require('./routes/sellingRoutes')(Selling);
@@ -69,6 +70,7 @@ app.use(function (req, res, next) {
 
 app.use('/test', routes);
 app.use('/users', users);
+app.use('/api/config', configRouter);
 app.use('/api/products', productRouter);
 app.use('/api/sellingItems', sellingItemRouter);
 app.use('/api/sellings', sellingRouter);
