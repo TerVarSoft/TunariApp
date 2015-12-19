@@ -43,7 +43,7 @@ angular.module('tunariApp')
     $scope.getProductImageUrl = function(product) {
         return  $scope.serverData.urlImages + "/" + 
                 product.category + "/" + 
-                product.properties.type + "/" +
+                (product.properties.type || '' )+ "/" +
                 product.name + "-M.jpg"
     }
     

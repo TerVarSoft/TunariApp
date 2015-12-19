@@ -13,7 +13,7 @@ angular.module('tunariApp')
 
 		$scope.imageUrl = 	 ServerData.urlImages + "/" + 
 							           product.category + "/" + 
-							           product.properties.type + "/" +
+							           (product.properties.type || '') + "/" +
 							           product.name + "-L.jpg"
 
   		$scope.dissmissModal = function () {

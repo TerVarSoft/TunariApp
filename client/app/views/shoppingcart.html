@@ -21,7 +21,7 @@
               <tr>
                 <th class="hidden-xs">Imagen</th>
                 <th>Producto</th>  
-                <th>P/Paq.</th>
+                <th>Precio</th>
                 <th>Cant.</th>
                 <th>Gan.</th>
                 <th>Total</th>   
@@ -33,7 +33,7 @@
                         <div class="thumbnail shoppingCartImage">
                             <img alt="{{sellingItem.product.name}}" class="img-rounded img-responsive" 
                                  ng-src=
-                    "{{serverData.urlImages}}/{{sellingItem.product.category}}/{{sellingItem.product.properties.type}}/{{sellingItem.product.name}}-S.jpg"/>      
+                    "{{serverData.urlImages}}/{{sellingItem.product.category}}/{{sellingItem.product.properties.type||''}}/{{sellingItem.product.name}}-S.jpg"/>      
                         </div>
                     </td>
                     <td class="product-name" ng-click="showSelling(sellingItem)">{{sellingItem.product.name}}</td>
