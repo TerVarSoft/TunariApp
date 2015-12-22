@@ -7,7 +7,7 @@
  * # prodQuantity
  */
 angular.module('tunariApp')
-  .directive('productQuantityChart', function () {
+  .directive('productQuantityChart', ["ServerData", function (ServerData) {
 
   	var margin = {top: 70, right: 10, bottom: 100, left: 60};
 	var	height = height = 500 - margin.top - margin.bottom;
@@ -111,7 +111,7 @@ angular.module('tunariApp')
 
 				vis.append("g")
 					.attr("class", "y axis")
-					.call(yAxis)
+					.call(yAxis);
 
 				// Real Quantities at the top of the bars
 			    vis.selectAll("text.bar")
@@ -124,16 +124,37 @@ angular.module('tunariApp')
 				  .text(function(d) { return d.quantity; })
 				  .transition()
 				  .delay(function(d, i) { return i * 100; })
-				  .attr("y", function(d){return yScale(d.quantity) - 10})	
+				  .attr("y", function(d){return yScale(d.quantity) - 10});	
 				  	
 			    // Tooltips
+			    // Different position for the first bar because it is 
+			    // not displayed nice in small screens
                 var tip = d3.tip()
 				  .attr('class', 'well well-lg')
-				  .direction('e')
+				  .offset(function(d,i) {
+					  if(i == 0 && dataSet.length>1) return [0, 0]
+					  return [0, -40]
+				     })
+				  .direction('w')
+				  tip.direction(function(d,i) {
+					  if(i == 0 && dataSet.length>1) return 'e'
+					  return 'n'
+				     }
+				  )
 				  .html(function(d) {
-				    return "<strong>Producto:</strong> <span>" + d.name + "</span></br>" +
-				    		"<strong>Cantidad:</strong> <span>" + d.quantity + "</span>";
-				  })
+				    return "<div class='col-xs-12'>" +
+					    		"<div class='col-xs-7'>" +
+						    		"<img class='img-responsive' src='" +
+						    		ServerData.urlImages + "/" + d.category + "/" +
+						    		d.properties.type + "/" + d.name +"-S.jpg"+"'>" +
+									"</img>" + 
+					    		"</div>" +
+					    		"<div class='col-xs-5'>" +
+						    		"<strong>Producto:</strong> <span>" + d.name + "</span></br>" +
+						    		"<strong>Cantidad:</strong> <span>" + d.quantity + "</span>"+
+					    		"</div>" +
+				    		"</div>";
+				  });
 
 				vis.call(tip);  
 				
@@ -150,7 +171,7 @@ angular.module('tunariApp')
 	                    return "translate(" + (i * barWidth + spaceBetweenBars/2) + ",0)";
 	                })
 	                .on('mouseover', tip.show)
-      				.on('mouseout', tip.hide)
+      				.on('mouseout', tip.hide);
 
                 bars.append("rect")
 	                .attr("width", barWidth - spaceBetweenBars)
@@ -165,4 +186,4 @@ angular.module('tunariApp')
             } //resize
       } // link  
     }; // return
-}); //directive
+}]); //directive
