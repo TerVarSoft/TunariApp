@@ -67,7 +67,7 @@ var all = {
 		"Matrimonios",
 		"Estampas"
 	],
-	invitationsDetails:{
+	invitationsDetails: {
 		Default: {			
 			sizes: [
 				"Postal",
@@ -91,7 +91,17 @@ var all = {
 		Matrimonios: {
 			genres: ["Unisex"]
 		}
-	}
+	},
+	statisticsViews: [
+    	{
+    		name: 'Cantidad de Invitaciones',
+    		view: '../../views/invitationsQuantityCharts.html'
+    	},
+    	{
+    		name: 'Ventas',
+    		view: '../../views/sellingCharts.html'
+    	}
+    ]
 };
 
 // Export the config object based on the NODE_ENV

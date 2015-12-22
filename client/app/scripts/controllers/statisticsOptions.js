@@ -8,19 +8,12 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('StatisticsOptionsCtrl', ['$scope', '$uibModalInstance', 
-  	function ($scope, $uibModalInstance) {
-    
-	    $scope.options = [
-	    	{
-	    		name: 'Cantidad de Productos',
-	    		view: '../../views/productQuantityCharts.html'
-	    	},
-	    	{
-	    		name: 'Ventas',
-	    		view: '../../views/sellingCharts.html'
-	    	}
-	    ]
+  .controller('StatisticsOptionsCtrl', ['$scope', '$uibModalInstance', 'ServerData',
+  	function ($scope, $uibModalInstance, ServerData) {
+    	
+    	ServerData.config.get().then(function(config){
+	        $scope.options = config.statisticsViews;  
+	    });
 
 	    $scope.selectOption = function(option){
 	    	$uibModalInstance.close(option.view);
