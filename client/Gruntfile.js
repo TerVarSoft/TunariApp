@@ -504,7 +504,8 @@ module.exports = function (grunt) {
                     'app/styles/typeahead.css', 
                     'app/styles/clientsearch.css',
                     'app/styles/clientsamples.css',
-                    'app/styles/newclient.css'
+                    'app/styles/newclient.css',
+                    'app/styles/statistics.css'
                 ],
             dest: 'build/.tmp/app.css'
         },
@@ -534,6 +535,8 @@ module.exports = function (grunt) {
                 'bower_components/angular-typeahead/angular-typeahead.min.js',
                 'bower_components/angular-audio/app/angular.audio.js',
                 'bower_components/angular-utils-pagination/dirPagination.js',
+                'bower_components/d3/d3.min.js',
+                'bower_components/d3-tip/index.js',
                 'app/custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js'
             ],
             dest: 'build/.tmp/dependencies.js'
