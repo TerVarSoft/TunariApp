@@ -1,0 +1,22 @@
+
+.axis path{
+  stroke: black;
+  stroke-width: 6;
+}
+
+.axis line{
+  fill: none;
+  stroke: black;
+}
+
+.tick text{
+  font-size: 15px;
+}
+
+.tick line{
+  opacity: 0.2;
+}
+
+.bar:hover {
+  cursor:pointer;
+}

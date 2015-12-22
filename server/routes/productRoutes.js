@@ -13,9 +13,10 @@ var productRouter = function(Product){
 		.get(function(req, res, next) {
 			
 			var query = {};
-			if (req.query.tags){
-				query = routesUtil.buildQuery(req.query);
-			}
+            var querySort = req.query.querySort;
+            var queryLimit = +req.query.queryLimit;
+
+			query = routesUtil.buildQuery(req.query);
 			
 			Product.find(query, function(err, products) {
 				if (err) {
@@ -25,8 +26,8 @@ var productRouter = function(Product){
 				
 				res.status(200).send(products);
 			})
-            .sort('name')
-            .limit(50);;
+            .sort(querySort || 'name')
+            .limit(queryLimit || 20);
 		})
 		.post(function(req, res, next) {
 

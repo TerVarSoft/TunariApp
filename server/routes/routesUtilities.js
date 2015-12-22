@@ -1,16 +1,21 @@
+var _ = require('lodash');
 
 var buildQuery = function(requestQuery){
 	
-	var query ={};
+	var query = requestQuery;
 	
-	var tagsString = requestQuery.tags.split(" ");        
-	var tagsRegExp = [];
-	
-	for(var i=0; i<tagsString.length;i++){
-		tagsRegExp[i] = new RegExp(tagsString[i], 'i');
+	if (query.tags){
+		var tagsString = requestQuery.tags.split(" ");        
+		var tagsRegExp = [];
+		
+		for(var i=0; i<tagsString.length;i++){
+			tagsRegExp[i] = new RegExp(tagsString[i], 'i');
+		}
+		
+		query.tags = {$in:tagsRegExp};
 	}
-	
-	query.tags = {$in:tagsRegExp};
+
+	query = _.omit(query, ['querySort', 'queryLimit']);
 	
 	return query;
 }

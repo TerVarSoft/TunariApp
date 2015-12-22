@@ -1,0 +1,19 @@
+<div ng-controller="InvitationsQuantityChartsCtrl">
+	<h1><strong>Invitaciones en el Depósito</strong></h1>
+	</br>
+	Cantidad de invitaciones en el deposito. Estas graficas muestran los productos que hacen falta
+	en el deposito
+	</br>
+	</br>
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="chart"  ng-repeat="invitationType in invitationTypes" class="col-xs-12 col-sm-6">
+				<product-quantity-chart ng-if="chartsData[invitationType].length > 0" 
+					title-text="invitationType" 
+					data="chartsData[invitationType]" 
+					bars-color="mappedColors[invitationType]">
+				</product-quantity-chart>
+			</div>			
+		</div>
+	</div>
+</div>
