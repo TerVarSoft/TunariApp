@@ -45,6 +45,7 @@ angular.module('tunariApp')
         $scope.product.tags.push($scope.product.category);       
         $scope.product.tags.push($scope.product.provider); 
         $scope.$broadcast ('prepareProductToSave');
+        $(".nav").find(".active").removeClass("active");
         Products.post($scope.product).then(function(){
             $location.path("/productSearch");    
             Notifier({ 
