@@ -1,3 +1,58 @@
-<div>
-	Vista de las graficas de las ventas
+<div ng-controller="SellingsChartsCtrl">
+	 <div class="row">
+	 	<form name="datepickerForm" ng-submit="getSellings()">
+		 	<div class="col-xs-12 col-md-10">
+		 		<sellings-datepicker from="from" to="to" format="format">
+		 		</sellings-datepicker>        
+		 	</div>
+	        <div class="col-xs-12 col-md-2">
+	        	<button type="submit" class="col-xs-12 btn btn-primary">Actualizar</button>
+	        </div>
+	 	</form>
+    </div>
+	</br>
+	<div ng-if="sellings" class="row">
+		<div class="col-xs-12">
+			<div class="table-border panel panel-primary">
+				<div class="panel-heading">
+					<h4>Detalle de las Ventas </h4>
+		        </div>
+				<scrollable-table watch="sellings" resizable>
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th sortable-header col="date">Fecha</th>
+								<th sortable-header col="date">Hora</th>
+							    <th sortable-header col="product[0].name">Producto</th>
+							    <th sortable-header col="client[0].name">Cliente</th>
+							    <th sortable-header col="quantity">Cant.</th>
+							    <th sortable-header col="productPrice.value">Precio [Bs].</th>
+							    <th sortable-header col="total">Total.</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="selling in sellings" class="animate-if" row-id="{{ selling.id }}" >
+								<td>{{formatDate(selling.date)}}</td>
+								<td>{{formatHour(selling.date)}}</td>	
+							    <td>{{selling.product[0].name}}</td>
+							    <td>{{selling.client.name}}</td>
+							    <td>{{selling.quantity}}</td>
+							    <td>{{selling.productPrice.value}}</td>
+							    <td>{{selling.total}}</td>	  
+							</tr>   
+						</tbody>
+					</table>
+				</scrollable-table>
+				<div class="panel-footer">
+					<h4>Total: {{totalSellings}} [Bs].</h4>
+		        </div>
+		    </div>		
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			Grafica de barras de las ventas
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			Grafica pastel de los clientes y las ventas
+		</div>	
+	</div>
 </div>

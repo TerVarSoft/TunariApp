@@ -57,7 +57,7 @@
     overflow:hidden;
 }
 
-table th {
+#clients-table th {
     height: 50px;
     background-color: #3e3f3a;
     color: #FFFFFF;
