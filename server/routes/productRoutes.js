@@ -46,7 +46,14 @@ var productRouter = function(Product){
 			newProduct.save(function(err) {
 				if (err) {
 					logger.log('error',err);
-					throw err;
+
+                    if(err.code = 11000){
+                        // Product name already exists
+    					res.status(409).send(err);
+                    }
+                    else {
+                        res.status(500).send(err);
+                    }
 				}
                 else {                    
                     res.status(201).sendWrapped(newProduct);

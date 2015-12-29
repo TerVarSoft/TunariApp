@@ -14,7 +14,8 @@ var location = new Schema({
 // create a schema
 var productSchema = new Schema({
 	name: {
-		type: String
+		type: String,
+		unique: true
 	},
 	category: {
 		type: String
