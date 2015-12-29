@@ -7,12 +7,10 @@ var configRouter = function(){
 
 	router.route('/')
 		.get(function(req, res, next) {
-			res.status(200).send(config);
+			res.status(200).sendWrapped(config);
 		});
 
 	return router;
 }
-
-
 
 module.exports = configRouter;  

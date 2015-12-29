@@ -28,20 +28,22 @@ angular
     // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
 
-    RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
-            if (operation === "getList") {
-                _.each(response,function(element){
-                    element.id = element._id
-                });
-            }
-            else{
-                if(response._id){                    
-                    response.id = response._id;
-                }
-            }
-            
-            return response;
-        });
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        var extractedData;
+
+        if (operation === "getList") {
+
+            extractedData = data.data.items;
+            extractedData.meta = data.data.meta;
+        } else {
+            extractedData = data.data;
+        }
+        return extractedData;
+    });
+
+    RestangularProvider.setRestangularFields({
+        id: "_id"
+    });
 
     // Moment.js global configuration
     moment.locale('es', {
