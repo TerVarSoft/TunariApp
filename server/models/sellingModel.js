@@ -14,6 +14,7 @@ var sellingSchema = new Schema({
     revenue: {
         type: Number
     },
+    date : Date,
 });
 
 // the schema is useless so far

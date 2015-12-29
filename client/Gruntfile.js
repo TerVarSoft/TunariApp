@@ -497,6 +497,7 @@ module.exports = function (grunt) {
                     'bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css',
                     'bower_components/angular-notify/dist/angular-notify.css',
                     'app/styles/sandstone.css',
+                    'app/styles/scrollable-table.css',
                     'app/styles/main.css',                    
                     'app/styles/productsearch.css',                  
                     'app/styles/sellingItem.css',
@@ -505,7 +506,8 @@ module.exports = function (grunt) {
                     'app/styles/clientsearch.css',
                     'app/styles/clientsamples.css',
                     'app/styles/newclient.css',
-                    'app/styles/statistics.css'
+                    'app/styles/statistics.css',
+                    'app/styles/sellingsCharts.css'
                 ],
             dest: 'build/.tmp/app.css'
         },
@@ -537,7 +539,10 @@ module.exports = function (grunt) {
                 'bower_components/angular-utils-pagination/dirPagination.js',
                 'bower_components/d3/d3.min.js',
                 'bower_components/d3-tip/index.js',
-                'app/custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js'
+                'bower_components/moment/min/moment.min.js',
+                'app/custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js',
+                'app/custom_dependencies/angular-scrollable-table/angular-scrollable-table.min.js',
+                'app/custom_dependencies/angular-scrollable-table/angular-locale_es-419.js'
             ],
             dest: 'build/.tmp/dependencies.js'
         }

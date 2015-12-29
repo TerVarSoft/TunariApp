@@ -17,8 +17,7 @@ var sellingItemSchema = new Schema({
     },
     revenue: {
         type: Number
-    },
-    date : String,
+    },    
     productPrice :{}
 });
 

@@ -1,0 +1,10 @@
+.table-border{
+	border-style: double;
+	border-radius: 15px 15px 15px 15px;
+	border-width: 10px;
+	border-color: #4D4C49;
+}
+
+scrollable-table th{
+	color: #000000;
+}
