@@ -18,16 +18,20 @@ angular.module('tunariApp')
             sellingItems: $scope.sellingItems,
         };
 
-        $scope.getTotalRevenue = function(){
-            return _.reduce($scope.sellingItems, function(memo, sellingItem){ return memo + sellingItem.revenue; }, 0);
+        $scope.getTotalRevenue = function(){           
+            var result = _.sum($scope.sellingItems, function(sellingItem){
+                return sellingItem.revenue;
+            });
+
+            return _.round(result, 2);
         };
         
         $scope.getTotal = function(){
-            return _.reduce($scope.sellingItems, function(memo, sellingItem){ 
-                var result = memo + sellingItem.total;
-                result = parseFloat(result.toFixed(2));
-                return result; 
-            }, 0);
+            var result = _.sum($scope.sellingItems, function(sellingItem){
+                return sellingItem.total;
+            });
+
+            return _.round(result, 2);
         };
                 
         $scope.showSelling = function(sellingItem) {
