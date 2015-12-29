@@ -506,7 +506,8 @@ module.exports = function (grunt) {
                     'app/styles/clientsearch.css',
                     'app/styles/clientsamples.css',
                     'app/styles/newclient.css',
-                    'app/styles/statistics.css'
+                    'app/styles/statistics.css',
+                    'app/styles/sellingsCharts.css'
                 ],
             dest: 'build/.tmp/app.css'
         },
