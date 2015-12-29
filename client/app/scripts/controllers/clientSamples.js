@@ -62,14 +62,16 @@ angular.module('tunariApp')
         return result;
     }
     
-    $scope.addSample = function(productName){
+    $scope.addSample = function(product){
         
-        if(_.includes($scope.client.productSamples[$scope.selectedType], productName)){
+        if(_.includes($scope.client.productSamples[$scope.selectedType], product.name)){
             $scope.client.productSamples[$scope.selectedType] = 
-            _.without($scope.client.productSamples[$scope.selectedType], productName);
+            _.without($scope.client.productSamples[$scope.selectedType], product.name);
+            product.isDistributed = false;
         }
         else{       
-            $scope.client.productSamples[$scope.selectedType].push(productName);
+            $scope.client.productSamples[$scope.selectedType].push(product.name);
+            product.isDistributed = true;
         }
     }
     
