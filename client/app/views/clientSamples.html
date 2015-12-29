@@ -43,8 +43,8 @@
     <br/> 
     <div class="col-xs-12">
         <div class="animate-if" dir-paginate-start="product in products | itemsPerPage: 200">
-            <div class="animate-if" ng-if="filterDistributedOptions(product)">
-                <div ng-click="addSample(product.name)" 
+            <div ng-show="filterDistributedOptions(product)">
+                <div ng-click="addSample(product)" 
                     ng-class="product.isDistributed ? 'checked-sample' : 'unchecked-sample'"
                     class="col-xs-4 col-sm-3 col-md-2" >   
                     <h3>
