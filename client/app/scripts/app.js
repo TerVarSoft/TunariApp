@@ -19,10 +19,13 @@ angular
     'siyfion.sfTypeahead',
     'angularUtils.directives.dirPagination',
     'cgNotify',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'scrollable-table'
   ])
-  .config(['$routeProvider', 'RestangularProvider', 'Config', function ($routeProvider, RestangularProvider, Config) {
+  .config(['$routeProvider', 'RestangularProvider', 'Config', 
+    function ($routeProvider, RestangularProvider, Config) {
     
+    // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
 
     RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
@@ -39,6 +42,13 @@ angular
             
             return response;
         });
+
+    // Moment.js global configuration
+    moment.locale('es', {
+         months : "Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split("_"),
+         weekdays : "Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado".split("_"), 
+    });
+
     
     $routeProvider
       .when('/', {
