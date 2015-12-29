@@ -18,7 +18,7 @@ var clientSchema = new Schema({
     sampleBook : {
         type: Boolean  
     },
-    productSamples : [String]
+    productSamples : {}
 });
 
 // the schema is useless so far
