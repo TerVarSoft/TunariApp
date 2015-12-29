@@ -98,5 +98,9 @@ angular.module('tunariApp')
             $scope.isAllMarked = true;
             $scope.client.productSamples[$scope.selectedType] = _.pluck($scope.products, 'name');
         }
+
+        _.each($scope.products, function(product){
+            product.isDistributed = $scope.isAllMarked;                
+        });
     }    
 }]);
