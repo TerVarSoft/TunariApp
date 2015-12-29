@@ -25,40 +25,51 @@ angular.module('tunariApp')
     $scope.client={};
     Clients.one($routeParams.clientId).get().then(function(client){
         $scope.client = client;
+
         // Save a clone of the product samples
-        $scope.savedProductSamples = client.productSamples.slice(0);;
+        $scope.savedProductSamples = _.clone(client.productSamples);
+
+        $scope.getInvitations();
     });
-      
-    Products.getList().then(function(products){
-        $scope.products = products
-    });
-    
-    $scope.filterDistributedOptions = function(productName){
-        var result = true;
-        if($scope.distributedOption == "Repartidos"){
-            result = $scope.isDistributed(productName);
+        
+    $scope.getInvitations = function() {
+        $scope.isAllMarked = false;
+
+        if(!$scope.client.productSamples[$scope.selectedType]) {
+            $scope.client.productSamples[$scope.selectedType] = [];
         }
-        else if($scope.distributedOption == "No Repartidos"){
-            result = !$scope.isDistributed(productName);
-        }
-        return result;
+        var query = {
+            category:'Invitaciones',
+            'properties.type': $scope.selectedType || 'Mementos'
+        };  
+        Products.getList(query).then(function(products){
+            $scope.products = products;
+
+            _.each($scope.products, function(product){
+                product.isDistributed = _.includes($scope.client.productSamples[$scope.selectedType], product.name);                
+            });
+        });
     }
     
-    $scope.isDistributed = function(productName){
-        var result = false;
-        result = _.some($scope.client.productSamples, function(sample){
-            return sample == productName;
-        });
+    $scope.filterDistributedOptions = function(product){
+        var result = true;
+        if($scope.distributedOption == "Repartidos"){
+            result = product.isDistributed;
+        }
+        else if($scope.distributedOption == "No Repartidos"){
+            result = !product.isDistributed;
+        }
         return result;
     }
     
     $scope.addSample = function(productName){
         
-        if(_.contains($scope.client.productSamples, productName)){
-            $scope.client.productSamples = _.without($scope.client.productSamples, productName);
+        if(_.includes($scope.client.productSamples[$scope.selectedType], productName)){
+            $scope.client.productSamples[$scope.selectedType] = 
+            _.without($scope.client.productSamples[$scope.selectedType], productName);
         }
         else{       
-            $scope.client.productSamples.push(productName);
+            $scope.client.productSamples[$scope.selectedType].push(productName);
         }
     }
     
@@ -67,19 +78,23 @@ angular.module('tunariApp')
              $location.path("/clientSearch");   
         });
     }
+
     $scope.cancelModifications = function(){
-        $scope.client.productSamples = $scope.savedProductSamples.slice(0);
+        $scope.client.productSamples = _.clone($scope.savedProductSamples);
         $location.path("/clientSearch");
     }
     
     $scope.toogleMark = function(){
+
+        if($scope.products.length <= 0) return;
+
         if($scope.isAllMarked){
-            $scope.client.productSamples = [];
+            $scope.client.productSamples[$scope.selectedType] = [];
             $scope.isAllMarked = false;
         }
         else{
             $scope.isAllMarked = true;
-            $scope.client.productSamples = _.pluck($scope.products, 'name');
+            $scope.client.productSamples[$scope.selectedType] = _.pluck($scope.products, 'name');
         }
-    }
-  }]);
+    }    
+}]);
