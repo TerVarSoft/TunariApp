@@ -12,7 +12,7 @@ var buildQuery = function(requestQuery){
 			tagsRegExp[i] = new RegExp(tagsString[i], 'i');
 		}
 		
-		query.tags = {$in:tagsRegExp};
+		query.tags = {$all:tagsRegExp};
 	}
 
 	query = _.omit(query, ['querySort', 'queryLimit', 'page']);
