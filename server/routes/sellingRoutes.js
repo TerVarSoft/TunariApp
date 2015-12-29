@@ -22,16 +22,24 @@ var sellingRouter = function(Selling){
 				}
 			}
 
-            Selling.find(query, function(err, sellings) {
-				if (err) {
-					logger.log('error',err);
-					throw err;
-				}
-				
-				logger.log('info','get sellings called');
-				res.status(200).send(sellings);
-			})			
-			.sort("-date");
+			Selling.count(query, function(err, count){
+
+	            Selling.find(query, function(err, sellings) {
+					if (err) {
+						logger.log('error',err);
+						res.status(500).send(err);
+					}
+					
+					logger.log('info','get sellings called');
+					res.status(200).sendWrapped({
+						meta: {
+                            count: count   
+                        },
+						items: sellings
+					});
+				})			
+				.sort("-date");
+			});
         })
         .post(function(req, res, next) {
 
@@ -55,8 +63,8 @@ var sellingRouter = function(Selling){
                             'total:' + sellingItem.total + " " +
                             'revenue:' + sellingItem.revenue);
                     });
-//                    logger.log('info','post selling called');
-                    res.status(201).send(newSelling);
+
+                    res.status(201).sendWrapped(newSelling);
                 }				                
 			});
 		}); ;

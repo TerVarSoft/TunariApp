@@ -4,7 +4,7 @@ var buildQuery = function(requestQuery){
 	
 	var query = requestQuery;
 	
-	if (query.tags){
+	if (query.tags) {
 		var tagsString = requestQuery.tags.split(" ");        
 		var tagsRegExp = [];
 		
@@ -15,7 +15,7 @@ var buildQuery = function(requestQuery){
 		query.tags = {$in:tagsRegExp};
 	}
 
-	query = _.omit(query, ['querySort', 'queryLimit']);
+	query = _.omit(query, ['querySort', 'queryLimit', 'page']);
 	
 	return query;
 }

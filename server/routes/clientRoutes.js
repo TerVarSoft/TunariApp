@@ -9,15 +9,23 @@ var clientRouter = function(Client){
 	// Base route.
 	router.route('/')
 		.get(function(req, res, next) {
-            Client.find(req.query, function(err, clients) {
-				if (err) {
-					logger.log('error',err);
-					throw err;
-				}
-				
-				res.status(200).send(clients);
-			})
-            .sort('name');
+            Client.count(req.query, function(err, count){
+
+                Client.find(req.query, function(err, clients) {
+    				if (err) {
+    					logger.log('error',err);
+    					res.status(500).send(err);
+    				}
+    				
+    				res.status(200).sendWrapped({
+                        meta: {
+                            count: count   
+                        },
+                        items: clients
+                    });
+    			})
+                .sort('name');
+            });
         })
         .post(function(req, res, next) {
 
@@ -30,7 +38,7 @@ var clientRouter = function(Client){
 				}
 				
 				logger.log('info','post clients called');
-				res.status(201).send(newClient);
+				res.status(201).sendWrapped(newClient);
 			});
 		});
     
@@ -50,7 +58,7 @@ var clientRouter = function(Client){
     
     router.route('/:clientId')
         .get(function(req, res){
-            res.json(req.client);
+            res.sendWrapped(req.client);
         })
         .put(function(req, res){          
             req.client.name = req.body.name;
@@ -64,7 +72,7 @@ var clientRouter = function(Client){
                 if(err)
                     res.status(500).send(err);
                 else{
-                    res.json(req.client);                    
+                    res.sendWrapped(req.client);                    
                 }
             });                                        
         })
