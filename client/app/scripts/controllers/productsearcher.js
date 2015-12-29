@@ -10,23 +10,32 @@
 angular.module('tunariApp')
   .controller('ProductSearcherCtrl', 
               ['$scope', '$location', '$uibModal', 'Products', 'ServerData', 'Messages', 'Notifier',  
-              function ($scope, $location, $uibModal, Products, ServerData, Messages, Notifier) {
-    
-    Products.getList().then(function(products) {      
-      $scope.products = products;   
-    }); 
-   
-        
-    $scope.sampleBookSelected = 0; 
+              function ($scope, $location, $uibModal, Products, ServerData, Messages, Notifier) {    
+           
     $scope.shoppingCartSellings = [];    
     
     $scope.serverData = ServerData;
+
+    $scope.pagination = {
+        current: 1,
+        itemsPerPage: 15
+    };
     
-    $scope.search = function(){
-        Products.getList({tags:$scope.tags}).then(function(products) {
+    $scope.search = function(page){
+        var query = $scope.tags ? {tags:$scope.tags} : {};
+        query.page = page;
+        query.queryLimit = $scope.pagination.itemsPerPage;
+
+        Products.getList(query).then(function(products) {
             $scope.products = products;
+            $scope.totalProducts = products.meta.count; 
+            $scope.pagination.current = page;    
         });
     }    
+
+    $scope.pageChanged = function(newPage) {
+        $scope.search(newPage);
+    };
     
     $scope.showSampleBook = function(product){
         var samplebookModal = $uibModal.open({
@@ -109,4 +118,5 @@ angular.module('tunariApp')
         window.scrollTo(0, 0);
     }
     
+    $scope.search(1);    
   }]);
