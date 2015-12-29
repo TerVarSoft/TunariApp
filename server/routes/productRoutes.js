@@ -27,7 +27,7 @@ var productRouter = function(Product){
 				res.status(200).send(products);
 			})
             .sort(querySort || 'name')
-            .limit(queryLimit || 20);
+            .limit(queryLimit || 400);
 		})
 		.post(function(req, res, next) {
 

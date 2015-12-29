@@ -26,7 +26,7 @@ angular.module('tunariApp')
 
 			$(window).resize(function() {
 				var newWidth = $("#chart").width() - margin.left - margin.right;
-				if(width != newWidth){
+				if(newWidth>0 && width!= newWidth){
 			  		width = newWidth;					
 			  		repaint(scope.data); 
 				}				

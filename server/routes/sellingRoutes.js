@@ -10,7 +10,19 @@ var sellingRouter = function(Selling){
 	// Base route.
 	router.route('/')
 		.get(function(req, res, next) {
-            Selling.find({}, function(err, sellings) {
+
+			var query = {};
+
+			if(req.query.from && req.query.to){
+				query = {
+					date: {
+					    $gte: req.query.from,
+					    $lt: req.query.to
+				  	}
+				}
+			}
+
+            Selling.find(query, function(err, sellings) {
 				if (err) {
 					logger.log('error',err);
 					throw err;
@@ -18,16 +30,14 @@ var sellingRouter = function(Selling){
 				
 				logger.log('info','get sellings called');
 				res.status(200).send(sellings);
-			});
+			})			
+			.sort("-date");
         })
         .post(function(req, res, next) {
 
-            _.each(req.body.sellingItems, function(sellingItem){
-               sellingItem.date = new Date().toISOString();        
-            });
-    
 			var newSelling = new Selling(req.body);
 
+			newSelling.date = new Date();
 			newSelling.save(function(err) {
 				if (err) {
 					logger.log('error',err);
