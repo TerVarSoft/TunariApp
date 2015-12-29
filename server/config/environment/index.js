@@ -94,12 +94,12 @@ var all = {
 	},
 	statisticsViews: [
     	{
-    		name: 'Cantidad de Invitaciones',
-    		view: '../../views/invitationsQuantityCharts.html'
-    	},
-    	{
     		name: 'Ventas',
     		view: '../../views/sellingCharts.html'
+    	},
+    	{
+    		name: 'Cantidad de Invitaciones',
+    		view: '../../views/invitationsQuantityCharts.html'
     	}
     ]
 };
