@@ -28,6 +28,19 @@ angular.module('tunariApp')
                 message: Messages.message004 + $scope.product.name,
                 classes: 'alert-info'
             }); 
+        }, function(response){
+            if(response.code = 409) {                
+                Notifier({ 
+                    message: _.template(Messages.message018)({product : $scope.product.name}),
+                    classes: 'alert-danger'
+                });
+            }
+            else {
+                Notifier({ 
+                    message: Messages.message019,
+                    classes: 'alert-danger'
+                });
+            }
         });        
     }
     
