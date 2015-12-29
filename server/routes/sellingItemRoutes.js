@@ -9,14 +9,23 @@ var sellingItemRouter = function(SellingItem){
 	// Base route.
 	router.route('/')
 		.get(function(req, res, next) {
-            SellingItem.find({}, function(err, sellingItems) {
-				if (err) {
-					logger.log('error',err);
-					throw err;
-				}
-				
-				logger.log('info','get selling items called');
-				res.status(200).send(sellingItems);
+
+			SellingItem.count(req.query, function(err, count){
+
+	            SellingItem.find(req.query, function(err, sellingItems) {
+					if (err) {
+						logger.log('error',err);
+						throw err;
+					}
+					
+					logger.log('info','get selling items called');
+					res.status(200).sendWrapped({
+						meta: {
+                            count: count   
+                        },
+						items: sellingItems
+					});
+				});
 			});
         })
         .post(function(req, res, next) {
@@ -30,7 +39,7 @@ var sellingItemRouter = function(SellingItem){
 				}
 				
 				logger.log('info','post sellingItem called');
-				res.status(201).send(newSellingItem);
+				res.status(201).sendWrapped(newSellingItem);
 			});
 		}); ;
     

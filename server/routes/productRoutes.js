@@ -13,21 +13,31 @@ var productRouter = function(Product){
 		.get(function(req, res, next) {
 			
 			var query = {};
-            var querySort = req.query.querySort;
-            var queryLimit = +req.query.queryLimit;
+            var querySort = req.query.querySort || 'name';
+            var queryLimit = +req.query.queryLimit || 400;
+            var page = req.query.page || 1;
 
 			query = routesUtil.buildQuery(req.query);
 			
-			Product.find(query, function(err, products) {
-				if (err) {
-					logger.log('error',err);
-					throw err;
-				}
-				
-				res.status(200).send(products);
-			})
-            .sort(querySort || 'name')
-            .limit(queryLimit || 400);
+            Product.count(query, function(err, count){
+
+    			Product.find(query, function(err, products) {
+    				if (err) {
+    					logger.log('error',err);
+    					throw err;
+    				}
+    				
+    				res.status(200).sendWrapped({
+                        meta: {
+                            count: count   
+                        },
+                        items: products
+                    });
+    			})
+                .sort(querySort)
+                .skip(queryLimit*(page-1))
+                .limit(queryLimit);
+            });
 		})
 		.post(function(req, res, next) {
 
@@ -39,7 +49,7 @@ var productRouter = function(Product){
 					throw err;
 				}
                 else {                    
-				    res.status(201).send(newProduct);
+                    res.status(201).sendWrapped(newProduct);
                     logger.log('info',
                         'productId:' + newProduct._id + ' ' +
                         'product:' + newProduct.name + ' ' +
@@ -91,7 +101,7 @@ var productRouter = function(Product){
     
     router.route('/:productId')
         .get(function(req, res){
-            res.json(req.product);
+            res.sendWrapped(req.product);
         })        
         .put(function(req, res){ 
             req.product.name = req.body.name;
@@ -108,8 +118,8 @@ var productRouter = function(Product){
             req.product.save(function(err){
                 if(err)
                     res.status(500).send(err);
-                else{
-                    res.json(req.product);       
+                else{     
+                    res.sendWrapped(req.product);
                     logger.log('info',
                         'productId:' + req.product._id + ' ' +
                         'product:' + req.product.name + ' ' +

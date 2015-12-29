@@ -20,6 +20,13 @@ logger.log('info', 'TunariApp started!');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+express.response.sendWrapped = function(obj) {
+    return this.send({ 
+      version: 'v1.0',
+      data: obj 
+    });
+};
+
 var app = express();
 
 // Mongoose models
