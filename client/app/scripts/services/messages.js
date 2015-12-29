@@ -23,5 +23,6 @@ angular.module('tunariApp')
       message012: 'Nueva cantidad del producto ',
       message013: 'La cantidad no es correcta.',
       message014: 'Introduzca la cantidad por favor.',
-      message015: 'Unidades.'
+      message015: 'Unidades.',
+      message016: 'No hay productos en el carrito!, añada uno con los botones verdes.'
   })

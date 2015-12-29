@@ -51,6 +51,16 @@ angular.module('tunariApp')
         $scope.saveSelling = function () {   
 
             $('#shoppingcartbody').collapse('hide');
+
+            if($scope.sellingItems.length <= 0) {
+                Notifier({ 
+                    message: Messages.message016,
+                    classes: 'alert-warning'
+                }); 
+                return; 
+            }
+
+            // Add client to the selling
             if($scope.client){                
                 $scope.selling.client = $scope.client
             }
@@ -61,24 +71,25 @@ angular.module('tunariApp')
                     phone:"9999999"
                 };
             }
-             $scope.selling.sellingItems = $scope.sellingItems,
-             $scope.selling.total = $scope.getTotal();
-             $scope.selling.revenue = $scope.getTotalRevenue();
-             
-             _.each($scope.selling.sellingItems, function(sellingItem){
-                 var newProductQuantity = sellingItem.product.quantity-sellingItem.quantity;
-                 sellingItem.product.quantity = newProductQuantity;
-                 sellingItem.product.put();
-             });
-            
-             Sellings.post($scope.selling).then(function(){
-                 $scope.sellingItems = [];
-             });
 
-            Notifier({ 
-                message: Messages.message007,
-                classes: 'alert-info'
-            });                          
+            $scope.selling.sellingItems = $scope.sellingItems,
+            $scope.selling.total = $scope.getTotal();
+            $scope.selling.revenue = $scope.getTotalRevenue();
+
+            _.each($scope.selling.sellingItems, function(sellingItem){
+                var newProductQuantity = sellingItem.product.quantity-sellingItem.quantity;
+                sellingItem.product.quantity = newProductQuantity;
+                sellingItem.product.put();
+            });
+
+            Sellings.post($scope.selling).then(function(){
+                $scope.sellingItems = [];
+
+                Notifier({ 
+                    message: Messages.message007,
+                    classes: 'alert-info'
+                }); 
+            });                                     
         };
         
         $scope.cleanSelling = function() {
