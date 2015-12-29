@@ -59,3 +59,9 @@
 .product-name{
     cursor: pointer;
 }
+
+#sellingItems-table th {
+    height: 50px;
+    background-color: #3e3f3a;
+    color: #FFFFFF;
+}
