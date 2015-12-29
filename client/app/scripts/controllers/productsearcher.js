@@ -71,18 +71,27 @@ angular.module('tunariApp')
     };
 
     $scope.createSellingItem = function(product) {
+
+        if(_.some($scope.shoppingCartSellings, 'product.name', product.name)) {
+            Notifier({ 
+                message: _.template(Messages.message017)({product: product.name}),
+                classes: 'alert-warning'
+            }); 
+            return;
+        }
+
         var addingProductToCartModal = $uibModal.open({
-          templateUrl: '../../views/sellingItem.html',
-          controller: 'sellingItemCtrl',
-          size:'lg',
-          resolve: {
-            sellingItem: function () {
-                return {
-                    product: product,
-                    productPrice: product.prices[0]
-                };
+            templateUrl: '../../views/sellingItem.html',
+            controller: 'sellingItemCtrl',
+            size:'lg',
+            resolve: {
+                sellingItem: function () {
+                    return {
+                        product: product,
+                        productPrice: product.prices[0]
+                    };
+                }
             }
-          }
         });
 
         addingProductToCartModal.result.then(function(sellingItem) {
