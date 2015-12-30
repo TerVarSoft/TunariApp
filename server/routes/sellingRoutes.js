@@ -17,7 +17,7 @@ var sellingRouter = function(Selling){
 				query = {
 					date: {
 					    $gte: req.query.from,
-					    $lt: req.query.to
+					    $lte: req.query.to
 				  	}
 				}
 			}
