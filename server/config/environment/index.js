@@ -37,7 +37,7 @@ var all = {
 	defaultProductProperties: {
 		Default: {
 			provider: "Tunari",
-			quantity: 200,
+			quantity: 10000,
 			locations: [
 				{
 					type: "Tienda",
@@ -61,6 +61,9 @@ var all = {
 		}
 	},
 	invitationTypes: [
+		"Virgenes",
+		"Santos",
+		"Promociones",
 		"Mementos",
 		"Bautizos",
 		"1º Comunion",
@@ -71,9 +74,11 @@ var all = {
 		Default: {			
 			sizes: [
 				"Postal",
+				"Doble Esquela",
 				"Esquela",
-				"Doble Postal",
-				"Doble Esquela"
+				"Triple",
+				"Banderin",
+				"Doble Postal"				
 			],
 			genres: [
 				"Hombre",
@@ -89,6 +94,9 @@ var all = {
 			]
 		},
 		Matrimonios: {
+			genres: ["Unisex"]
+		},
+		Virgenes: {
 			genres: ["Unisex"]
 		}
 	},
