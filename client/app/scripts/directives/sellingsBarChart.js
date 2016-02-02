@@ -70,6 +70,8 @@ angular.module('tunariApp')
             mainVis.selectAll('*').remove();
             legendsVis.selectAll('*').remove();
 
+            d3.select(element[0]).select("svg").attr("width", width + margin.left + margin.right);
+
             mainVis.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", - margin.left)
