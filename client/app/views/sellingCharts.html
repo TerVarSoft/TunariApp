@@ -13,9 +13,9 @@
 	</br>
 	<div ng-if="sellings" class="row">
 		<div class="col-xs-12">
-			<div class="table-border panel panel-primary">
+			<div class="panel-border panel panel-primary">
 				<div class="panel-heading">
-					<h4>Detalle de las Ventas </h4>
+					<h4>Detalle de las Ventas. </h4>
 		        </div>
 				<scrollable-table watch="sellings" resizable>
 					<table class="table table-striped table-bordered">
@@ -48,10 +48,27 @@
 		        </div>
 		    </div>		
 		</div>
-		<div class="col-xs-12 col-sm-6">
-			Grafica de barras de las ventas
+		<div class="col-xs-12">
+			<div class="panel-border panel panel-warning">
+				<div class="panel-heading">
+					<h4>Total Ventas para lel top 20 de productos.</h4>
+				</div>
+				<div class="panel-body">
+					<div ng-if="sellings.length > 0" >
+						<div id="sellings-bar-chart"class="col-xs-10" >
+							<sellings-bar-chart data="sellings"></sellings-bar-chart>
+						</div>
+						<div class="col-xs-2">
+							<div id="selling-legends"></div>
+						</div>
+					</div>
+					<div ng-if="sellings.length <= 0">
+						<h3>No hay ventas que graficar. Por favor intente modificar el rango de fechas</h3>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6">
+		<div class="col-xs-12">
 			Grafica pastel de los clientes y las ventas
 		</div>	
 	</div>
