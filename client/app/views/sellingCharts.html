@@ -54,11 +54,11 @@
 					<h4>Total Ventas para lel top 20 de productos.</h4>
 				</div>
 				<div class="panel-body">
-					<div ng-if="sellings.length > 0" >
-						<div id="sellings-bar-chart"class="col-xs-10" >
+					<div class="row" ng-if="sellings.length > 0" >
+						<div id="sellings-bar-chart"class="col-xs-12 col-sm-10" >
 							<sellings-bar-chart data="sellings"></sellings-bar-chart>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-12 col-sm-2">
 							<div id="selling-legends"></div>
 						</div>
 					</div>
