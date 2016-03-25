@@ -52,5 +52,23 @@ angular.module('tunariApp')
         $scope.$parent.product.tags.push($scope.$parent.product.properties.type);
         $scope.$parent.product.tags.push($scope.$parent.product.properties.size);
         $scope.$parent.product.tags.push($scope.$parent.product.properties.genre);
+
+        var invitationNumber = getInvitationNumber();
+        $scope.$parent.product.sortTag = $scope.$parent.product.properties.type + invitationNumber;
     });
+
+    var getInvitationNumber = function(){
+        var nameParts = $scope.$parent.product.name.split('-');
+
+        var lastElement = _.last(nameParts);
+        var isNum = /^\d+$/.test(lastElement);
+        var number = "";
+
+        if(isNum){
+            number = lastElement;
+        }
+    
+        return number;
+    }
+
 }]);
