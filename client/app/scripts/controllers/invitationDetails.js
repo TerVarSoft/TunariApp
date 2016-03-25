@@ -43,8 +43,14 @@ angular.module('tunariApp')
 
     // Called by the parent scope
     $scope.$on('prepareProductToSave', function(e) { 
-        $scope.$parent.product.tags.push($scope.$parent.product.properties.size);
+        // Remove current type, size, genre from tags
+        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.config.invitationTypes));
+        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.config.invitationsDetails.Default.sizes));
+        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.config.invitationsDetails.Default.genres));
+        
+        // Add new type, size, genre from tags
         $scope.$parent.product.tags.push($scope.$parent.product.properties.type);
+        $scope.$parent.product.tags.push($scope.$parent.product.properties.size);
         $scope.$parent.product.tags.push($scope.$parent.product.properties.genre);
     });
 }]);

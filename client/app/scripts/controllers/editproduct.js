@@ -21,7 +21,10 @@ angular.module('tunariApp')
         });    
     });
     
-    $scope.saveProduct = function(){                  
+    $scope.saveProduct = function(){   
+        
+        $scope.$broadcast ('prepareProductToSave');    
+
         $scope.product.put().then(function(){
             $location.path("/productSearch");
             Notifier({ 
