@@ -22,6 +22,8 @@ angular.module('tunariApp')
     });
     
     $scope.saveProduct = function(){   
+        // Default value for sortTag, this can be overriden in prepareProductToSave
+        $scope.product.sortTag = $scope.product.category + $scope.product.name;           
         
         $scope.$broadcast ('prepareProductToSave');    
 

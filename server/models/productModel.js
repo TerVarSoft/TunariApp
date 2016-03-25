@@ -20,6 +20,9 @@ var productSchema = new Schema({
 	category: {
 		type: String
 	},
+	sortTag: {
+		type: String
+	},
 	tags: {
 		type: [String]
 	},

@@ -44,6 +44,10 @@ angular.module('tunariApp')
         $scope.product.tags.push($scope.product.name);       
         $scope.product.tags.push($scope.product.category);       
         $scope.product.tags.push($scope.product.provider); 
+
+        // Default value for sortTag, this can be overriden in prepareProductToSave
+        $scope.product.sortTag = $scope.product.category + $scope.product.name;
+
         $scope.$broadcast ('prepareProductToSave');
         $(".nav").find(".active").removeClass("active");
         Products.post($scope.product).then(function(){
