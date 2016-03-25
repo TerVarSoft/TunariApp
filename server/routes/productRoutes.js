@@ -13,7 +13,7 @@ var productRouter = function(Product){
 		.get(function(req, res, next) {
 			
 			var query = {};
-            var querySort = req.query.querySort || 'name';
+            var querySort = req.query.querySort || 'sortTag';
             var queryLimit = +req.query.queryLimit || 400;
             var page = req.query.page || 1;
 
@@ -114,6 +114,7 @@ var productRouter = function(Product){
             req.product.name = req.body.name;
             req.product.price = req.body.price;
             req.product.category = req.body.category;
+            req.product.sortTag = req.body.sortTag;
             req.product.tags = req.body.tags;
             req.product.properties = req.body.properties;
             req.product.buyingPrice = req.body.buyingPrice;
