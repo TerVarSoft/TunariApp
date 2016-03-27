@@ -61,10 +61,10 @@ var all = {
 		}
 	},
 	invitationTypes: [
+		"Mementos",
 		"Virgenes",
 		"Santos",
 		"Promociones",
-		"Mementos",
 		"Bautizos",
 		"1º Comunion",
 		"Matrimonios",

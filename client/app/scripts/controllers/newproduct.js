@@ -57,6 +57,8 @@ angular.module('tunariApp')
                 classes: 'alert-success'
             });
         }, function(response){
+
+            // Validate if products already exists
             if(response.code = 409) {                
                 Notifier({ 
                     message: _.template(Messages.message018)({product : $scope.product.name}),
