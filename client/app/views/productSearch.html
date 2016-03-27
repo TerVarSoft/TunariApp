@@ -22,6 +22,9 @@
             </dir-pagination-controls>        
         </div>
     </div>
+    <div>
+        <h4 class="text-primary">{{products.meta.count}} productos encontrados!</h4>
+    </div>
     <div class="row">
         <div dir-paginate-start="product in products | itemsPerPage: pagination.itemsPerPage"
          total-items="totalProducts" class="animate-if col-md-4 col-sm-6 col-xs-12" 
