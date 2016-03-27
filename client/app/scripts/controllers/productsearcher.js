@@ -9,12 +9,13 @@
  */
 angular.module('tunariApp')
   .controller('ProductSearcherCtrl', 
-              ['$scope', '$location', '$uibModal', 'Products', 'ServerData', 'Messages', 'Notifier',  
-              function ($scope, $location, $uibModal, Products, ServerData, Messages, Notifier) {    
+              ['$scope', '$location', '$uibModal', 'Products', 'ServerData', 'SearchInfo', 'Messages', 'Notifier',  
+              function ($scope, $location, $uibModal, Products, ServerData, SearchInfo, Messages, Notifier) {    
            
     $scope.shoppingCartSellings = [];    
     
     $scope.serverData = ServerData;
+    $scope.tags = SearchInfo.getTags();
 
     $scope.pagination = {
         current: 1,
@@ -30,6 +31,7 @@ angular.module('tunariApp')
             $scope.products = products;
             $scope.totalProducts = products.meta.count; 
             $scope.pagination.current = page;    
+            SearchInfo.setTags($scope.tags);
         });
     }    
 
