@@ -11,7 +11,6 @@ angular.module('tunariApp')
   .controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
 
   	$scope.subMenu = "views/productsSubmenu.html"
-  	$location.path('/');
   	 
   	$scope.menus = {
   		products: {
@@ -28,8 +27,8 @@ angular.module('tunariApp')
   	}
 
   	$scope.changeView = function(menuItem){
-		$scope.subMenu = $scope.menus[menuItem].subMenuView || "";
-		$location.path($scope.menus[menuItem].redirectTo);  
+  		$scope.subMenu = $scope.menus[menuItem].subMenuView || "";
+  		$location.path($scope.menus[menuItem].redirectTo);  
   	}
 
   	// Collapse navBar when clicking an menu item
