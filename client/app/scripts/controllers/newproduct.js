@@ -41,14 +41,7 @@ angular.module('tunariApp')
     }
     
     $scope.createProduct = function() {
-        $scope.product.tags.push($scope.product.name);       
-        $scope.product.tags.push($scope.product.category);       
-        $scope.product.tags.push($scope.product.provider); 
-
-        // Default value for sortTag, this can be overriden in prepareProductToSave
-        $scope.product.sortTag = $scope.product.category + $scope.product.name;
-
-        $scope.$broadcast ('prepareProductToSave');
+        prepareProductBeforeSaving();
         $(".nav").find(".active").removeClass("active");
         Products.post($scope.product).then(function(){
             $location.path("/productSearch");    
@@ -74,7 +67,17 @@ angular.module('tunariApp')
         });
     };
 
+    var prepareProductBeforeSaving = function(){
+        // Default value for sortTag, this can be overriden in prepareSpecificPropertiesBeforeProductSaving
+        $scope.product.sortTag = $scope.product.category + $scope.product.name;
         
+        $scope.product.tags.push($scope.product.name);       
+        $scope.product.tags.push($scope.product.category);       
+        $scope.product.tags.push($scope.product.provider); 
+
+        $scope.$broadcast ('prepareSpecificPropertiesBeforeProductSaving');
+    }
+
     $scope.cancelProduct = function(){
         $location.path("/productSearch");  
         $(".nav").find(".active").removeClass("active");

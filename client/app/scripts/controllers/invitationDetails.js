@@ -18,6 +18,8 @@ angular.module('tunariApp')
         $scope.updateProperties();        
     });
 
+    // Setup specific properties in invitationDetails, based in product type
+    // Merge default configuration with specific configuration
     $scope.updateProperties = function() {
     	$scope.invitationsDetails = $.extend(true, {}, $scope.config.invitationsDetails['Default']);  
         var productType = $scope.$parent.product.properties.type;
@@ -42,11 +44,11 @@ angular.module('tunariApp')
     };
 
     // Called by the parent scope
-    $scope.$on('prepareProductToSave', function(e) { 
+    $scope.$on('prepareProductToSaveSpecificProperties', function(e) { 
         // Remove current type, size, genre from tags
-        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.config.invitationTypes));
-        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.invitationsDetails.sizes));
-        $scope.$parent.product.tags = _.xor($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.invitationsDetails.genres));
+        $scope.$parent.product.tags = _.difference($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.config.invitationTypes));
+        $scope.$parent.product.tags = _.difference($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.invitationsDetails.sizes));
+        $scope.$parent.product.tags = _.difference($scope.$parent.product.tags, _.intersection($scope.$parent.product.tags, $scope.invitationsDetails.genres));
             
         // Add new type, size, genre from tags
         $scope.$parent.product.tags.push($scope.$parent.product.properties.type);
