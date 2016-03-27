@@ -27,6 +27,7 @@ angular.module('tunariApp')
 
                 Products.getList({
                     category: 'Invitaciones', 
+                    maxQuantity: 9000,
                     'properties.type': invitationType,
                     querySort: 'quantity',
                     queryLimit: invitationsPerChart
