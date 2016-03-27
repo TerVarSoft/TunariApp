@@ -39,7 +39,11 @@ var buildQuery = function(requestQuery){
 		}			
 	}
 
-	query = _.omit(query, ['querySort', 'queryLimit', 'page']);
+	if(query.maxQuantity){
+		query.quantity = {$lte: +query.maxQuantity};
+	}
+
+	query = _.omit(query, ['querySort', 'queryLimit', 'page', 'maxQuantity']);
 	
 	return query;
 }
