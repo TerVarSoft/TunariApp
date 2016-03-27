@@ -15,18 +15,21 @@ angular.module('tunariApp')
     
     $scope.product = Products.one($routeParams.productId).get().then(function(product){
         $scope.product = product; 
+        $scope.tagsToRemoveWhenUpdating = getTagsToRemoveWhenUpdating();
         ServerData.config.get().then(function(config) {
             $scope.config = config;
             $scope.productView = _.where(config.productCategories, {name: $scope.product.category})[0].view;
         });    
     });
-    
-    $scope.saveProduct = function(){   
-        // Default value for sortTag, this can be overriden in prepareProductToSave
-        $scope.product.sortTag = $scope.product.category + $scope.product.name;           
-        
-        $scope.$broadcast ('prepareProductToSave');    
 
+    var getTagsToRemoveWhenUpdating= function (){
+        var tags = [$scope.product.name, $scope.product.provider];
+        return tags;
+    }
+    
+    $scope.saveProduct = function(){            
+        prepareProductBeforeSaving();
+        
         $scope.product.put().then(function(){
             $location.path("/productSearch");
             Notifier({ 
@@ -47,6 +50,17 @@ angular.module('tunariApp')
                 });
             }
         });        
+    }
+
+    var prepareProductBeforeSaving = function(){
+        // Default value for sortTag, this can be overriden in prepareSpecificPropertiesBeforeProductSaving
+        $scope.product.sortTag = $scope.product.category + $scope.product.name;           
+        
+        $scope.product.tags = _.difference($scope.product.tags, $scope.tagsToRemoveWhenUpdating);
+        $scope.product.tags.push($scope.product.name);
+        $scope.product.tags.push($scope.product.provider);
+
+        $scope.$broadcast ('prepareSpecificPropertiesBeforeProductSaving');   
     }
     
     $scope.cancelEditing = function() {
