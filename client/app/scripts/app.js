@@ -20,10 +20,11 @@ angular
     'angularUtils.directives.dirPagination',
     'cgNotify',
     'ui.bootstrap',
-    'scrollable-table'
+    'scrollable-table',
+    'ui.router'
   ])
-  .config(['$routeProvider', 'RestangularProvider', 'Config', 
-    function ($routeProvider, RestangularProvider, Config) {
+  .config(['$routeProvider', 'RestangularProvider', 'AuthInterceptorProvider', 'Config',
+    function ($routeProvider, RestangularProvider, AuthInterceptorProvider, Config) {
     
     // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
@@ -43,7 +44,7 @@ angular
 
     RestangularProvider.setRestangularFields({
         id: "_id"
-    });
+    });    
 
     // Moment.js global configuration
     moment.locale('es', {
@@ -51,7 +52,8 @@ angular
          weekdays : "Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado".split("_"), 
     });
 
-    
+    //RestangularProvider.addRequestInterceptor(AuthInterceptorProvider.request);
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/productSearch.html',

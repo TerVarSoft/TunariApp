@@ -27,5 +27,10 @@ angular.module('tunariApp')
       message016: 'No hay productos en el carrito!, añada uno con los botones verdes.',
       message017: 'Ya existe un producto <%= product %> en el carrito!, por favor modifique el que ya existe',
       message018: 'El producto <%= product %> ya existe en la base de datos, por favor utilize otro nombre',
-      message019: 'Hubo un problema con el servidor por favor contactese con su proveedor'
+      message019: 'Hubo un problema con el servidor por favor contactese con su proveedor',
+      message020: 'Felicidades! Ha ingresado el usuario <%= user %> exisosamente.',
+      message021: 'El nombre de usuario <%= user %> ya existe en la base de datos :(, por favor utilize otro nombre.',      
+      message022: 'Hubo un problema al ingresar el usuario por favor intente mas tarde.',
+      message023: 'Imposible mostras los productos, por favor vuelva a intentarlo.',
+      message024: 'Bienvenido <%= user %>!.'
   })

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="styles/scrollable-table.css" />
 
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="styles/productsearch.css">
     <link rel="stylesheet" href="styles/sellingItem.css">
     <link rel="stylesheet" href="styles/shoppingcart.css">
@@ -35,7 +36,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-controller="NavBarCtrl"  class="header">
+    <!-- <div  class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -47,18 +48,22 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">TunariApp</a>
+            <a class="navbar-brand" ng-href="#/">TunariApp</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
+              <li ui-sref-active="active"><a ui-sref="register">Registrar</a></li>
+              <li ui-sref-active="active"><a ui-sref="products">Productos</a></li>
+              <li ui-sref-active="active"><a ui-sref="clients">Clientes</a></li>
+              <li ui-sref-active="active"><a ui-sref="statistics">Estadisticas</a></li> -->
 <!--
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/about">About</a></li>
               <li><a ng-href="#/productSearch">Buscar</a></li>
               <li><a ng-href="#/">Contact</a></li>
--->
+--><!-- 
               <li ng-audio="sounds/click.mp3"  class="">
                 <a ng-click="changeView('products')">Productos</a>
               </li> 
@@ -67,26 +72,29 @@
               </li>                  
               <li ng-audio="sounds/click.mp3"  class="">
                 <a ng-click="changeView('statistics')">Estadisticas</a>
-              </li>
-            </ul>
+              </li> -->
+           <!--  </ul>
           </div>
         </div>
         <div class="submenu">
           <div ng-include="subMenu"></div>
         </div>
       </div>            
-    </div>
+    </div> -->
+
+    <div ng-include="'views/header.html'"></div>
 
     <div class="container">
-        <div class="reveal-animation" ng-view=""></div>
+        <!--<div class="reveal-animation" ng-view=""></div>-->
+        <div class="reveal-animation" ui-view></div>
 <!--        <div ng-view=""></div>-->
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="container">
         <p><span class="glyphicon glyphicon-registration-mark"></span> El equipo de TervarSoft</p>
       </div>
-    </div>
+    </div> -->
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -105,7 +113,6 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
@@ -120,19 +127,25 @@
     <script src="bower_components/d3/d3.js"></script>
     <script src="bower_components/d3-tip/index.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!--customDependencies-->
     <script src="custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.js"></script>
     <script src="custom_dependencies/angular-scrollable-table/angular-scrollable-table.js"></script>
     <script src="custom_dependencies/angular-scrollable-table/angular-locale_es-419.js"></script>
+    <script src="custom_dependencies/angular-animate/angular-animate.js"></script>
     <!--customDependencies-->
     <!-- /build -->
 
 
         <!-- build:js scripts/app.min.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/app.config.js"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
         <script src="scripts/controllers/navBar.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/products.js"></script>
@@ -150,10 +163,16 @@
         <script src="scripts/controllers/sellingsCharts.js"></script>
         <script src="scripts/services/sellings.js"></script>
         <script src="scripts/services/clients.js"></script>     
-        <script src="scripts/controllers/questionModal.js"></script>   
+        <script src="scripts/services/users.js"></script>     
+        <script src="scripts/controllers/questionModal.js"></script>  
+        <script src="scripts/controllers/register.js"></script> 
         <script src="scripts/services/messages.js"></script>
         <script src="scripts/services/notifier.js"></script>
         <script src="scripts/services/searchInfo.js"></script>
+        <script src="scripts/services/login.js"></script>
+        <script src="scripts/services/authInfo.js"></script>
+        <script src="scripts/services/authInterceptor.js"></script>
+        <script src="scripts/services/authRestangular.js"></script>
         <script src="scripts/directives/sellingquantity.js"></script>
         <script src="scripts/directives/tagsproduct.js"></script>
         <script src="scripts/directives/shoppingcart.js"></script>
@@ -161,6 +180,7 @@
         <script src="scripts/directives/prodQuantityChart.js"></script>
         <script src="scripts/directives/sellingsDatepicker.js"></script>
         <script src="scripts/directives/sellingsbarchart.js"></script>
+        <script src="scripts/directives/validateEquals.js"></script>
         <script src="scripts/controllers/clientSearch.js"></script>
         <script src="scripts/controllers/clientSamples.js"></script>
         <script src="scripts/controllers/newclient.js"></script>

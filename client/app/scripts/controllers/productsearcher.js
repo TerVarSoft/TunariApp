@@ -32,6 +32,11 @@ angular.module('tunariApp')
             $scope.totalProducts = products.meta.count; 
             $scope.pagination.current = page;    
             SearchInfo.setTags($scope.tags);
+        }, function(err) {
+            Notifier({ 
+                message: Messages.message023 + err.message,
+                classes: 'alert-warning'
+            });
         });
     }    
 

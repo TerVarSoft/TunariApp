@@ -7,9 +7,17 @@
 
 body {
   padding: 0px;
-/*  background: #7B939C;    */
+  background: #7B939C;    
   background-image: url(../images/sandpaper.png);    
 }
+
+/*body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(135deg, rgba(31,123,229,1) 0%, rgba(58,139,232,1) 47%, rgba(70,153,234,1) 92%, rgba(72,156,234,1) 100%);
+    background-image: url("http://p1.pichost.me/640/54/1777799.jpg"); 
+    background-size: 100% 100%;
+}*/
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -128,6 +136,14 @@ body {
 @-moz-keyframes Fade-Leave-Anime {
     from { opacity: 1; }
     to { opacity: 0; }
+}
+
+.img-logo {
+    width: 90px;
+    height: 40px;
+    margin: 10px 10px 10px;
+    display: block;
+    
 }
 
 a {

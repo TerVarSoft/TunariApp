@@ -18,7 +18,6 @@ var logger = require('./logger/logger');
 logger.log('info', 'TunariApp started!');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 express.response.sendWrapped = function(obj) {
     return this.send({ 
@@ -34,6 +33,7 @@ var Product = require('./models/productModel');
 var SellingItem = require('./models/sellingItemModel');
 var Selling = require('./models/sellingModel');
 var Client = require('./models/clientModel');
+var User = require('./models/userModel');
 
 // Routers
 var configRouter = require('./routes/configRoutes')();
@@ -41,6 +41,8 @@ var productRouter = require('./routes/productRoutes')(Product);
 var sellingItemRouter = require('./routes/sellingItemRoutes')(SellingItem);
 var sellingRouter = require('./routes/sellingRoutes')(Selling);
 var clientRouter = require('./routes/clientRoutes')(Client);
+var userRouter = require('./routes/userRoutes')(User);
+var loginRouter = require('./routes/loginRoutes')(User);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,12 +78,13 @@ app.use(function (req, res, next) {
 
 
 app.use('/test', routes);
-app.use('/users', users);
 app.use('/api/config', configRouter);
 app.use('/api/products', productRouter);
 app.use('/api/sellingItems', sellingItemRouter);
 app.use('/api/sellings', sellingRouter);
 app.use('/api/clients', clientRouter);
+app.use('/api/users', userRouter);
+app.use('/api/login', loginRouter);
 
 app.get('/', function(req, res) {
     res.sendFile('./public/frontend/index.html',{root: __dirname }); 

@@ -1,5 +1,6 @@
 var express = require('express');
 var _ = require('underscore-node');
+var jwt = require('jwt-simple')
 var routesUtil = require('./routesUtilities');
 
 // Logger
@@ -11,6 +12,19 @@ var productRouter = function(Product){
 	// Base route.
 	router.route('/')
 		.get(function(req, res, next) {
+            
+            if(!req.headers.authorization) {
+                return res.status(401).send({
+                    message: "No estas autorizado para ver los productos"
+                });
+            }
+
+            var token = req.headers.authorization.split(' ')[1];           
+            var payload = jwt.decode(token, "shhh...");
+
+            if(!payload.sub) {
+                res.status(401).send({message: "La Autenticacion fallo! :("});
+            }                        
 			
 			var query = {};
             var querySort = req.query.querySort || 'sortTag';

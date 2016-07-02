@@ -1,0 +1,31 @@
+<div class="card-login card-login-container">
+    <h1 class="text-muted">Registrar</h1>
+    <img id="profile-img" class="profile-img-card-register" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+    <p id="profile-name" class="profile-name-card-login"></p>
+    <form ng-submit="submit()" name="register" class="form-signin" novalidate>
+        <span id="reauth-email" class="reauth-email"></span>
+        <input name="name" ng-model="newUser.name" type="text"
+                class="form-control" placeholder="Usuario" required autofocus>
+        <p class="text-warning" ng-show="register.name.$dirty && register.name.$invalid">
+            Porvafor introduzca un nombre de usuario apropiado
+        </p>
+        <input name="password" ng-model="password" type="password" id="inputPassword" 
+                class="form-control" placeholder="Contraseña" required>
+        <input name="passwordConfirm" ng-model="passwordConfirm" type="password" id="inputPasswordConfirm"
+                class="form-control" placeholder="Repetir Contraseña" validate-equals="password">
+        <p class="text-warning" 
+            ng-show="register.passwordConfirm.$dirty && register.passwordConfirm.$invalid">
+            Los passwords no son iguales
+        </p>
+        <p class="select-role">Seleccionar el role:</p>
+        <div class="btn-group btn-group-justified">
+          <a    ng-repeat="role in roles" ng-click="changeRole(role.value)" 
+                ng-class="isRoleSelected(role.value) ? 'btn btn-info active': 'btn btn-default'" >     
+                {{role.text}}
+          </a>
+        </div>
+        <br />
+        <button ng-disabled="register.$invalid" class="btn btn-lg btn-success btn-block btn-signin" 
+                type="submit">Registrar</button>
+    </form>
+</div>
