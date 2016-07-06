@@ -16,7 +16,6 @@
     <!-- endbower -->
     
     <link rel="stylesheet" href="styles/sandstone.css">
-    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
     <link rel="stylesheet" href="styles/scrollable-table.css" />
 
     <link rel="stylesheet" href="styles/app.css">
@@ -32,49 +31,13 @@
     <link rel="stylesheet" href="styles/sellingsCharts.css">
     <!-- /build -->
   </head>
-  <body ng-app="tunariApp" layout="row">
-    <md-sidenav  md-component-id="sideNav" md-is-locked-open="$mdMedia('gt-md')" layout="column" class="md-sidenav-left md-whiteframe-z2">
-        <md-toolbar layout-align="center center" class="md-tall md-hue-2">
-            TunariApp
-        </md-toolbar>
-        <md-list ng-controller="NavBarCtrl">
-            <md-list-item ng-repeat="menu in menus" ng-click="changeView(menu.propName)">
-                <a>
-                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                        <div class="inset" >
-                            <ng-md-icon icon="{{menu.icon}}"></ng-md-icon>
-                        </div>
-                        <div class="inset" >
-                            {{menu.text}}
-                        </div>                    
-                    </md-item-content>                
-                </a>
-            </md-list-item>                    
-        </md-list>
-    </md-sidenav>
-    <div ng-controller="ContentCtrl" flex layout="column">
-        <md-toolbar layout="row">
-            <div class="md-toolbar-tools" layout-align="space-between center" layout-align-gt-md="center center">
-                <md-button ng-click="toggleSidenav('sideNav')" hide-gt-md aria-label="Menu">
-                    <div class="inset" >
-                        <ng-md-icon icon="menu"></ng-md-icon>
-                    </div>                    
-                </md-button>  
-                <h3>{{header.title}}</h3>
-            </div>
-        </md-toolbar>
-        <md-content  id="content">
-            <div class="container-fluid">
-               <div ng-view=""></div>
-            </div>
-        </md-content>
-    </div>
+  <body ng-app="tunariApp" layout="column">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <!-- <div ng-controller="NavBarCtrl"  class="header">
+    <div ng-controller="NavBarCtrl"  class="header">
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -108,18 +71,18 @@
           <div ng-include="subMenu"></div>
         </div>
       </div>            
-    </div> -->
+    </div>
 
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
         <div  ng-view=""></div>
-       <div ng-view=""></div>
-    </div> -->
+<!--        <div ng-view=""></div>-->
+    </div>
 
-    <!-- <div class="footer">
+    <div class="footer">
       <div class="container">
         <p><span class="glyphicon glyphicon-registration-mark"></span> El equipo de TervarSoft</p>
       </div>
-    </div> -->
+    </div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -156,7 +119,6 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script> 
     <!-- endbower -->
     <!--customDependencies-->
     <script src="custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.js"></script>
@@ -165,7 +127,7 @@
     <!--customDependencies-->
     <!-- /build -->
 
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script> 
         <!-- build:js scripts/app.min.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/config.js"></script>
@@ -173,9 +135,8 @@
         <script src="scripts/controllers/navBar.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/products.js"></script>
-        <script src="scripts/controllers/content.js"></script>
         <script src="scripts/controllers/productSearcher.js"></script>
-        <script src="scripts/services/serverdata.js"></script>
+        <script src="scripts/services/serverdata.js"></script>        
         <script src="scripts/controllers/editProduct.js"></script>
         <script src="scripts/controllers/newProduct.js"></script>
         <script src="scripts/controllers/invitationDetails.js"></script>

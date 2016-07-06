@@ -11,7 +11,8 @@ angular.module('tunariApp')
   .controller('ProductSearcherCtrl', 
               ['$scope', '$location', '$uibModal', 'Products', 'ServerData', 'SearchInfo', 'Messages', 'Notifier',  
               function ($scope, $location, $uibModal, Products, ServerData, SearchInfo, Messages, Notifier) {    
-           
+
+    $scope.header.title = 'Productos';
     $scope.shoppingCartSellings = [];    
     
     $scope.serverData = ServerData;

@@ -10,6 +10,8 @@
 angular.module('tunariApp')
   .controller('ClientSearchCtrl', ['$scope', '$location', 'Clients', function ($scope, $location, Clients) {
     
+    $scope.header.title = 'Clientes';
+
     Clients.getList().then(function(clients) {   
         $scope.clients = clients;
         
