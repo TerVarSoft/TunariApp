@@ -20,10 +20,16 @@ angular
     'angularUtils.directives.dirPagination',
     'cgNotify',
     'ui.bootstrap',
-    'scrollable-table'
+    'scrollable-table',
+    'ngMaterial',
+    'ngMdIcons'
   ])
-  .config(['$routeProvider', 'RestangularProvider', 'Config', 
-    function ($routeProvider, RestangularProvider, Config) {
+  .config(['$routeProvider', '$mdThemingProvider', 'RestangularProvider', 'Config', 
+    function ($routeProvider, $mdThemingProvider, RestangularProvider, Config) {
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue-grey')
+      .accentPalette('cyan');      
     
     // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');

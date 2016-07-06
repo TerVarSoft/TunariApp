@@ -6,9 +6,9 @@
 }
 
 body {
-  padding: 0px;
+  /*padding: 0px;*/
 /*  background: #7B939C;    */
-  background-image: url(../images/sandpaper.png);    
+  /*background-image: url(../images/sandpaper.png);    */
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -131,12 +131,16 @@ body {
 }
 
 a {
-    color: #fff;
+    /*color: #fff;*/
+    fill: #737373;
+    color: #737373;
     text-decoration: none;
 }
 
 a:hover, a:focus {
     /*color: #fff;*/
+    fill: #737373;
+    color: #737373;
     text-decoration: none;
 }
 
