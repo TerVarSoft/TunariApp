@@ -14,13 +14,13 @@ angular.module('tunariApp')
 
     $scope.header.title = 'Productos';
     $scope.shoppingCartSellings = [];    
-    
+
     $scope.serverData = ServerData;
     $scope.tags = SearchInfo.getTags();
 
     $scope.pagination = {
         current: 1,
-        itemsPerPage: 15
+        itemsPerPage: 200
     };
     
     $scope.search = function(page){

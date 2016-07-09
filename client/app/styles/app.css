@@ -1,7 +1,31 @@
+md-toolbar {
+	fill: #ffffff;
+}
+
 md-sidenav {
   fill: #737373;
-  /*ng-md-icon {
-    position: relative;
-    top: 5px; // adjust for svg viewbox
-  }*/
 }
+
+ng-md-icon {
+	position: relative;
+	top: 5px; 
+}
+
+md-content.md-default-theme, md-content {
+    background-color: rgb(229, 223, 223);
+}
+
+.md-button.md-fab.md-fab-bottom-right {
+	/*top: auto;
+	right: 20px;
+	bottom: 20px;
+	left: auto;
+	position: fixed;*/
+	fill: #ffffff;
+}
+
+.menu-button {
+	background-color: #737373;
+}
+
+

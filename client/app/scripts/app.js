@@ -28,9 +28,18 @@ angular
     function ($routeProvider, $mdThemingProvider, RestangularProvider, Config) {
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('blue-grey')
-      .accentPalette('cyan');      
+      .primaryPalette('indigo')
+      .accentPalette('pink');   
+
+    /*$mdThemingProvider.theme('dark-grey').backgroundPalette('blue-grey');
+    $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
+    $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
+    $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();   
     
+    $mdThemingProvider.theme('docs-dark', 'default')
+      .primaryPalette('yellow')
+      .dark();*/
+
     // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
 
