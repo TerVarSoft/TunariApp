@@ -1,4 +1,92 @@
-<div class="row">
+<div role="main" layout="column" layout-gt-xs="row" layout-wrap class="relative" layout-fill> 
+    
+    <!--Extra small and small view-->          
+    <md-list flex  hide-gt-sm>
+        <div ng-repeat="product in products">
+            <md-list-item class="md-3-line" ng-click="null" layout="row" layout-wrap>
+              <div flex="30">
+                <img ng-src="{{getProductImageUrl(product)}}" class="md-avatar product-image"/>
+            </div>
+              <div flex="30"class="md-list-item-text"  layout="column">
+                <h3>{{ product.name }}</h3>
+                <h4 layout="row">
+                    <ng-md-icon style="fill: #777" icon="attach_money" size="17"></ng-md-icon> 
+                    <p>{{product.prices[0].value}} Bs.</p>  
+                </h4>
+                <h4 layout="row">
+                    <ng-md-icon style="fill: #777" icon="store" size="17"></ng-md-icon> 
+                    <p>{{product.quantity}}</p> 
+                </h4>
+              </div>
+              <md-card-actions flex="40" layout="row" layout-align="end center" layout-wrap>
+                <md-button class="md-fab md-mini md-primary" aria-label="Add to cart">
+                  <ng-md-icon style="fill: #fff" icon="shopping_cart" size="30" aria-label="call"></ng-md-icon> 
+                </md-button>
+                <md-button class="md-fab md-mini md-primary" aria-label="Add product">
+                  <ng-md-icon style="fill: #fff" icon="add_circle_outline" size="30" aria-label="call"></ng-md-icon> 
+                </md-button>
+              </md-card-actions>
+
+            </md-list-item>
+            <md-divider ></md-divider>
+        </div>
+    </md-list>   
+    
+    <!--Greater than Medium view-->
+    <div  hide-sm hide-xs show-gt-sm flex layout="row" layout-wrap>
+        <div ng-repeat="product in products" flex-md="50" flex-gt-md="33" >
+            <md-card md-whiteframe-z2 layout="column" flex>
+                <md-card-title>
+                    <md-card-title-text layout="column">
+                        <span class="md-headline">{{product.name}}</span>
+                        <span class="md-subhead">{{product.category}}</span>                                        
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-lg card-media" layout="center center">
+                            <img ng-src="{{getProductImageUrl(product)}}" class="md-card-image" alt="Washed Out">
+                        </div>
+                    </md-card-title-media>        
+                </md-card-title> 
+
+                <section flex layout-wrap layout="row" layout-align="start center"> 
+                    <md-card-actions flex="60" layout="row" layout-align="start center">
+                        <md-button  md-ink-ripple="false" layout="row" aria-label="call">
+                            <md-tooltip md-direction="top">
+                                Precio.
+                            </md-tooltip>
+                            <ng-md-icon style="fill: #777" icon="attach_money" size="30"></ng-md-icon> 
+                            <p>{{product.prices[0].value}} Bs.</p>  
+                        </md-button>
+                        <md-button  md-ink-ripple="false" layout="row" aria-label="call">
+                            <md-tooltip md-direction="top">
+                                Cantidad en el deposito.
+                            </md-tooltip>
+                            <ng-md-icon style="fill: #777" icon="store" size="30"></ng-md-icon> 
+                            <p>{{product.quantity}}</p>  
+                        </md-button>  
+                    </md-card-actions>
+                    <md-card-actions flex layout="row" layout-align="center center">
+                        <md-button class="md-fab md-mini md-primary" aria-label="Add to cart">
+                            <md-tooltip md-direction="top">
+                                Agregar al carrito.
+                            </md-tooltip>
+                            <ng-md-icon style="fill: #fff" icon="shopping_cart" size="30" aria-label="call"></ng-md-icon> 
+                        </md-button>
+                        <md-button class="md-fab md-mini md-primary" aria-label="Add product">
+                            <md-tooltip md-direction="top">
+                                Agregar producto.
+                            </md-tooltip>  
+                            <ng-md-icon style="fill: #fff" icon="add_circle_outline" size="30" aria-label="call"></ng-md-icon> 
+                        </md-button>
+                    </md-card-actions>   
+                </section>                     
+            </md-card>                
+        </div>
+    </div> 
+    
+</div>
+
+<!-- <div class="row">
     <form class="col-xs-12" name="searchingForm" role="form" novalidate>
         <div class="form-group">
           <div class="input-group">
@@ -34,7 +122,7 @@
                     <span ng-click="editProduct(product._id)" class="glyphicon glyphicon-pencil pencil"></span>
                 </div>
                 <div align="center">
-                    <!--Double img tag to not show samplebook in small screens-->
+                    <!--Double img tag to not show samplebook in small screens
                     <img    alt="{{product.name}}" class="img-rounded img-responsive hidden-xs"  
                             ng-click="showSampleBook(product)"
                             ng-src="{{getProductImageUrl(product)}}"/> 
@@ -81,3 +169,4 @@
     <shoppingcart selling-items='shoppingCartSellings'>
     </shoppingcart>    
 </div>
+ -->

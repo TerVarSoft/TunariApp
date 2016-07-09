@@ -255,3 +255,16 @@ p {
 }
 
 
+/*Angular Material*/
+
+md-list-item .md-avatar.product-image {
+    border-radius: 3%;
+    width: 70px;
+    height: 70px;
+}
+
+md-card .md-card-image {
+    border-radius: 5%
+}
+
+

@@ -19,8 +19,8 @@
     <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
     <link rel="stylesheet" href="styles/scrollable-table.css" />
 
-    <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="styles/productsearch.css">
     <link rel="stylesheet" href="styles/sellingItem.css">
     <link rel="stylesheet" href="styles/shoppingcart.css">
@@ -33,7 +33,7 @@
     <!-- /build -->
   </head>
   <body ng-app="tunariApp" layout="row">
-    <md-sidenav  md-component-id="sideNav" md-is-locked-open="$mdMedia('gt-md')" layout="column" class="md-sidenav-left md-whiteframe-z2">
+    <md-sidenav  md-component-id="sideNav" md-is-locked-open="$mdMedia('gt-md')" layout="column" class="md-sidenav-left md-whiteframe-z4">
         <md-toolbar layout-align="center center" class="md-tall md-hue-2">
             TunariApp
         </md-toolbar>
@@ -53,13 +53,13 @@
         </md-list>
     </md-sidenav>
     <div ng-controller="ContentCtrl" flex layout="column">
-        <md-toolbar layout="row">
-            <div class="md-toolbar-tools" layout-align="space-between center" layout-align-gt-md="center center">
+        <md-toolbar md-scroll-shrink layout="row">
+            <div class="md-toolbar-tools" layout-align="space-between center" layout-wrap layout-align-gt-md="center center">
                 <md-button ng-click="toggleSidenav('sideNav')" hide-gt-md aria-label="Menu">
                     <div class="inset" >
-                        <ng-md-icon icon="menu"></ng-md-icon>
+                        <ng-md-icon icon="menu" size="40"></ng-md-icon>
                     </div>                    
-                </md-button>  
+                </md-button>                
                 <h3>{{header.title}}</h3>
             </div>
         </md-toolbar>
@@ -68,6 +68,12 @@
                <div ng-view=""></div>
             </div>
         </md-content>
+        <md-button class="md-fab md-fab-bottom-right" aria-label="Add">  
+            <md-tooltip md-direction="top">
+              Crear nuevo producto.
+            </md-tooltip>
+            <ng-md-icon icon="add" size="40"></ng-md-icon>        
+        </md-button>
     </div>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -156,12 +162,12 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script> 
     <!-- endbower -->
     <!--customDependencies-->
     <script src="custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.js"></script>
     <script src="custom_dependencies/angular-scrollable-table/angular-scrollable-table.js"></script>
     <script src="custom_dependencies/angular-scrollable-table/angular-locale_es-419.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script> 
     <!--customDependencies-->
     <!-- /build -->
 
