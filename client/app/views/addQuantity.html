@@ -1,0 +1,35 @@
+<md-dialog aria-label="Cantidad">
+	<form name="sellingForm"ng-submit="sellingForm.$valid && add()" novalidate>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				  <h2>{{product.name}}</h2>
+				  <span flex></span>
+				  <md-button class="md-icon-button" ng-click="cancel()">
+				    <ng-md-icon class="icon" style="fill: #fff" icon="close" size="20" aria-label="call"></ng-md-icon> 
+				  </md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content layout="column" layout-margin>   
+			<div class="md-headline">Que cantidad quiere Agregar?</div>
+			<span></span>
+			<md-input-container>
+				<label>Cantidad</label>
+				<input ng-model="quantity" name="quantity" type="number" md-autofocus ng-max="{{product.quantity}}" required>
+				<div ng-messages="sellingForm.quantity.$error">
+					<div ng-message="required">La cantidad es requerida.</div>
+					<div ng-message="max">Solo hay <b>{{product.quantity}}</b> unidades en el deposito.
+					</div>
+				</div>
+			</md-input-container>
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button class="md-raised md-warn" type="button" ng-click="cancel()" >
+				Cancelar
+			</md-button>
+			<md-button class="md-raised md-primary" type="submit" style="margin-right:20px;" >
+				Agregar!
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

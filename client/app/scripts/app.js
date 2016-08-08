@@ -12,7 +12,6 @@ angular
   .module('tunariApp', [
     'ngAnimate',
     'ngRoute',
-    'angular-carousel',
     'restangular',
     'ngAudio',
     'nya.bootstrap.select',
@@ -22,23 +21,15 @@ angular
     'ui.bootstrap',
     'scrollable-table',
     'ngMaterial',
-    'ngMdIcons'
+    'ngMdIcons',
+    'ngMessages'
   ])
-  .config(['$routeProvider', '$mdThemingProvider', 'RestangularProvider', 'Config', 
-    function ($routeProvider, $mdThemingProvider, RestangularProvider, Config) {
+  .config(['$routeProvider', '$mdThemingProvider', '$httpProvider', 'RestangularProvider', 'Config', 
+    function ($routeProvider, $mdThemingProvider, $httpProvider, RestangularProvider, Config) {
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('indigo')
-      .accentPalette('pink');   
-
-    /*$mdThemingProvider.theme('dark-grey').backgroundPalette('blue-grey');
-    $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
-    $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
-    $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();   
-    
-    $mdThemingProvider.theme('docs-dark', 'default')
-      .primaryPalette('yellow')
-      .dark();*/
+      .primaryPalette('blue-grey')
+      .accentPalette('pink');
 
     // Restangular global configurations
     RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
@@ -69,8 +60,8 @@ angular
     
     $routeProvider
       .when('/', {
-        templateUrl: 'views/productSearch.html',
-        controller: 'ProductSearcherCtrl',
+        templateUrl: 'views/shoppingTabs.html',
+        controller: 'ShopCtrl',
         controllerAs: 'ProductSearcher'
       })
       .when('/about', {
@@ -78,9 +69,9 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/productSearch', {
-        templateUrl: 'views/productSearch.html',
-        controller: 'ProductSearcherCtrl',
+      .when('/shoppingTabs', {
+        templateUrl: 'views/shoppingTabs.html',
+        controller: 'ShopCtrl',
         controllerAs: 'ProductSearcher'
       })
       .when('/products/:productId', {

@@ -1,0 +1,18 @@
+<md-dialog aria-label="img">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{product.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <ng-md-icon class="icon" style="fill: #fff" icon="close" size="20" aria-label="call">
+                </ng-md-icon> 
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-content class="md-padding" >
+            <img alt="{{sellingItem.product.name}}" class="md-card-image"
+                ng-src="{{getImageUrl()}}"/> 
+        </md-content>
+    </md-dialog-content>
+</md-dialog>

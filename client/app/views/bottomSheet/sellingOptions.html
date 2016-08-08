@@ -1,0 +1,17 @@
+<md-bottom-sheet class="md-list md-has-header" ng-cloak>
+	<md-content>		   	    
+		<md-list>
+			<md-list-item ng-repeat="item in items">
+				<md-button
+					md-autofocus="$index == 2"
+					class="md-list-item-content" 
+					ng-click="listItemClick($index)" >
+					<ng-md-icon class="icon list-item-icon" icon="{{item.icon}}" size="20" aria-label="call">
+					</ng-md-icon>
+					<span class="md-inline-list-icon-label">{{ item.text }}</span>
+				</md-button>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</md-bottom-sheet>
+

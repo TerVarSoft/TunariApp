@@ -1,0 +1,55 @@
+<md-dialog aria-label="summaryCart"  ng-cloak>
+	<form>
+		<md-toolbar class="md-accent">
+			<div class="md-toolbar-tools">
+				<h2>Carrito!</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="cancel()">
+		        	<ng-md-icon class="icon" style="fill: #fff" icon="close" size="20" aria-label="call"></ng-md-icon> 
+		      	</md-button>
+			</div>
+		</md-toolbar>		
+		<md-autocomplete
+			ng-hide="sellingItems.length == 0"						
+			md-selected-item="selectedClient"
+			md-search-text="searchClientText"			
+			md-items="client in queryClientSearch(searchClientText)"
+			md-item-text="client.name"
+			md-min-length="0"
+			placeholder="Cliente de la venta">
+				<md-item-template>
+				  <span md-highlight-text="searchClientText" md-highlight-flags="^i">{{client.name}}</span>
+				</md-item-template>
+				<md-not-found>
+				  No hay ningun cliente "{{searchClientText}}".
+				</md-not-found>
+		</md-autocomplete>
+		<md-dialog-content>
+			<md-list flex>
+		        <md-list-item class="md-3-line" ng-repeat="selling in sellingItems" ng-click="openSell(selling, $event)">
+					<md-button  class="md-fab md-mini md-primary" 
+	                    aria-label="Add to cart">
+	                  	{{selling.total}}
+	                </md-button>
+					<div class="md-list-item-text" layout="column">
+						<h3>{{ selling.product.name }}</h3>
+						<h4>{{ selling.quantity}} Unidades.</h4>
+						<p>{{ selling.productPrice.value }} Bs. - {{selling.productPrice.type}}</p>
+					</div>								                
+		        </md-list-item>
+		    </md-list>
+		    <h4 class="md-body-2" ng-hide="sellingItems.length > 0">No hay items en el carrito!</h4>
+			<md-divider></md-divider>
+		</md-dialog-content>
+		<md-dialog-actions layout="row">
+			<p class="md-body-2">Total: {{getTotal()}} Bs.</p>
+			<span flex></span>
+			<md-button class="md-warn md-raised md-hue-2" ng-click="cancel()">
+			  Cancelar
+			</md-button>
+			<md-button class="md-primary md-raised md-hue-2" ng-click="sell()">
+			  Vender
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

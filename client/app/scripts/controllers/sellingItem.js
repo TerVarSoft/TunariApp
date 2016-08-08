@@ -8,58 +8,35 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('sellingItemCtrl', ['$scope', '$uibModalInstance', 'ServerData', 'sellingItem',
-   function ($scope, $uibModalInstance, ServerData, sellingItem) {
-
-      $scope.sellingItem = $.extend(true, {}, sellingItem);     
+  .controller('sellingItemCtrl', ['$scope', '$mdDialog', 'ServerData', 'SellingItemInfo', 'sellingItem',
+   function ($scope, $mdDialog, ServerData, SellingItemInfo, sellingItem) {
+   
+      $scope.selling = $.extend(true, {}, sellingItem);     
 
       // Initialize productPrice with an element from prices
       // to prevent productPrice dropdown from displaying empty options
-      $scope.sellingItem.productPrice = _.where($scope.sellingItem.product.prices, 
+      $scope.selling.productPrice = _.where($scope.selling.product.prices, 
         {
-          _id: $scope.sellingItem.productPrice._id
+          _id: $scope.selling.productPrice._id
         })[0];
-
+      
       $scope.serverData = ServerData;
 
-      $scope.imageUrl =    ServerData.urlImages + "/" + 
-                         $scope.sellingItem.product.category + "/" + 
-                         ($scope.sellingItem.product.properties.type || '') + "/" +
-                         $scope.sellingItem.product.name + "-M.jpg"
+      $scope.imageUrl =  ServerData.urlImages + "/" + 
+                         $scope.selling.product.category + "/" + 
+                         ($scope.selling.product.properties.type || '') + "/" +
+                         $scope.selling.product.name + "-M.jpg"
 
-      $scope.updateTotal = function() {
-          var pricePerUnity = $scope.sellingItem.productPrice.type != 'Unidad' ?
-                              $scope.sellingItem.productPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
-                              $scope.sellingItem.productPrice.value;
+      $scope.updateTotal = function() { 
+        SellingItemInfo.updateProperties($scope.selling);
+      }      
 
-          $scope.sellingItem.total = $scope.sellingItem.quantity * pricePerUnity;
-          $scope.sellingItem.total = parseFloat($scope.sellingItem.total.toFixed(2));
-          $scope.updateRevenue();
-      }
-        
-      $scope.updateRevenue = function() {
-          var pricePerUnity = $scope.sellingItem.productPrice.type != 'Unidad' ?
-                            $scope.sellingItem.productPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
-                            $scope.sellingItem.productPrice.value;
-
-          var buyingPricePerUnity = $scope.sellingItem.product.buyingPrice.type != 'Unidad' ?
-                            $scope.sellingItem.product.buyingPrice.value / $scope.sellingItem.product.properties.quantityPerPackage :
-                            $scope.sellingItem.product.buyingPrice.value;
-
-          $scope.sellingItem.revenue = $scope.sellingItem.total -
-              $scope.sellingItem.quantity * buyingPricePerUnity;
-          $scope.sellingItem.revenue = parseFloat($scope.sellingItem.revenue.toFixed(2));
-      }
-
-      $scope.addToCart = function () {
-          sellingItem.productPrice = $scope.sellingItem.productPrice;
-          sellingItem.total = $scope.sellingItem.total;
-          sellingItem.quantity =  $scope.sellingItem.quantity;
-          sellingItem.revenue = $scope.sellingItem.revenue;
-          $uibModalInstance.close(sellingItem);
+      $scope.saveSelling = function () {
+          sellingItem = $scope.selling;
+          $mdDialog.hide(sellingItem);
       };
 	    
       $scope.cancel = function () {
-      	  $uibModalInstance.dismiss();
+      	  $mdDialog.cancel();
       }; 
   }]);

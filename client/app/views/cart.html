@@ -1,0 +1,17 @@
+<div layout-margin>
+    <md-card>
+      <md-card-title>
+        <md-card-title-media>
+          <div class="md-media-sm card-media" layout layout-align="center center">
+            <ng-md-icon icon="person"></ng-md-icon>
+          </div>
+        </md-card-title-media>
+        <md-card-title-text>
+          <span class="md-headline">Total: {{getTotal()}} Bs.</span>
+          <span class="md-subhead">Cliente: {{sellClient.name}}</span>
+        </md-card-title-text>
+      </md-card-title>
+    </md-card>
+
+    <div ng-include="'../views/sellingItemList.html'"></div>
+</div>
