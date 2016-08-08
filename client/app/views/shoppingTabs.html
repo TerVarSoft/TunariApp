@@ -1,0 +1,47 @@
+<!-- Small Screens -->
+<md-content flex layout="row" hide-gt-sm class="background">
+    <md-tabs flex md-stretch-tabs="always">
+        <md-tab label="Productos">
+            <md-tab-body>
+                <div flex ng-include="'views/productSearch.html'"></div>  
+            </md-tab-body>           
+        </md-tab>
+        <md-tab >
+            <md-tab-label>Carrito ({{shoppingCartSellings.length}})</md-tab-label>
+            <md-tab-body>
+                <div flex ng-include="'views/cart.html'"></div>  
+            </md-tab-body>           
+        </md-tab>
+        <md-tab label="Texto">
+            <div layout="row">
+            <md-content flex="70" class="md-padding background">
+              <h1 class="md-display-2">Tab One</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+            </md-content>
+            </div>          
+        </md-tab>
+    </md-tabs>
+</md-content>
+
+<!-- Medium Screens -->
+<md-content flex layout="row" hide-xs hide-sm show-gt-sm class="background">
+    <md-sidenav flex="30"  md-is-locked-open="$mdMedia('gt-xs')"  style="z-index: 0;"class="md-whiteframe-z2 background" >
+        <div flex ng-include="'views/productSearch.html'"></div>
+    </md-sidenav>
+    <md-tabs flex md-stretch-tabs="always">
+        <md-tab>
+            <md-tab-label>Carrito ({{shoppingCartSellings.length}})</md-tab-label>
+            <md-tab-body>
+                <div flex ng-include="'views/cart.html'"></div>  
+            </md-tab-body>           
+        </md-tab>
+        <md-tab label="Texto">
+            <div layout="row">
+            <md-content flex="70" class="md-padding background">
+              <h1 class="md-display-2">Tab One</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+            </md-content>
+            </div>          
+        </md-tab>
+    </md-tabs>
+</md-content>
