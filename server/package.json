@@ -7,7 +7,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-prebuild": "cd server",
     "postinstall": "bower install"
   },
   "dependencies": {
