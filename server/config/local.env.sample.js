@@ -8,7 +8,8 @@
 module.exports = {	
 	serverOptions:{
 		host: 'http://localhost',
-		port: 8000
+		port: 8000,
+		target: 'http://localhost'
 	},	
 	clientOptions:{
 		host: 'http://localhost',

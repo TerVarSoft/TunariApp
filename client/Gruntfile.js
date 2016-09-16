@@ -54,7 +54,8 @@ module.exports = function (grunt) {
           Config: {            
             serverOptions: {              
               host: config.serverOptions.host,
-              port: config.serverOptions.port
+              port: config.serverOptions.port,
+              target: config.serverOptions.target  
             }
           }
         }
@@ -68,6 +69,7 @@ module.exports = function (grunt) {
             serverOptions: {
               host: 'http://localhost',
               port: 8000,
+              target: 'https://servertunari.herokuapp.com/'
             }
           }
         }

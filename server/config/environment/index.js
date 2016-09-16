@@ -18,7 +18,8 @@ var all = {
 	env: process.env.NODE_ENV,
 	serverOptions:{
 		host: 'http://localhost',
-		port: 8000
+		port: 8000,
+		target: 'http://localhost:8000'
 	},	
 	clientOptions:{
 		host: 'http://localhost',
