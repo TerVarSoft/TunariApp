@@ -32,7 +32,6 @@ angular
       .accentPalette('pink');
 
     // Restangular global configurations
-    //RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
     RestangularProvider.setBaseUrl(Config.serverOptions.target + '/api');
 
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {

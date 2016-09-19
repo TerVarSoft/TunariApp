@@ -24,7 +24,6 @@ gulp.task('default', function(){
         
     })
     .on('start', function(){
-        //console.log('TunariApp server is listening at %s:%d in %s mode', config.serverOptions.host, config.serverOptions.port, config.env);
         console.log('TunariApp server is listening at %s in %s mode', config.serverOptions.target, config.env);
     })
     .on('restart', function(){

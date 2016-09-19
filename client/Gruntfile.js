@@ -19,11 +19,14 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn'
   });
 
-  var config;
+  var config = {serverOptions:{},clientOptions:{}};
+  var isDevelopment = grunt.option('isDev');
+  process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
+
   try {
-    config = require('./../server/config/environment');
+      config = require('./../server/config/environment');
   } catch(e) {
-    config = {};
+      config = {};
   }
 
   // Configurable paths for the application
@@ -46,33 +49,17 @@ module.exports = function (grunt) {
         deps: false
       },
       // Environment targets
-      development: {        
-        options: {
-          dest: '<%= yeoman.app %>/scripts/config.js'
-        },
-        constants: {
-          Config: {            
-            serverOptions: {              
-              host: config.serverOptions.host,
-              port: config.serverOptions.port,
-              target: config.serverOptions.target  
-            }
+      generateClientConfig: {
+          options: {
+              dest: '<%= yeoman.app %>/scripts/config.js'
+          },
+          constants: {
+              Config: {
+                  serverOptions: {
+                      target: config.serverOptions.target
+                  }
+              }
           }
-        }
-      },
-      production: {
-        options: {
-          dest: '<%= yeoman.app %>/scripts/config.js'
-        },
-        constants: {
-          Config: {            
-            serverOptions: {
-              host: 'http://localhost',
-              port: 8000,
-              target: 'https://servertunari.herokuapp.com/'
-            }
-          }
-        }
       }
     },
 
@@ -213,6 +200,19 @@ module.exports = function (grunt) {
             'build/.tmp',
           ]
         }]
+      },
+      heroku: {
+          files: [{
+              dot: true,
+              cwd: '../server/',
+              src: [
+                  'config',
+                  'logger',
+                  'models',
+                  'public',
+                  'routes',
+              ]
+          }]
       },
       server: '.tmp'
     },
@@ -449,12 +449,27 @@ module.exports = function (grunt) {
         cwd: 'build',
         dest: '../server/public/frontend/',
         src: '**'
-      }, 
+      },
+      toHeroku: {
+          expand: true,
+          cwd: '../server/',
+          src: [
+              'config/**',
+              'logger/**',
+              'models/**',
+              'public/**',
+              'routes/**',
+              'app.js',
+              'package.json',
+              'prodStart.js'
+          ],
+          dest: '../../TunariAppHeroku/servertunari/'
+      },
       dependencies: {
-        expand: true,
-        cwd: 'build/.tmp/',
-        dest: 'build/lib/',
-        src: 'dependencies.js'
+      expand: true,
+      cwd: 'build/.tmp/',
+      dest: 'build/lib/',
+      src: 'dependencies.js'
       },     
       styles: {
         expand: true,
@@ -498,6 +513,7 @@ module.exports = function (grunt) {
                     'bower_components/angular-carousel/dist/angular-carousel.css',
                     'bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css',
                     'bower_components/angular-notify/dist/angular-notify.css',
+                    'bower_components/angular-material/angular-material.css',
                     'app/styles/sandstone.css',
                     'app/styles/scrollable-table.css',
                     'app/styles/main.css',                    
@@ -542,6 +558,11 @@ module.exports = function (grunt) {
                 'bower_components/d3/d3.min.js',
                 'bower_components/d3-tip/index.js',
                 'bower_components/moment/min/moment.min.js',
+                "bower_components/angular-aria/angular-aria.js",
+                "bower_components/angular-messages/angular-messages.js",
+                "bower_components/angular-material/angular-material.js",
+                "bower_components/svg-morpheus/compile/minified/svg-morpheus.js",
+                "bower_components/angular-material-icons/angular-material-icons.min.js",
                 'app/custom_dependencies/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js',
                 'app/custom_dependencies/angular-scrollable-table/angular-scrollable-table.min.js',
                 'app/custom_dependencies/angular-scrollable-table/angular-locale_es-419.js'
@@ -580,13 +601,19 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ng-constant');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+    try {
+        config = require('./../server/config/environment');
+    } catch(e) {
+        config = {};
+    }
+
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
-      'ngconstant:development',
+      'ngconstant:generateClientConfig',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -633,11 +660,9 @@ module.exports = function (grunt) {
     'build'
   ]);
   
-  
-  
-  grunt.registerTask('tvsBuild', 
+  grunt.registerTask('tvsBuild',
     [
-      'ngconstant:production',
+      'ngconstant:generateClientConfig',
       'clean:build',
       'copy:dist',
       'concat',
@@ -646,7 +671,9 @@ module.exports = function (grunt) {
       'copy:dependencies',
       'clean:buildTmp',
       'processhtml',
-      'copy:toServer'
+      'copy:toServer',
+      'clean:heroku',
+      'copy:toHeroku'
   ]); 
   
 };
