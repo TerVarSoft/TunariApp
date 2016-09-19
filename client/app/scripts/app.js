@@ -12,7 +12,6 @@ angular
   .module('tunariApp', [
     'ngAnimate',
     'ngRoute',
-    'angular-carousel',
     'restangular',
     'ngAudio',
     'nya.bootstrap.select',
@@ -20,13 +19,20 @@ angular
     'angularUtils.directives.dirPagination',
     'cgNotify',
     'ui.bootstrap',
-    'scrollable-table'
+    'scrollable-table',
+    'ngMaterial',
+    'ngMdIcons',
+    'ngMessages'
   ])
-  .config(['$routeProvider', 'RestangularProvider', 'Config', 
-    function ($routeProvider, RestangularProvider, Config) {
-    
+  .config(['$routeProvider', '$mdThemingProvider', '$httpProvider', 'RestangularProvider', 'Config', 
+    function ($routeProvider, $mdThemingProvider, $httpProvider, RestangularProvider, Config) {
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue-grey')
+      .accentPalette('pink');
+
     // Restangular global configurations
-    RestangularProvider.setBaseUrl(Config.serverOptions.host + ":" + Config.serverOptions.port + '/api');
+    RestangularProvider.setBaseUrl(Config.serverOptions.target + '/api');
 
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         var extractedData;
@@ -54,8 +60,8 @@ angular
     
     $routeProvider
       .when('/', {
-        templateUrl: 'views/productSearch.html',
-        controller: 'ProductSearcherCtrl',
+        templateUrl: 'views/shoppingTabs.html',
+        controller: 'ShopCtrl',
         controllerAs: 'ProductSearcher'
       })
       .when('/about', {
@@ -63,9 +69,9 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/productSearch', {
-        templateUrl: 'views/productSearch.html',
-        controller: 'ProductSearcherCtrl',
+      .when('/shoppingTabs', {
+        templateUrl: 'views/shoppingTabs.html',
+        controller: 'ShopCtrl',
         controllerAs: 'ProductSearcher'
       })
       .when('/products/:productId', {

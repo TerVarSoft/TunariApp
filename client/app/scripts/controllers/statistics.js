@@ -10,6 +10,8 @@
 angular.module('tunariApp')
   .controller('StatisticsCtrl', ['$scope', '$uibModal', 'ServerData', function ($scope, $uibModal, ServerData) {
 
+      $scope.header.title = 'Estadisticas';
+
       ServerData.config.get().then(function(config){
           $scope.statisticsView = config.statisticsViews[0].view;  
       });
