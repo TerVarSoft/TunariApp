@@ -7,6 +7,7 @@ var configRouter = function(){
 
 	router.route('/')
 		.get(function(req, res, next) {
+			config.imgServer = 'http://localhost:8000/images/'
 			res.status(200).sendWrapped(config);
 		});
 
