@@ -131,17 +131,27 @@ angular.module('tunariApp')
     }
 
     $scope.getProductImageUrl = function(product) {
-        return  $scope.serverData.urlImages + "/" + 
-                product.category + "/" + 
+        var imageUrl = $scope.serverData.urlImages + "/notFound.gif";
+
+        if(product.category && product.properties) {
+            imageUrl = $scope.serverData.urlImages + "/" +
+                product.category + "/" +
                 (product.properties.type || '' )+ "/" +
                 product.name + "-M.jpg";
+        }
+        return imageUrl;
     }
     
     $scope.getSmallProductImageUrl = function(product) {
-        return  $scope.serverData.urlImages + "/" + 
-                product.category + "/" + 
+        var imageUrl = $scope.serverData.urlImages + "/notFound.gif";
+
+        if(product.category && product.properties) {
+            imageUrl = $scope.serverData.urlImages + "/" +
+                product.category + "/" +
                 (product.properties.type || '' )+ "/" +
-                product.name + "-S.jpg"
+                product.name + "-S.jpg";
+        }
+        return imageUrl;
     }
 
     $scope.addProduct = function(product) {
