@@ -1,2 +1,2 @@
 @echo off
-node ../prodStart.js
+node ../server.js

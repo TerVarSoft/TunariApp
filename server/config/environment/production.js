@@ -5,12 +5,9 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-     uri: 'mongodb://admin:test1234@ds161495.mlab.com:61495/tunari'
-  },
-  serverOptions:{
-     target: 'https://servertunari.herokuapp.com/'
+    uri: 'mongodb://localhost/tunariDB-prodTest'
   },
   loggingOptions: {
-  	logDir: './log'
+  	logDir: './../log'
   }
 };

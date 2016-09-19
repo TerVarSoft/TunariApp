@@ -3,9 +3,7 @@
 server/node_modules/*
 server/log/*
 server/public/*
-!server/public/images/
-server/data/
-data/
+server/data
 
 server/config/local.env.js
 
@@ -30,7 +28,3 @@ ELK/logstash/config/dev*
 
 ELK/kibana/*
 !ELK/kibana/dashboards
-
-#Other
-
-.idea/*

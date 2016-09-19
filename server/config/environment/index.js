@@ -16,10 +16,14 @@ try {
 // All environments will share this configuration
 var all = {
 	env: process.env.NODE_ENV,
-    clientOptions:{
-        host: 'http://localhost',
-        port: 9000
-    },
+	serverOptions:{
+		host: 'http://localhost',
+		port: 8000
+	},	
+	clientOptions:{
+		host: 'http://localhost',
+		port: 9000
+	},
 	productCategories: [
 		{
 			name: "Invitaciones",
@@ -113,5 +117,5 @@ var all = {
 module.exports = _.merge(
   all,
   require('./' + process.env.NODE_ENV + '.js') || {},
-  process.env.NODE_ENV === 'development' ? localConfig : {});
+  localConfig);
 

@@ -43,7 +43,7 @@ var buildQuery = function(requestQuery){
 		query.quantity = {$lte: +query.maxQuantity};
 	}
 
-	query = _.omit(query, ['querySort', 'queryLimit', 'page', 'maxQuantity', 'properties']);
+	query = _.omit(query, ['querySort', 'queryLimit', 'page', 'maxQuantity']);
 	
 	return query;
 }

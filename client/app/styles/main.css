@@ -1,6 +1,14 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
 body {
-  /*background-image: url(../images/sandpaper.png);    */
-  background-color: rgb(229, 223, 223);
+  padding: 0px;
+/*  background: #7B939C;    */
+  background-image: url(../images/sandpaper.png);    
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -29,6 +37,32 @@ body {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+}
+
+.sub-nav-menu{
+    background: #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -97,16 +131,12 @@ body {
 }
 
 a {
-    /*color: #fff;*/
-    fill: #737373;
-    color: #737373;
+    color: #fff;
     text-decoration: none;
 }
 
 a:hover, a:focus {
     /*color: #fff;*/
-    fill: #737373;
-    color: #737373;
     text-decoration: none;
 }
 
@@ -116,28 +146,9 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.divborder {
+  border-style: solid;
+    
+}
+
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
-/*Angular Material*/
-
-ng-md-icon {
-  position: relative;
-  top: 5px; 
-}
-
-ng-md-icon.fab-button-icon {
-  position: relative;
-  top: 10px; 
-}
-
-md-content.md-default-theme, md-content.main-content {
-    background-color: rgb(229, 223, 223);
-}
-
-.md-button.md-fab.md-fab-bottom-right {
-  fill: #ffffff;
-}
-
-.menu-button {
-  background-color: #737373;
-}

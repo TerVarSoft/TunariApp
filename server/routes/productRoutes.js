@@ -14,12 +14,11 @@ var productRouter = function(Product){
 			
 			var query = {};
             var querySort = req.query.querySort || 'sortTag';
-            var queryLimit = +req.query.queryLimit || 30;
+            var queryLimit = +req.query.queryLimit || 400;
             var page = req.query.page || 1;
-            var propertiesToSelect = req.query.properties;			
-            
-            query = routesUtil.buildQuery(req.query);
 
+			query = routesUtil.buildQuery(req.query);
+			
             Product.count(query, function(err, count){
 
     			Product.find(query, function(err, products) {
@@ -37,8 +36,7 @@ var productRouter = function(Product){
     			})
                 .sort(querySort)
                 .skip(queryLimit*(page-1))
-                .limit(queryLimit)
-                .select(propertiesToSelect)
+                .limit(queryLimit);
             });
 		})
 		.post(function(req, res, next) {

@@ -1,71 +1,91 @@
-<md-dialog> 
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2>VENTA {{selling.product.name}}</h2>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <ng-md-icon class="icon" style="fill: #fff" icon="close" size="20" aria-label="call"></ng-md-icon> 
-            </md-button>
+<form  class="form-horizontal" name="sellingForm" 
+                  ng-submit="sellingForm.$valid && addToCart()" role="form" novalidate>
+	<div class="modal-header">
+	    <h3 class="modal-title">Venta {{sellingItem.product.name}}</h3>
+	</div>
+	<div class="modal-body">	    
+    	<div class="hidden-xs col-sm-4">
+            <div class="thumbnail">
+                <img alt="{{sellingItem.product.name}}" class="img-rounded img-responsive" 
+                     ng-src="{{imageUrl}}"/>        
+            </div>
         </div>
-    </md-toolbar>
-    <form ng-submit="sellingForm.$valid && saveSelling()" name="sellingForm">
-        <md-dialog-content>
-                <md-list-item class="noright">
-                    <p>{{ selling.product.name }}</p>      
-                    <img ng-src="{{imageUrl}}" class="md-avatar md-secondary" />
-                </md-list-item>
-                <md-tabs md-swipe-content md-stretch-tabs="always" md-dynamic-height md-border-bottom>
-                    <md-tab label="DATOS">                       
-                        <md-content class="md-padding">
-                            <section layout="row">
-                                <md-input-container class="md-block" flex>
-                                    <label>Cantidad. (Unit.)</label>
-                                    <input ng-model="selling.quantity" type="number" name="quantity" ng-change="updateTotal()" 
-                                    ng-max="{{selling.product.quantity}}" required>
-                                    <div ng-messages="sellingForm.quantity.$error">
-                                        <div ng-message="required">La cantidad es requerida.</div>
-                                        <div ng-message="max">Solo hay <b>{{selling.product.quantity}}</b> unidades en el deposito.
-                                        </div>
-                                    </div>
-                                </md-input-container>
-                                <md-input-container class="md-block" flex>
-                                    <label>Precio.</label>
-                                    <md-select ng-model="selling.productPrice" ng-change="updateTotal()" >
-                                        <md-option ng-value="price" ng-repeat="price in selling.product.prices">
-                                            {{price.value}} Bs. - {{price.type}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
-                            </section>
-                            <md-input-container class="md-block">
-                                <label>Total. (Bs.)</label>
-                                <input ng-model="selling.total">
-                            </md-input-container> 
-                            <md-input-container class="md-block">
-                                <label>Cantidad por paquete.</label>
-                                <input value="{{selling.product.properties.quantityPerPackage}} Unidades por Paquete.">
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Cantidad en deposito.</label>
-                                <input value="{{selling.product.quantity}} Unidades.">
-                            </md-input-container>
-                        </md-content>
-                    </md-tab>
-                    <md-tab label="IMAGEN">                       
-                        <md-content class="md-padding" flex>
-                            <img alt="{{selling.product.name}}" class="md-card-image" 
-                             ng-src="{{imageUrl}}"/> 
-                        </md-content>
-                    </md-tab>        
-                </md-tabs>
-        </md-dialog-content>
-        <md-dialog-actions layout="row">
-            <md-button class="md-warn md-raised" ng-click="cancel()">
-                Cancelar
-            </md-button>
-            <md-button class="md-primary md-raised" type="submit">
-                Guardar
-            </md-button>
-        </md-dialog-actions>
-    </form>
-</md-dialog>
+        <div class="col-sm-8">
+        	<div class="form-group">
+            	<div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon">Cant :</span>
+                        <input autofocus type="tel" ng-pattern="/^\d+[ #\*]\d+$|^\d+$/"  
+                               sellingquantity max-quantity="{{sellingItem.product.quantity}}" 
+                               ng-change="updateTotal()" 
+                               autocomplete="off"
+                               class="form-control" 
+                               ng-model="sellingItem.quantity" 
+                               name="quantity" id="quantity"
+                               required/>
+                       	<span class="input-group-btn">
+                                <div>
+                                    <select class="nya-selectpicker btn btn-primary"
+                                            ng-model="sellingItem.productPrice" 
+                                            ng-options="p.value+' Bs. - '+p.type for p in sellingItem.product.prices" 
+                                            ng-change="updateTotal()">
+                                    </select>
+                                </div>
+                        </span>
+                    </div>
+                    <div class="text-danger">                   
+                        <span ng-if="sellingForm.quantity.$error.pattern">La cantidad no es correcta.</span>
+
+                        <span ng-if="sellingForm.quantity.$dirty && sellingForm.$error.max_quantity">
+                            No hay suficientes unidades en el deposito.
+                        </span>
+                        <span 
+                             ng-if="(!sellingForm.quantity.$pristine || 
+                                      sellingForm.$submitted) && sellingForm.quantity.$error.required">
+                           Introduzca la cantidad por favor. 
+                        </span>
+                    </div>
+                    <div class="text-info">                   
+                        <span ng-if="sellingForm.quantity.$dirty && sellingForm.quantity.$valid">
+                           {{sellingItem.quantity}} Unidades
+                        </span>
+                    </div>
+            	</div>
+        	</div>
+        	<div class="form-group">
+        		<div class="col-xs-12">
+	                <div class="input-group">
+	                    <span class="input-group-addon">
+	                        Total: 
+	                    </span>
+	                    <input placeholder="Total de la venta..." ng-change = "updateRevenue()"
+	                           type="number" step="any" class="form-control" ng-model="sellingItem.total"/>
+	                    <span class="input-group-addon">Bs.
+	                    </span>
+	                    
+	                </div>
+	            </div>
+            </div>
+            <div >
+                <div class="col-xs-7">
+                    <label class="control-label">Cantidad deposito :</label>
+                </div>                        
+                <div class="col-xs-5">
+                    <p class="form-control-static">{{sellingItem.product.quantity}} Unidades.</p>
+                </div>
+            </div>
+            <div >
+                <div class="col-xs-7">
+                    <label class="control-label">Cantidad / Paquete :</label>
+                </div>                        
+                <div class="col-xs-5">
+                    <p class="form-control-static">{{sellingItem.product.properties.quantityPerPackage}} Unidades por Paquete</p>
+                </div>              
+            </div>    
+        </div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+	    <button class="btn btn-primary" type="submit">Guardar</button>
+	</div>
+</form>

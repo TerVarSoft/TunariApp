@@ -7,9 +7,6 @@ module.exports = {
   mongo: {
     uri: 'mongodb://localhost/tunariDB-dev'
   },
-  serverOptions:{
-    target: 'http://localhost:8000'
-  },
   loggingOptions: {
   	logDir: './log'
   }

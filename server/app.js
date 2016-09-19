@@ -52,6 +52,8 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public/frontend')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
 
@@ -72,8 +74,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(express.static(path.join(__dirname, 'public/frontend')));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/test', routes);
 app.use('/users', users);

@@ -8,38 +8,28 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('NavBarCtrl', ['$scope', '$location', '$mdSidenav', function ($scope, $location, $mdSidenav) {
-    
+  .controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
+
   	$scope.subMenu = "views/productsSubmenu.html"
   	 
-    $scope.menus = {
-      products: {
-        icon: 'dashboard',
-        redirectTo: '/productSearch',
-        subMenuView: 'views/productsSubMenu.html',
-        propName: 'products',
-        text: 'Productos'
-      },
-      clients: {
-        icon: 'people',
-        redirectTo: '/clientSearch',  	
-        subMenuView: 'views/clientsSubMenu.html',
-        propName: 'clients',
-        text: 'Clientes'		
-      },
-      statistics: {
-        icon: 'insert_chart',
-        redirectTo: '/statistics',
-        propName: 'statistics',
-        text: 'Estadisticas'  			
-      }
-    }
+  	$scope.menus = {
+  		products: {
+  			redirectTo: '/productSearch',
+  			subMenuView: 'views/productsSubMenu.html'
+  		},
+  		clients: {
+  			redirectTo: '/clientSearch',  	
+  			subMenuView: 'views/clientsSubMenu.html'		
+  		},
+  		statistics: {
+  			redirectTo: '/statistics'  			
+  		}
+  	}
 
-    $scope.changeView = function(menuItem){
-      $scope.subMenu = $scope.menus[menuItem].subMenuView || "";
-      $location.path($scope.menus[menuItem].redirectTo);  
-      $mdSidenav('sideNav').toggle();
-    }
+  	$scope.changeView = function(menuItem){
+  		$scope.subMenu = $scope.menus[menuItem].subMenuView || "";
+  		$location.path($scope.menus[menuItem].redirectTo);  
+  	}
 
   	// Collapse navBar when clicking an menu item
 	$("#js-navbar-collapse a").on("click", function () {
