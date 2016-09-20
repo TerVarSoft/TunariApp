@@ -1,7 +1,7 @@
 var express = require('express');
 var _ = require('lodash');
 
-var configFile = require('./../config/environment');
+var config = require('./../config/environment');
 var logger = require('./../logger/logger');
 
 var configRouter = function(Setting){
@@ -11,17 +11,16 @@ var configRouter = function(Setting){
 		.get(function(req, res, next) {
 
             Setting.find({}, function(err, settings) {
-                var config = _.clone(configFile);
                 if (err) {
                     logger.log('error',err);
                     res.status(500).send(err);
                 }
 
-                _.forEach(settings, function(setting){
-                    config[setting.key] = setting.value;
+                _.forEach(config, function(value, key) {
+                	settings.push({key:key, value: value});
                 });
 
-                res.status(200).sendWrapped(config);
+                res.status(200).sendWrapped({items:settings});
             })
             .sort('name');
 		})
@@ -49,6 +48,40 @@ var configRouter = function(Setting){
                     res.status(201).sendWrapped(result);
                 }
             });
+        });
+
+    router.use('/:settingId', function(req, res, next){
+        Setting.findById(req.params.settingId, function(err, setting){
+            if(err)
+                res.status(500).send(err);
+            else if(setting){
+                req.setting = setting;
+                next();
+            }
+            else{
+                res.status(404).send('no product found');                
+            }
+        });            
+    });
+    
+    router.route('/:settingId')
+        .get(function(req, res){
+            res.sendWrapped(req.setting);
+        })        
+        .put(function(req, res){ 
+            req.setting.key = req.body.key;
+            req.setting.value = req.body.value;
+            
+            req.setting.save(function(err){
+                if(err)
+                    res.status(500).send(err);
+                else{     
+                    res.sendWrapped(req.setting);
+                    logger.log('info',
+                        'settingId:' + req.setting._id + ' ' +
+                        'setting:' + req.setting.key + ' ');                        
+                }
+            });                                        
         });
 
 	return router;

@@ -8,13 +8,24 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('SettingsCtrl', ['$scope', 'ServerData', function ($scope, ServerData) {
+  .controller('SettingsCtrl', ['$scope', 'Settings', function ($scope, Settings) {
 
-      $scope.layout.title = 'Configuraciones';
+    $scope.layout.title = 'Configuraciones';
 
-      ServerData.config.get().then(function(config){
-        $scope.config = config;
-        $scope.imgServer = config.imgServer;     
-    });
+	Settings.getList().then(function(settings){
+        $scope.imgServer = _.find(settings, {'key': 'imgServer'});     
+
+        if(!$scope.imgServer) {
+        	Settings.post({key:"imgServer", value:""}).then(function(newSetting){
+        		$scope.imgServer = newSetting;
+        	});
+        }
+	});
+
+	$scope.saveSettings = function() {
+		console.log($scope.imgServer);
+		$scope.imgServer.save();
+	}
      
   }]);
+	

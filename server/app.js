@@ -78,7 +78,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/test', routes);
 app.use('/users', users);
-app.use('/api/config', configRouter);
+app.use('/api/settings', configRouter);
 app.use('/api/products', productRouter);
 app.use('/api/sellingItems', sellingItemRouter);
 app.use('/api/sellings', sellingRouter);
