@@ -34,9 +34,10 @@ var Product = require('./models/productModel');
 var SellingItem = require('./models/sellingItemModel');
 var Selling = require('./models/sellingModel');
 var Client = require('./models/clientModel');
+var Setting = require('./models/settingModel');
 
 // Routers
-var configRouter = require('./routes/configRoutes')();
+var configRouter = require('./routes/configRoutes')(Setting);
 var productRouter = require('./routes/productRoutes')(Product);
 var sellingItemRouter = require('./routes/sellingItemRoutes')(SellingItem);
 var sellingRouter = require('./routes/sellingRoutes')(Selling);
