@@ -26,7 +26,7 @@ angular.module('tunariApp')
                     product.name + suffix +".jpg";
         }
         else {
-            return Config.serverOptions.target  + "/error.jpg"
+            return Config.serverOptions.target  + "/images/error.jpg"
         }
     }
 
