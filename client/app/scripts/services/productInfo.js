@@ -8,7 +8,7 @@
 * Service in the clientApp.
 */
 angular.module('tunariApp')
-  .service('ProductInfo', ["Settings", function (Settings) {
+  .service('ProductInfo', ["Settings", "Config", function (Settings, Config) {
 
 
     var imgServer = "";
@@ -26,7 +26,7 @@ angular.module('tunariApp')
                     product.name + suffix +".jpg";
         }
         else {
-            return imgServer  + "/notFound.jpg"
+            return Config.serverOptions.target  + "/error.jpg"
         }
     }
 
