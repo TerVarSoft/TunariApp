@@ -1,7 +1,7 @@
 <md-list class="reveal-animation" flex ng-if="shoppingCartSellings.length != 0">
     <md-subheader class="background">Productos en el carito</md-subheader>    
     <md-list-item class="md-3-line" ng-repeat="selling in shoppingCartSellings" ng-click="openSell(selling, $event)">
-		<img ng-src="{{getSmallProductImageUrl(selling.product)}}" class="md-avatar" alt="Imagen" />
+		<img ng-src="{{getProductImageUrl(product, '-S')}}" class="md-avatar" alt="Imagen" />
 		<div class="md-list-item-text" layout="column">
 			<h3>{{ selling.product.name }}</h3>
 			<h4>Total: {{ selling.total }} Bs.</h4>

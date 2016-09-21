@@ -9,8 +9,8 @@
  */
 angular.module('tunariApp')
   .controller('ShopCtrl', 
-              ['$scope', '$mdSidenav', '$mdDialog', '$mdToast', '$mdBottomSheet', '$mdMedia', '$location', '$uibModal', 'Products', 'ServerData', 'SearchInfo', 'SellingItemInfo','Messages', 'Notifier',  
-              function ($scope, $mdSidenav, $mdDialog, $mdToast, $mdBottomSheet, $mdMedia, $location, $uibModal, Products, ServerData, SearchInfo, SellingItemInfo, Messages, Notifier) {    
+              ['$scope', '$mdSidenav', '$mdDialog', '$mdToast', '$mdBottomSheet', '$mdMedia', '$location', '$uibModal', 'Products', 'ProductInfo', 'ServerData', 'SearchInfo', 'SellingItemInfo','Messages', 'Notifier',
+              function ($scope, $mdSidenav, $mdDialog, $mdToast, $mdBottomSheet, $mdMedia, $location, $uibModal, Products, ProductInfo, ServerData, SearchInfo, SellingItemInfo, Messages, Notifier) {
 
     $scope.layout.title = 'Productos';
     $scope.layout.backupTitle = 'Productos';    
@@ -130,28 +130,8 @@ angular.module('tunariApp')
         $scope.$parent.showToast('Agregaste un producto al carrito!', product.name);        
     }
 
-    $scope.getProductImageUrl = function(product) {
-        var imageUrl = $scope.serverData.urlImages + "/notFound.gif";
-
-        if(product.category && product.properties) {
-            imageUrl = $scope.serverData.urlImages + "/" +
-                product.category + "/" +
-                (product.properties.type || '' )+ "/" +
-                product.name + "-M.jpg";
-        }
-        return imageUrl;
-    }
-    
-    $scope.getSmallProductImageUrl = function(product) {
-        var imageUrl = $scope.serverData.urlImages + "/notFound.gif";
-
-        if(product.category && product.properties) {
-            imageUrl = $scope.serverData.urlImages + "/" +
-                product.category + "/" +
-                (product.properties.type || '' )+ "/" +
-                product.name + "-S.jpg";
-        }
-        return imageUrl;
+    $scope.getProductImageUrl = function(product, sufix) {
+        return  ProductInfo.getProductImageUrl(product, sufix);
     }
 
     $scope.addProduct = function(product) {

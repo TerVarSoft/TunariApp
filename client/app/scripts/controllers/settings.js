@@ -8,7 +8,8 @@
  * Controller of the clientApp
  */
 angular.module('tunariApp')
-  .controller('SettingsCtrl', ['$scope', 'Settings', function ($scope, Settings) {
+  .controller('SettingsCtrl', ['$scope', 'Settings', 'ProductInfo',
+        function ($scope, Settings, ProductInfo) {
 
     $scope.layout.title = 'Configuraciones';
 
@@ -25,7 +26,8 @@ angular.module('tunariApp')
 	$scope.saveSettings = function() {
 
 		$scope.imgServer.save().then(function(){
-            $scope.$parent.showToast('Las configuraciones han sido actualizadas!', "");
+            ProductInfo.setImageServer($scope.imgServer.value);
+            $scope.$parent.showToast('Nuevo servidor de imagenes!', $scope.imgServer.value);
         });
 	}
      
