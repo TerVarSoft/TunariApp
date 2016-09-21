@@ -1,17 +1,18 @@
 <md-content flex layout="row" layout-align="center" class="background">
-	<md-card flex="80" flex-gt-sm="50"> 
-		<md-list ng-cloack>
-			<md-subheader>Configuraciones Avanzadas</md-subheader>
-			<md-list-item>
-				<md-input-container class="md-block" flex>
-		            <label>Direccion del servidor de imagenes</label>
-	            	<input ng-model="imgServer.value">
-		        </md-input-container>
-			</md-list-item>
-		</md-list>
-		<md-card-actions layout="row" layout-align="end end">
-          <md-button class="md-warn">Cancelar</md-button>
-          <md-button class="md-primary" ng-click="saveSettings()">Guardar</md-button>
-        </md-card-actions>
+	<md-card flex="80" flex-gt-sm="50">
+        <form ng-submit="saveSettings()">
+            <md-list ng-cloack>
+                <md-subheader>Configuraciones Avanzadas</md-subheader>
+                <md-list-item>
+                    <md-input-container class="md-block" flex>
+                        <label>Direccion del servidor de imagenes</label>
+                        <input ng-model="imgServer.value">
+                    </md-input-container>
+                </md-list-item>
+            </md-list>
+            <md-card-actions layout="row" layout-align="end end">
+                <md-button class="md-raised md-primary" type="submit">Guardar</md-button>
+            </md-card-actions>
+        </form>
 	</md-card>
 </md-content>	

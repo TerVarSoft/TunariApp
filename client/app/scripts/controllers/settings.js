@@ -23,8 +23,10 @@ angular.module('tunariApp')
 	});
 
 	$scope.saveSettings = function() {
-		console.log($scope.imgServer);
-		$scope.imgServer.save();
+
+		$scope.imgServer.save().then(function(){
+            $scope.$parent.showToast('Las configuraciones han sido actualizadas!', "");
+        });
 	}
      
   }]);
