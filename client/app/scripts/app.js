@@ -109,6 +109,11 @@ angular
         controller: 'StatisticsCtrl',
         controllerAs: 'statistics'
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl',
+        controllerAs: 'settings'
+      })
       .otherwise({
         redirectTo: '/'
       });

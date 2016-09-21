@@ -7,14 +7,14 @@
  * # checkImage
  */
 angular.module('tunariApp')
-  .directive('checkImage', ['$http', 'ServerData', function ($http, ServerData) {
+  .directive('checkImage', ['$http', 'Config', function ($http, Config) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
             attrs.$observe('ngSrc', function(ngSrc) {
                 $http.get(ngSrc).success(function(){
                 }).error(function() {
-                    element.attr('src', ServerData.urlImages + "/" + "notFound.gif"); // set default image
+                    element.attr('src', Config.serverOptions.target + "/images/" + "notFound.gif"); // set default image
                 });
             });
         }

@@ -20,8 +20,8 @@ module.exports = function (grunt) {
   });
 
   var config = {serverOptions:{},clientOptions:{}};
-  var isDevelopment = grunt.option('isDev');
-  process.env.NODE_ENV = isDevelopment ? 'development' : 'production';
+  var isProduction = grunt.option('isProd');
+  process.env.NODE_ENV = isProduction ? 'production' : 'development';
 
   try {
       config = require('./../server/config/environment');

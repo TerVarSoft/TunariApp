@@ -40,7 +40,7 @@
             ng-click="addQuantity(product)" 
             class="md-3-line" ng-click="null" layout="row" layout-wrap>
             <div flex="30">
-                <img check-image ng-click="openImageModal(product, $event)" ng-src="{{getSmallProductImageUrl(product)}}" 
+                <img check-image ng-click="openImageModal(product, $event)" ng-src="{{getProductImageUrl(product, '-S')}}"
                     class="md-avatar product-image"/>
             </div>
             <div flex="30"class="md-list-item-text"  layout="column">

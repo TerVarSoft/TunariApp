@@ -20,7 +20,13 @@ angular.module('tunariApp')
         propName: 'products',
         text: 'Productos'
       },
-      clients: {
+      settings: {
+        icon: 'settings',
+        redirectTo: '/settings',
+        propName: 'settings',
+        text: 'Configuraciones'
+      }
+      /*clients: {
         icon: 'people',
         redirectTo: '/clientSearch',  	
         subMenuView: 'views/clientsSubMenu.html',
@@ -32,7 +38,7 @@ angular.module('tunariApp')
         redirectTo: '/statistics',
         propName: 'statistics',
         text: 'Estadisticas'  			
-      }
+      }*/
     }
 
     $scope.changeView = function(menuItem){
